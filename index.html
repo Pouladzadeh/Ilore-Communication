@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ILore – Communication App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styless.css">
+</head>
+<body>
+  <header>
+      <!-- ============================================ -->
+    <!-- HEADER SECTION - Navigation and Branding    -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="img/Logo.svg" alt="Ilore logo" style="height:32px; width: 122px; vertical-align:middle;">
+            </a>
+ 
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Home</a>
+                <a href="Services.html">Services</a>
+                <a href="Contact.html">Contact</a>
+            </nav>
+            
+            <div class="nav-actions">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle"></button>
+            </div>
+        </div>
+    </header>
+    <!-- END HEADER SECTION -->
+   
+
+  <main class="container">
+    <!-- Tabs -->
+    <div class="tabs" role="tablist" aria-label="Modes">
+      <button class="tab active" data-tab="voice" role="tab" aria-selected="true">
+        <img src="img/Voice.svg" alt="AI Voice Helper">AI Voice Helper
+      </button>
+      <button class="tab" data-tab="cards" role="tab" aria-selected="false">
+        <img src="img/picturecards.svg" alt="Picture Cards">Picture Cards
+      </button>
+    </div>
+
+    <!-- Message Builder -->
+    <section class="panel" aria-labelledby="msg-title">
+      <div class="panel-title">
+        <h3 id="msg-title" style="margin:0;font-size:18px;font-weight:700">My Message:</h3>
+        <div class="row">
+          <button id="sayBtn" class="btn btn-green" disabled aria-label="Say it"><img src="img/sound.svg" alt="Say It" style="height:20px; width: 20px; vertical-align:middle;"> <span>Say It</span></button>
+          <button id="sendBtn" class="btn btn-blue" disabled aria-label="Send"><img src="img/send.svg" alt="Send" style="height:20px; width: 20px; vertical-align:middle;"> <span>Send</span></button>
+          <button id="clearBtn" class="btn btn-red" aria-label="Clear"><img src="img/remove.svg" alt="Clear" style="height:20px; width: 20px; vertical-align:middle;"> <span>Clear</span></button>
+        </div>
+      </div>
+      <div id="messageArea" class="message-area">
+        <p class="muted center" id="emptyHint">Choose cards from either page to build your message</p>
+        <div class="chips" id="chips"></div>
+      </div>
+    </section>
+
+    <!-- Voice Helper -->
+    <section id="tab-voice" class="panel">
+      <div class="center">
+        <h2 style="margin:.2rem 0 6px;font-size:24px">AI Voice Helper</h2>
+        <p class="muted" style="margin-top:0">Say anything, and I'll show you helpful words!</p>
+
+        <div class="mic-wrap">
+          <button id="micBtn" class="mic" aria-pressed="false" aria-label="Start listening">
+            <img src="img/microphone.svg" alt="Microphone" style="height:70px; width: 70px; filter: brightness(0) invert(1);"/>
+          </button>
+        </div>
+        <p id="listenState" style="font-size:20px;font-weight:600;text-align:center;margin:8px 0 4px">Press and say any letter A,B,C...</p>
+        <p class="muted center" style="margin:0 0 18px">Choose a word</p>
+      </div>
+
+      <!-- AI Block moved outside center div for full width -->
+      <div id="aiBlock" class="hidden" style="margin-top:16px">
+        <h3 style="font-size:18px;margin:0 0 10px;padding:0 20px">AI Suggestions:</h3>
+        <div id="aiGrid" class="ai-suggestions-grid"></div>
+      </div>
+    </section>
+
+    <!-- Picture Cards -->
+    <section id="tab-cards" class="panel hidden" aria-labelledby="cards-title">
+      <div class="center" style="margin-bottom:14px">
+        <h2 id="cards-title" style="margin:.2rem 0 6px;font-size:24px">Picture Cards</h2>
+        <p class="muted" style="margin:0">Tap picture cards to tell you what you need!</p>
+      </div>
+
+      <!-- Categories -->
+      <div id="categoryBar" class="categories"></div>
+
+      <!-- Grid -->
+      <div id="cardGrid" class="grid"></div>
+    </section>
+  </main>
+
+  <!-- ============================================ -->
+<!-- FOOTER SECTION                               -->
+<!-- ============================================ -->
+<footer class="footer">
+  <div class="footer-container">
+      <!-- Logo and Social Icons (Desktop) -->
+      <div class="footer-brand">
+          <img src="img/Logo-light.svg" alt="Ilore" class="footer-logo">
+          <div class="social-icons">
+              <div class="social-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.024-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.163-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+                  </svg>
+                </div>
+                <div class="social-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                  </svg>
+                </div>
+                <div class="social-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </div>
+          </div>
+      </div>
+      
+      <!-- Company Links (Desktop) -->
+      <div class="footer-section">
+          <h3>Company</h3>
+          <ul class="footer-links">
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Testimonials</a></li>
+          </ul>
+      </div>
+      
+      <!-- Support Links (Desktop) -->
+      <div class="footer-section">
+          <h3>Support</h3>
+          <ul class="footer-links">
+              <li><a href="#">Help center</a></li>
+              <li><a href="#">Terms of service</a></li>
+              <li><a href="#">Legal</a></li>
+              <li><a href="#">Privacy policy</a></li>
+              <li><a href="#">Status</a></li>
+          </ul>
+      </div>
+      
+      <!-- Newsletter (Desktop & Mobile) -->
+      <div class="footer-section newsletter-section">
+          <h3>Stay up to date</h3>
+          <form class="newsletter">
+              <input type="email" class="newsletter-input" placeholder="Enter your email">
+              <button type="submit" class="newsletter-btn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                  </svg>
+              </button>
+          </form>
+      </div>
+      
+      <!-- Social Icons (Mobile/Tablet Only) -->
+      <div class="social-icons">
+          <div class="social-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.024-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.163-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+              </svg>
+            </div>
+            <div class="social-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </div>
+            <div class="social-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </div>
+      </div>
+      
+      <!-- Company and Support sections container for mobile/tablet -->
+      <div class="footer-sections-container">
+          <!-- Company Links -->
+          <div class="footer-section">
+              <h3>Company</h3>
+              <ul class="footer-links">
+                  <li><a href="#">About us</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">Contact us</a></li>
+                  <li><a href="#">Pricing</a></li>
+                  <li><a href="#">Testimonials</a></li>
+              </ul>
+          </div>
+          
+          <!-- Support Links -->
+          <div class="footer-section">
+              <h3>Support</h3>
+              <ul class="footer-links">
+                  <li><a href="#">Help center</a></li>
+                  <li><a href="#">Terms of service</a></li>
+                  <li><a href="#">Legal</a></li>
+                  <li><a href="#">Privacy policy</a></li>
+                  <li><a href="#">Status</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+  
+  <div class="footer-bottom">
+      <p class="footer-copyright">
+      @2025 Ilore Inc. All rights reserved. 
+      <a href="/privacy">Privacy Policy</a> | 
+      <a href="/terms">Terms of Services</a>
+  </p> 
+  </div>
+</footer>
+<!-- END FOOTER SECTION -->
+<!-- END FOOTER SECTION -->
+  <script>
+     
+        // Mobile menu toggle functionality
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+
+        // Header background change on scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Set active menu based on current page
+        function setActiveMenuByPage() {
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const linkHref = link.getAttribute('href');
+                
+                // Check if current page matches the link
+                if (linkHref === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Call on page load
+        document.addEventListener('DOMContentLoaded', setActiveMenuByPage);
+ 
+    <!-- END JAVASCRIPT -->
+    // -------------------------
+    // Data (matches your React)
+    // -------------------------
+    const categories = {
+      basic:      { name: 'Basic Needs', icon:'🏠', theme: 'basic' },
+      emotions:   { name: 'Emotions',    icon:'😊', theme: 'emotions' },
+      activities: { name: 'Activities',  icon:'⚽', theme: 'activities' },
+      people:     { name: 'People',      icon:'👨‍👩‍👧', theme: 'people' },
+    };
+
+    const pictureCards = {
+      basic: [
+        { id: 'hungry',   text: 'I am hungry',  icon: '🍎', category: 'basic' },
+        { id: 'thirsty',  text: 'I am thirsty', icon: '🥤', category: 'basic' },
+        { id: 'bathroom', text: 'Bathroom',     icon: '🚽', category: 'basic' },
+        { id: 'sleep',    text: 'I am tired',   icon: '😴', category: 'basic' },
+        { id: 'help',     text: 'Help me',      icon: '🆘', category: 'basic' },
+        { id: 'more',     text: 'More',         icon: '➕', category: 'basic' },
+      ],
+      emotions: [
+        { id: 'happy',   text: 'I am happy',   icon: '😊', category: 'emotions' },
+        { id: 'sad',     text: 'I am sad',     icon: '😢', category: 'emotions' },
+        { id: 'angry',   text: 'I am angry',   icon: '😠', category: 'emotions' },
+        { id: 'scared',  text: 'I am scared',  icon: '😨', category: 'emotions' },
+        { id: 'excited', text: 'I am excited', icon: '🤩', category: 'emotions' },
+        { id: 'calm',    text: 'I am calm',    icon: '😌', category: 'emotions' },
+      ],
+      activities: [
+        { id: 'play',   text: 'I want to play', icon: '🎮', category: 'activities' },
+        { id: 'read',   text: 'I want to read', icon: '📖', category: 'activities' },
+        { id: 'music',  text: 'I want music',   icon: '🎵', category: 'activities' },
+        { id: 'outside',text: 'Go outside',     icon: '🌳', category: 'activities' },
+        { id: 'watch',  text: 'Watch TV',       icon: '📺', category: 'activities' },
+        { id: 'draw',   text: 'I want to draw', icon: '🎨', category: 'activities' },
+      ],
+      people: [
+        { id: 'mom',     text: 'Mom',    icon: '👩',       category: 'people' },
+        { id: 'dad',     text: 'Dad',    icon: '👨',       category: 'people' },
+        { id: 'teacher', text: 'Teacher',icon: '👩‍🏫',     category: 'people' },
+        { id: 'friend',  text: 'Friend', icon: '👫',       category: 'people' },
+        { id: 'doctor',  text: 'Doctor', icon: '👨‍⚕️',     category: 'people' },
+        { id: 'family',  text: 'Family', icon: '👨‍👩‍👧‍👦', category: 'people' },
+      ]
+    };
+
+    // -------------------------
+    // State
+    // -------------------------
+    let activeTab = 'voice';
+    let selectedCategory = 'basic';
+    const selectedCards = new Map(); // id -> card
+
+    // -------------------------
+    // Elements
+    // -------------------------
+    const tabs = document.querySelectorAll('.tab');
+    const tabVoice = document.getElementById('tab-voice');
+    const tabCards = document.getElementById('tab-cards');
+
+    const sayBtn = document.getElementById('sayBtn');
+    const sendBtn = document.getElementById('sendBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const chipsWrap = document.getElementById('chips');
+    const emptyHint = document.getElementById('emptyHint');
+
+    const micBtn = document.getElementById('micBtn');
+    const listenState = document.getElementById('listenState');
+    const aiBlock = document.getElementById('aiBlock');
+    const aiGrid = document.getElementById('aiGrid');
+
+    const categoryBar = document.getElementById('categoryBar');
+    const cardGrid = document.getElementById('cardGrid');
+
+    // -------------------------
+    // Utilities
+    // -------------------------
+    // Speak a single card immediately
+    const speakCard = (text) => {
+      if (!('speechSynthesis' in window)) return;
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang   = 'en-US';
+      u.rate   = 1;
+      u.pitch  = 1;
+      speechSynthesis.cancel();   // stop anything already talking
+      speechSynthesis.speak(u);
+    };
+
+    const updateMessageUI = () => {
+      chipsWrap.innerHTML = '';
+      const cards = Array.from(selectedCards.values());
+      if (cards.length === 0) {
+        emptyHint.classList.remove('hidden');
+        sayBtn.disabled = true;
+        sendBtn.disabled = true;
+        return;
+      }
+      emptyHint.classList.add('hidden');
+      sayBtn.disabled = false;
+      sendBtn.disabled = false;
+
+      cards.forEach((card, idx) => {
+        const chip = document.createElement('div');
+        chip.className = 'chip';
+        chip.innerHTML = `
+          <span style="font-size:18px">${card.icon}</span>
+          <span style="font-size:14px;font-weight:600">${card.text}</span>
+          <button class="remove" aria-label="Remove card">&times;</button>
+          ${idx < cards.length - 1 ? '<span class="muted">→</span>' : ''}
+        `;
+        chip.querySelector('.remove').addEventListener('click', () => {
+          selectedCards.delete(card.id);
+          // also unselect the tile if visible
+          const tile = document.querySelector(`[data-card-id="${card.id}"]`);
+          if (tile) tile.classList.remove('selected');
+          updateMessageUI();
+        });
+        chipsWrap.appendChild(chip);
+      });
+    };
+
+    const buildSentence = () =>
+      Array.from(selectedCards.values()).map(c => c.text).join('. ');
+
+    const speakMessage = () => {
+      const sentence = buildSentence();
+      if (!sentence) return;
+      try {
+        // Use Web Speech API if available
+        if ('speechSynthesis' in window) {
+          const u = new SpeechSynthesisUtterance(sentence);
+          u.rate = 0.95;
+          u.pitch = 1.0;
+          speechSynthesis.cancel();
+          speechSynthesis.speak(u);
+        } else {
+          console.log('TTS not supported, simulated:', sentence);
+        }
+      } catch(e) { console.warn(e) }
+    };
+
+    const sendMessage = () => {
+      const sentence = buildSentence();
+      if (!sentence) return;
+      const timestamp = new Date().toLocaleTimeString();
+      alert(`✅ Message sent to Mom at ${timestamp}:\n"${sentence}"`);
+      setTimeout(clearMessage, 800);
+    };
+
+    const clearMessage = () => {
+      selectedCards.clear();
+      document.querySelectorAll('.pict-card.selected').forEach(el => el.classList.remove('selected'));
+      updateMessageUI();
+      // Clear AI block too (optional)
+      // aiBlock.classList.add('hidden'); aiGrid.innerHTML=''
+    };
+
+    const toggleSelectCard = (card, tileEl) => {
+      if (selectedCards.has(card.id)) {
+        selectedCards.delete(card.id);
+        tileEl.classList.remove('selected');
+      } else {
+        selectedCards.set(card.id, card);
+        tileEl.classList.add('selected');
+        // Read this card aloud as soon as it’s chosen
+        speakCard(card.text);
+      }
+      updateMessageUI();
+    };
+
+    // -------------------------
+    // Renderers
+    // -------------------------
+    const renderCategories = () => {
+      categoryBar.innerHTML = '';
+      Object.entries(categories).forEach(([key, cat]) => {
+        const btn = document.createElement('button');
+        btn.className = 'pill';
+        btn.innerHTML = `<span>${cat.icon}</span><span>${cat.name}</span>`;
+        if (key === selectedCategory) btn.classList.add(`active-${cat.theme}`);
+        btn.addEventListener('click', () => {
+          selectedCategory = key;  // Update selected category
+          renderCategories();      // Re-render categories to update active state
+          renderCardGrid();        // Re-render grid with new category
+        });
+        categoryBar.appendChild(btn);
+      });
+    };
+
+    const renderCardGrid = () => {
+      cardGrid.innerHTML = '';
+      pictureCards[selectedCategory].forEach(card => {
+        const tile = document.createElement('button');
+        tile.className = 'pict-card';
+        tile.setAttribute('data-card-id', card.id);
+        tile.innerHTML = `
+          <span class="pict-emoji">${card.icon}</span>
+          <span class="pict-text">${card.text}</span>
+        `;
+        
+        // Check if already selected
+        if (selectedCards.has(card.id)) {
+          tile.classList.add('selected');
+        }
+        
+        tile.addEventListener('click', () => toggleSelectCard(card, tile));
+        cardGrid.appendChild(tile);
+      });
+    };
+
+    const renderAISuggestions = (cards) => {
+      aiGrid.innerHTML = '';
+      cards.forEach(card => {
+        const tile = document.createElement('button');
+        tile.className = 'pict-card ai';
+        tile.setAttribute('data-card-id', card.id);
+        if (selectedCards.has(card.id)) tile.classList.add('selected');
+        tile.innerHTML = `
+          <div class="badge-ai">AI</div>
+          <div class="pict-emoji">${card.icon}</div>
+          <div class="pict-text">${card.text}</div>
+        `;
+        tile.addEventListener('click', () => toggleSelectCard(card, tile));
+        aiGrid.appendChild(tile);
+      });
+      aiBlock.classList.remove('hidden');
+    };
+
+    // -------------------------
+    // Tabs
+    // -------------------------
+    const setActiveTab = (tab) => {
+      activeTab = tab;
+      tabs.forEach(t => {
+        const on = t.getAttribute('data-tab') === tab;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', String(on));
+      });
+      tabVoice.classList.toggle('hidden', tab !== 'voice');
+      tabCards.classList.toggle('hidden', tab !== 'cards');
+    };
+    tabs.forEach(t => t.addEventListener('click', () => setActiveTab(t.dataset.tab)));
+
+    // -------------------------
+    // Voice (simulated)
+    // -------------------------
+    const generateAISuggestions = () => ([
+      { id:'ai-hungry', text:'I am hungry', icon:'🍎', isAI:true },
+      { id:'ai-help',   text:'Help me',     icon:'🆘', isAI:true },
+      { id:'ai-water',  text:'I need water',icon:'💧', isAI:true },
+    ]);
+
+    const handleVoiceInput = async () => {
+      micBtn.classList.add('listening');
+      micBtn.setAttribute('aria-pressed','true');
+      listenState.textContent = 'Listening...';
+      micBtn.disabled = true;
+
+      // Simulated 2s capture
+      await new Promise(r => setTimeout(r, 2000));
+
+      const suggestions = generateAISuggestions();
+      renderAISuggestions(suggestions);
+
+      micBtn.classList.remove('listening');
+      micBtn.setAttribute('aria-pressed','false');
+      listenState.textContent = 'Press and say any letter A,B,C...';
+      micBtn.disabled = false;
+    };
+
+    // -------------------------
+    // Wire up controls
+    // -------------------------
+    sayBtn.addEventListener('click', speakMessage);
+    sendBtn.addEventListener('click', sendMessage);
+    clearBtn.addEventListener('click', clearMessage);
+    micBtn.addEventListener('click', handleVoiceInput);
+
+    // -------------------------
+    // Init
+    // -------------------------
+    renderCategories();
+    renderCardGrid();
+    setActiveTab('voice');
+    updateMessageUI();
+  </script>
+
+  <script>
+// ensure CSS variable matches the measured header height
+function updateHeaderOffset() {
+  const headerEl = document.getElementById('header');
+  const h = headerEl ? headerEl.offsetHeight : 0;
+  document.documentElement.style.setProperty('--header-h', `${h}px`);
+}
+
+// set on load and when window size changes (keeps it correct on mobile/rotate)
+window.addEventListener('DOMContentLoaded', () => {
+  updateHeaderOffset();
+  // if other DOMContentLoaded listeners exist they will also run
+});
+window.addEventListener('resize', updateHeaderOffset);
+</script>
+</body>
+</html>

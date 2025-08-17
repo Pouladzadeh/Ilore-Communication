@@ -1,0 +1,1705 @@
+/* ILore Communication App Styles */
+:root{
+  --bg:#F9FAFB;            /* gray-50 */
+  --card:#ffffff;          /* white */
+  --border:#e5e7eb;        /* gray-200 */
+  --border-300:#d1d5db;    /* gray-300 */
+  --text:#111827;          /* gray-900 */
+  --muted:#6b7280;         /* gray-500 */
+  --blue:#1C5A98;
+  --blue-600:#2563eb;
+  --green:#34A853;         /* Changed from #22c55e */
+  --green-600:#2E7D32;     /* Darker shade of the new green */
+  --red:#ef4444;
+  --red-600:#dc2626;
+  --shadow:0 6px 18px rgba(0,0,0,.08);
+  --radius:14px;
+  --header-h: 72px; /* fallback/default */
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+    body{
+    margin:0;
+    /* use Poppins as the primary font */
+    font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+        /* font-family replaced to Poppins above */
+    }
+
+/* ========================================================================
+   HEADER & NAVIGATION STYLES
+   ======================================================================== */
+
+/* Fixed header with blur effect when scrolled */
+.header {
+    background: #F9FAFB;
+    color: #333333;
+    padding: 16px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1100;
+    transition: all 0.3s ease;
+}
+
+/* Scrolled state */
+.header.scrolled {
+    background: #F9FAFB;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Navigation container with flexbox layout */
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 12px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Ensure logo stays on the left */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  z-index: 1102;
+}
+
+/* Desktop navigation menu */
+.nav-menu {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 16px;
+}
+
+/* Navigation links */
+.nav-menu a {
+  color: #333333;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+  background: rgba(28, 90, 152, 0.1);
+  color: var(--blue);
+}
+
+/* Right side navigation actions (search, cart) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Mobile hamburger menu toggle */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #333333;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 8px;
+    transition: transform 0.3s ease;
+    z-index: 1102;
+}
+
+/* Transform hamburger to X when active */
+.mobile-menu-toggle.active {
+    transform: rotate(90deg);
+}
+
+.mobile-menu-toggle::before {
+    content: "☰";
+    display: block;
+}
+
+.mobile-menu-toggle.active::before {
+    content: "✕";
+}
+
+/* ========================================================================
+   MOBILE RESPONSIVE NAVIGATION
+   ======================================================================== */
+
+@media (max-width: 768px) {
+    /* Adjust container padding on mobile */
+    .nav-container {
+        padding: 12px 20px;
+    }
+    
+    /* Mobile navigation menu - hidden by default, shown when active */
+    .nav-menu {
+        display: none;
+        position: fixed;
+        top: 72px; /* Height of header */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(249, 250, 251, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 32px 24px;
+        gap: 8px;
+        z-index: 1099;
+        overflow-y: auto;
+        margin: 0;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    /* Mobile menu links styling */
+    .nav-menu a {
+        width: 100%;
+        padding: 16px 20px;
+        text-align: left;
+        font-size: 18px;
+        border-radius: 8px;
+        color: #333333;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .nav-menu a:last-child {
+        border-bottom: none;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+        background: rgba(28, 90, 152, 0.1);
+        color: var(--blue);
+    }
+
+    /* Show mobile menu toggle button */
+    .mobile-menu-toggle {
+        display: block;
+        order: 3; /* Places it after nav-actions */
+    }
+
+    /* Hide desktop search and cart on mobile */
+    .search-container,
+    .nav-actions .social-icon {
+        display: none;
+    }
+
+    /* Mobile search and cart links in menu */
+    .mobile-search,
+    .mobile-cart {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #333333;
+        text-decoration: none;
+        padding: 16px 20px;
+        border-radius: 8px;
+        border-bottom: 1px solid var(--border);
+        margin-top: 16px;
+        transition: all 0.3s ease;
+        font-size: 18px;
+    }
+
+    .mobile-search:first-of-type {
+        border-top: 2px solid var(--border);
+        padding-top: 24px;
+    }
+
+    .mobile-search:hover,
+    .mobile-cart:hover {
+        background: rgba(28, 90, 152, 0.1);
+        color: var(--blue);
+    }
+
+    .mobile-search-icon,
+    .mobile-cart-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+        overflow: hidden;
+    }
+}
+
+/* Tablet specific adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .nav-container {
+        padding: 12px 32px;
+    }
+    
+    .nav-menu {
+        gap: 12px;
+    }
+    
+    .nav-menu a {
+        padding: 6px 12px;
+        font-size: 15px;
+    }
+}
+
+/* Large desktop adjustments */
+@media (min-width: 1200px) {
+    .nav-container {
+        padding: 12px 40px;
+    }
+    
+    .nav-menu {
+        gap: 24px;
+    }
+    
+    .nav-menu a {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+}
+
+/* Desktop-only navigation elements */
+@media (min-width: 769px) {
+    .mobile-search,
+    .mobile-cart,
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+}
+
+/* Mobile-only navigation elements */
+@media (max-width: 768px) {
+    .mobile-search,
+    .mobile-cart {
+        display: flex;
+    }
+    
+    /* Hide desktop search and cart on mobile */
+    .search-container,
+    .nav-actions .social-icon {
+        display: none;
+    }
+}
+
+
+/* ========================================================================
+   MAIN LAYOUT CONTAINER
+   ======================================================================== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ========================================================================
+   HEADER STYLES
+   ======================================================================== */
+header {
+  background: #fff;
+  /* Remove these lines */
+  /* border-bottom: 1px solid var(--border); */
+  /* box-shadow: 0 1px 0 rgba(0, 0, 0, .02); */
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+}
+
+.brand {
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--blue);
+}
+
+.nav {
+  display: flex;
+  gap: 18px;
+}
+
+/* Icon buttons (like menu toggles) */
+.icon-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 10px;
+  color: #6b7280;
+}
+
+.icon-btn:hover {
+  color: var(--blue);
+  background: #f3f4f6;
+}
+
+/* ========================================================================
+   TAB NAVIGATION
+   ======================================================================== */
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0 32px;
+  justify-content: center; /* Center the tabs */
+  align-items: center;
+}
+
+.tab {
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  background: #fff;
+  color: #4b5563;
+  font-weight: 600;
+  font-size: 18px; /* Larger tab text */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.tab img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+/* ========================================================================
+   PANELS AND CARDS
+   ======================================================================== */
+.panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Space between consecutive panels */
+.panel + .panel {
+  margin-top: 18px;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Message title */
+.panel-title h3 {
+  font-size: 22px !important;
+  margin: 0;
+  flex: 1 1 auto;
+}
+
+/* Button row in message section */
+.panel-title .row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+}
+
+/* Responsive styles for message section */
+@media (max-width: 768px) {
+  /* Stack title and buttons on mobile */
+  .panel-title {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  
+  /* Center title on mobile */
+  .panel-title h3 {
+    text-align: center;
+    font-size: 20px !important;
+  }
+  
+  /* Make buttons full width on mobile */
+  .panel-title .row {
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .panel-title .btn {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 12px 16px;
+    font-size: 14px;
+    justify-content: center;
+  }
+  
+  /* Adjust button text size on mobile */
+  .panel-title .btn span {
+    font-size: 14px;
+  }
+  
+  /* Hide button icons on very small screens */
+  @media (max-width: 360px) {
+    .panel-title .btn svg,
+    .panel-title .btn img {
+      display: none;
+    }
+  }
+}
+
+/* Tablet specific adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .panel-title {
+    gap: 16px;
+  }
+  
+  .panel-title h3 {
+    font-size: 20px !important;
+  }
+  
+  .panel-title .btn {
+    padding: 10px 16px;
+    font-size: 15px;
+  }
+}
+
+/* Message area responsiveness */
+@media (max-width: 768px) {
+  .message-area {
+    min-height: 80px;
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  /* Chips in message area */
+  .chips {
+    gap: 6px;
+  }
+  
+  .chip {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .chip span {
+    font-size: 14px !important;
+  }
+}
+
+/* Small phone adjustments */
+@media (max-width: 480px) {
+  /* Stack buttons vertically on very small screens */
+  .panel-title .row {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .panel-title .btn {
+    width: 100%;
+    padding: 14px 20px;
+  }
+  
+  /* Adjust padding for smaller screens */
+  .panel {
+    padding: 16px 12px;
+  }
+}
+
+/* ========================================================================
+   BUTTONS
+   ======================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px; /* Larger button text */
+}
+
+.btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+/* Button color variants */
+.btn-green {
+  background: var(--green);
+}
+.btn-green:hover {
+  background: var(--green-600);
+}
+
+.btn-blue {
+  background: var(--blue);
+}
+.btn-blue:hover {
+  background: var(--blue-600);
+}
+
+.btn-red {
+  background: var(--red);
+}
+.btn-red:hover {
+  background: var(--red-600);
+}
+
+/* ========================================================================
+   MESSAGE AREA AND CHIPS
+   ======================================================================== */
+.message-area {
+  min-height: 100px;
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  background: #f9fafb;
+  font-size: 16px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+  font-size: 16px; /* Larger chip text */
+}
+
+.chip .remove {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.chip .remove:hover {
+  color: var(--red);
+}
+
+/* ========================================================================
+   MICROPHONE BUTTON
+   ======================================================================== */
+.mic-wrap {
+  text-align: center;
+}
+
+.mic {
+  width: 128px;
+  height: 128px;
+  border-radius: 999px;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  background: var(--green);
+  box-shadow: 0 10px 24px rgba(52, 168, 83, .35);
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease;
+}
+
+.mic:hover {
+  transform: scale(1.04);
+  background: var(--green-600);
+}
+
+.mic.listening {
+  background: var(--red);
+  animation: pulse 1s infinite;
+  transform: scale(1.08);
+}
+
+/* Make microphone icon white */
+.mic img {
+  filter: brightness(0) invert(1);
+}
+
+/* Optional: Keep it white even when listening */
+.mic.listening img {
+  filter: brightness(0) invert(1);
+}
+
+/* Pulse animation for recording state */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, .4);
+  }
+  70% {
+    box-shadow: 0 0 0 24px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+/* ========================================================================
+   CATEGORY PILLS
+   ======================================================================== */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 24px;
+  padding: 0 8px;
+}
+
+.pill {
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: #fff; /* Light blue tint of #1C5A98 */
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px; /* Larger category text */
+}
+
+/* Active category states with different colors */
+.pill.active-basic {
+background: #1C5A98;
+  color: #ffffff;
+  border-color: #1C5A98;
+  box-shadow: 0 4px 12px rgba(28, 90, 152, 0.25);
+}
+.pill:hover {
+  background: #EAF2FA; /* Light blue tint of #1C5A98 */
+  border-color: #1C5A98;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 90, 152, 0.15);
+}
+
+.pill.active-emotions {
+  background: #1C5A98;
+  color: #ffffff;
+  border-color: #1C5A98;
+  box-shadow: 0 4px 12px rgba(28, 90, 152, 0.25);
+}
+
+.pill.active-activities {
+  background: #1C5A98;
+  color: #ffffff;
+  border-color: #1C5A98;
+  box-shadow: 0 4px 12px rgba(28, 90, 152, 0.25);
+}
+
+.pill.active-people {
+  background: #1C5A98;
+  color: #ffffff;
+  border-color: #1C5A98;
+  box-shadow: 0 4px 12px rgba(28, 90, 152, 0.25);
+}
+
+/* ========================================================================
+   PICTURE CARDS GRID
+   ======================================================================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) !important; /* Force 2 columns */
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* Remove the media query overrides for grid */
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important; /* Keep 2 columns */
+    justify-content: center;
+  }
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important; /* Keep 2 columns */
+    max-width: 600px; /* Optional: limit max width on larger screens */
+    margin: 16px auto 0; /* Center the grid */
+  }
+}
+
+/* Remove or comment out this media query that was changing to 3 columns */
+/*
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(150px, 200px));
+  }
+}
+*/
+
+/* Individual picture card styling */
+.pict-card {
+ width: 100%;
+  padding: 20px;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  background: white;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  aspect-ratio: 1.2; /* Maintain consistent card proportions */
+}
+
+.pict-card:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow);
+  border-color: var(--border-300);
+}
+
+.pict-card.selected {
+  border-color: #1C5A98;
+  background: #f0fdf4;
+  box-shadow: 0 6px 18px rgba(28, 90, 152, .18);
+}
+
+.pict-card.ai {
+  border-style: dashed;
+  border-color: #1C5A98;
+  background: #eff6ff;
+}
+
+/* Card content */
+.pict-emoji {
+  font-size: px; /* Larger emoji */
+  margin-bottom: 12px;
+}
+
+.pict-text {
+  font-size: 16px !important; /* Larger card text */
+  line-height: 1.4;
+}
+
+/* Card badges */
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #34A853;
+  color: #fff;
+  border-radius: 999px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.badge-ai {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  background: #3b82f6;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 12px;
+  padding: 2px 6px;
+}
+
+/* ========================================================================
+   UTILITY CLASSES
+   ======================================================================== */
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* SVG icon sizing */
+.svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* ========================================================================
+   MAIN CONTENT OFFSET (for fixed header)
+   ======================================================================== */
+:root {
+  --header-h: 72px; /* fallback value */
+}
+
+main.container {
+  /* Push content below fixed header */
+  padding-top: calc(var(--header-h) + 24px) !important; /* Increased from 12px to 24px */
+  padding-bottom: 60px; /* Increased from 32px to 60px */
+}
+
+/* ========================================================================
+   TYPOGRAPHY IMPROVEMENTS - Larger, more readable text
+   ======================================================================== */
+body {
+  font-size: 16px; /* Base font size increase */
+}
+
+/* ========================================================================
+   TAB IMPROVEMENTS - Better alignment and sizing
+   ======================================================================== */
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0 32px;
+  justify-content: center; /* Center the tabs */
+  align-items: center;
+}
+
+.tab {
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  background: #fff;
+  color: #4b5563;
+  font-weight: 600;
+  font-size: 18px; /* Larger tab text */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.tab img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+/* ========================================================================
+   TAB HOVER AND ACTIVE STATES
+   ======================================================================== */
+.tab {
+  /* existing styles plus transition for smooth effects */
+  transition: all 0.3s ease;
+}
+
+/* Hover state - subtle background and border change */
+.tab:hover {
+  background: #EAF2FA; /* Light blue tint of #1C5A98 */
+  border-color: #1C5A98;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 90, 152, 0.15);
+}
+
+/* Active state - full color with white text */
+.tab.active {
+  background: #1C5A98;
+  color: #ffffff;
+  border-color: #1C5A98;
+  box-shadow: 0 4px 12px rgba(28, 90, 152, 0.25);
+}
+
+/* Remove or comment out this rule that makes icons white */
+/* 
+.tab.active img {
+  filter: brightness(0) invert(1);
+}
+*/
+
+/* Keep the original icon colors in active state */
+.tab.active img {
+  /* No filter applied - keeps original colors */
+  opacity: 1; /* Ensure full opacity */
+}
+
+/* Active tab hover - slightly darker */
+.tab.active:hover {
+  background: #164a7d; /* Darker shade of #1C5A98 */
+  border-color: #164a7d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(28, 90, 152, 0.35);
+}
+
+/* Optional: Add focus state for accessibility */
+.tab:focus {
+  outline: 3px solid rgba(28, 90, 152, 0.4);
+  outline-offset: 2px;
+}
+
+/* Pressed/click state */
+.tab:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(28, 90, 152, 0.2);
+}
+
+/* ========================================================================
+   PANEL TITLE IMPROVEMENTS
+   ======================================================================== */
+.panel-title h3 {
+  font-size: 22px !important; /* Larger panel titles */
+}
+
+/* ========================================================================
+   BUTTON IMPROVEMENTS - Larger and better aligned
+   ======================================================================== */
+.btn {
+  padding: 12px 20px;
+  font-size: 16px; /* Larger button text */
+  border-radius: 14px;
+}
+
+.btn span {
+  font-size: 16px;
+}
+
+/* ========================================================================
+   MESSAGE AREA IMPROVEMENTS
+   ======================================================================== */
+.message-area {
+  min-height: 100px;
+  padding: 16px;
+  font-size: 16px;
+}
+
+.chip {
+  padding: 10px 14px;
+  font-size: 16px; /* Larger chip text */
+}
+
+.chip span {
+  font-size: 16px !important;
+}
+
+/* ========================================================================
+   VOICE HELPER SECTION - Better alignment
+   ======================================================================== */
+#tab-voice h2 {
+  font-size: 28px !important; /* Larger section title */
+  margin-bottom: 12px !important;
+}
+
+#tab-voice p {
+  font-size: 16px !important; /* Larger helper text */
+}
+
+#listenState {
+  font-size: 22px !important; /* Larger listening state text */
+}
+
+/* ========================================================================
+   PICTURE CARDS SECTION
+   ======================================================================== */
+#tab-cards h2 {
+  font-size: 28px !important; /* Larger section title */
+  margin-bottom: 12px !important;
+}
+
+/* ========================================================================
+   CATEGORY PILLS - Larger and better spaced
+   ======================================================================== */
+.categories {
+  margin-bottom: 24px;
+  padding: 0 8px;
+}
+
+.pill {
+  padding: 12px 18px;
+  font-size: 16px; /* Larger category text */
+  border-radius: 14px;
+}
+
+/* ========================================================================
+   PICTURE CARD IMPROVEMENTS
+   ======================================================================== */
+.pict-card {
+  min-height: 140px;
+  min-width: 160px;
+  padding: 20px;
+}
+
+.pict-emoji {
+  font-size: 80px; /* Larger emoji */
+  margin-bottom: 12px;
+}
+
+.pict-text {
+  font-size: 16px !important; /* Larger card text */
+  line-height: 1.4;
+}
+
+/* ========================================================================
+   NAVIGATION IMPROVEMENTS
+   ======================================================================== */
+.nav-menu a {
+  font-size: 16px; /* Larger nav links */
+  padding: 8px 12px;
+}
+
+/* ========================================================================
+   RESPONSIVE IMPROVEMENTS
+   ======================================================================== */
+@media (max-width: 768px) {
+  .tabs {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+  
+  .tab {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .panel {
+    padding: 16px;
+  }
+  
+  .categories {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 8px;
+  }
+}
+
+/* ============================================ */
+/* FOOTER STYLES                                */
+/* ============================================ */
+.footer {
+    background: #0B5394; /* Darker blue background */
+    color: white;
+    padding: 60px 0 30px;
+    margin-top: 80px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 300px 1fr 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Footer brand section */
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start; /* Add this to align items to the left */
+}
+
+/* Hide the separate social icons on desktop */
+.footer-container > .social-icons {
+    display: none;
+}
+
+/* Hide the footer sections container on desktop */
+.footer-container > .footer-sections-container {
+    display: none;
+}
+
+.footer-logo {
+    height: 40px;
+    width: auto;
+    margin-bottom: 0; /* Changed from 10px to 0 */
+}
+
+/* Social icons */
+.social-icons {
+    display: flex;
+    gap: 12px;
+    margin-top: 0; /* Add this to ensure no extra top margin */
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.social-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.social-icon svg,
+.social-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Footer sections */
+.footer-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-links li a {
+    color: #b3d4f5;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.3s ease;
+    display: block;
+}
+
+.footer-links li a:hover {
+    color: white;
+}
+
+/* Newsletter section */
+.newsletter-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.newsletter {
+    display: flex;
+    margin-top: 20px;
+    position: relative;
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 14px 45px 14px 18px;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-size: 15px;
+    outline: none;
+    width: 100%;
+}
+
+.newsletter-input::placeholder {
+    color: #b3d4f5;
+}
+
+.newsletter-input:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.newsletter-btn {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 8px;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newsletter-btn:hover {
+    transform: translateY(-50%) translateX(2px);
+}
+
+.newsletter-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Footer bottom */
+.footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.footer-copyright {
+    font-size: 14px;
+    color: #b3d4f5;
+    margin-bottom: 0;
+}
+
+.footer-copyright a {
+    color: #b3d4f5;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-copyright a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Tablet breakpoint */
+@media (max-width: 1024px) {
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        padding: 0 30px;
+        text-align: center;
+        align-items: center;
+    }
+    
+    /* Hide desktop footer sections */
+    .footer-container > .footer-section:not(.newsletter-section) {
+        display: none;
+    }
+    
+    /* Hide social icons in footer-brand */
+    .footer-brand .social-icons {
+        display: none;
+    }
+    
+    /* Show separate social icons */
+    .footer-container > .social-icons {
+        display: flex;
+    }
+    
+    /* Show footer sections container */
+    .footer-container > .footer-sections-container {
+        display: grid;
+    }
+    
+    /* 1. Logo (centered) */
+    .footer-brand {
+        order: 1;
+        align-items: center;
+        gap: 0;
+    }
+    
+    .footer-logo {
+        margin-bottom: 0;
+    }
+    
+    /* 2. Newsletter section */
+    .newsletter-section {
+        order: 2;
+        max-width: 400px;
+        width: 100%;
+    }
+    
+    /* 3. Social icons (below newsletter) */
+    .footer-container > .social-icons {
+        order: 3;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    /* 4. Two-column grid for Company and Support */
+    .footer-sections-container {
+        order: 4;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        width: 100%;
+        max-width: 500px;
+    }
+    
+    .footer-section h3 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .footer-links {
+        text-align: center;
+        align-items: center;
+    }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 20px;
+        margin-top: 40px;
+    }
+
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 20px;
+        text-align: center;
+        align-items: center;
+    }
+    
+    /* Hide desktop footer sections */
+    .footer-container > .footer-section:not(.newsletter-section) {
+        display: none;
+    }
+    
+    /* Hide social icons in footer-brand */
+    .footer-brand .social-icons {
+        display: none;
+    }
+    
+    /* Show separate social icons */
+    .footer-container > .social-icons {
+        display: flex;
+    }
+    
+    /* Show footer sections container */
+    .footer-container > .footer-sections-container {
+        display: grid;
+    }
+    
+    /* 1. Logo (centered) */
+    .footer-brand {
+        order: 1;
+        align-items: center;
+        gap: 0;
+    }
+    
+    .footer-logo {
+        margin-bottom: 0;
+    }
+    
+    /* 2. Newsletter section */
+    .newsletter-section {
+        order: 2;
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    .newsletter-section h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .newsletter-input {
+        padding: 12px 40px 12px 16px;
+        font-size: 14px;
+    }
+    
+    /* 3. Social icons (below newsletter) */
+    .footer-container > .social-icons {
+        order: 3;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 20px;
+    }
+
+    .social-icon {
+        width: 44px;
+        height: 44px;
+    }
+
+    .social-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+    
+    /* 4. Two-column grid for Company and Support */
+    .footer-sections-container {
+        order: 4;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        width: 100%;
+    }
+
+    .footer-section h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .footer-links {
+        gap: 10px;
+        text-align: center;
+    }
+
+    .footer-links li a {
+        font-size: 14px;
+    }
+
+    .footer-bottom {
+        margin-top: 30px;
+        padding-top: 15px;
+        order: 5;
+    }
+
+    .footer-copyright {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+}
+
+/* Small mobile breakpoint */
+@media (max-width: 480px) {
+    .footer-container {
+        padding: 0 16px;
+    }
+
+    .newsletter-input {
+        font-size: 13px;
+        padding: 10px 35px 10px 14px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .social-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .footer-sections-container {
+        gap: 25px;
+    }
+}
+
+/* AI Suggestions - Wide horizontal layout */
+#aiGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+ max-width: 800px;
+  margin: 0 auto;
+  /* safe default */
+}
+
+
+#aiGrid .pict-card {
+  width: 100%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  padding: 32px 40px; 
+  gap: 0; 
+  position: relative; 
+  border: 2px solid #D1D5DB; 
+  border-radius: 16px; 
+  background: white; 
+  cursor: pointer; 
+  transition: all 0.2s ease; 
+  min-height: 140px;
+
+}
+
+#aiGrid .pict-card:hover {
+  border-color: #1C5A98;
+  box-shadow: 0 4px 12px rgba(28, 90, 152, 0.1);
+}
+
+#aiGrid .pict-card .pict-emoji {
+  font-size: 100px;
+  margin: 0 20px 0 0;
+  flex-shrink: 0;
+}
+
+#aiGrid .pict-card .pict-text {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: #1F2937;
+  margin: 0;
+  flex: 1;
+}
+
+#aiGrid .pict-card .badge-ai {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  background: #1C5A98;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  #aiGrid {
+    grid-template-columns: 1fr; /* Single column on small screens */
+    max-width: 100%;
+    padding: 0 16px;
+  }
+  
+  #aiGrid .pict-card {
+    padding: 24px 32px;
+    min-height: 100px;
+  }
+  
+  #aiGrid .pict-card .pict-emoji {
+    font-size: 72px;
+    margin: 0 16px 0 0;
+  }
+  
+  #aiGrid .pict-card .pict-text {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  #aiGrid {
+    padding: 0 10px;
+  }
+  
+  #aiGrid .pict-card {
+    padding: 14px 16px;
+    min-height: 80px;
+    gap: 12px;
+  }
+  
+  #aiGrid .pict-card .pict-emoji {
+    font-size: 60px;
+    margin: 0 12px 0 0;
+  }
+  
+  #aiGrid .pict-card .pict-text {
+    font-size: 16px;
+  }
+}
+/* Very small phones */
+@media (max-width: 360px) {
+  #aiGrid .pict-card {
+    padding: 12px 14px;
+    min-height: 70px;
+  }
+  
+  #aiGrid .pict-card .pict-emoji {
+    font-size: 36px;
+  }
+  
+  #aiGrid .pict-card .pict-text {
+    font-size: 14px;
+  }
+}
+
+/* --- AI cards – compact override --------------------------------------- */
+#aiGrid .pict-card{
+  padding: 14px 24px;          /* tighter padding  */
+  min-height: 0 !important;    /* remove previous 120 px floor   */
+  max-height: 140px;           /* cap the height – adjust to taste */
+  height: auto;                /* let content decide, but never >140 */
+}
+
+#aiGrid .pict-card .pict-emoji{
+  font-size: 78px;             /* smaller emoji so it fits the cap   */
+  margin-right: 16px;
+}
+
+#aiGrid .pict-card .pict-text{
+  font-size: 16px;
+}
+/* ----------------------------------------------------------------------- */
+/* --- AI Suggestions heading ------------------------------------------- */
+#aiBlock{
+  max-width: 800px;      /* same as #aiGrid */
+  margin: 0 auto;        /* center the whole block */
+}
+
+#aiBlock h3{
+  font-size:18px;
+  margin:0 0 16px !important;
+  padding:0 !important;   /* cancels the inline 0 20px */
+  text-align:center;      /* centers the label */
+}
+
+/* --- AI cards – breathing-room override -------------------------------- */
+#aiGrid .pict-card {
+  padding: 16px 32px;   /* was 8px 24px → add vertical / horizontal space */
+  min-height: 0 !important;
+  max-height: 180px;    /* allow a bit more height with the added padding */
+  height: auto;
+}
+
+/* keep emojis/text balanced with the new padding                       */
+#aiGrid .pict-card .pict-emoji { font-size: 72px; }
+#aiGrid .pict-card .pict-text  { font-size: 16px; }
+
+/* small screens */
+@media (max-width: 640px) {
+  #aiGrid .pict-card { padding: 14px 28px; }
+}
+@media (max-width: 480px) {
+  #aiGrid .pict-card { padding: 12px 24px; }
+}
+@media (max-width: 360px) {
+  #aiGrid .pict-card { padding: 10px 20px; }
+}
+
+
