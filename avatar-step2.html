@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Tell Us About You – ILore Communication App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styless.css">
+</head>
+<body>
+  
+  <!-- ============================================ -->
+  <!-- HEADER SECTION - Navigation and Branding    -->
+  <!-- ============================================ -->
+  <header class="header" id="header">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="img/Logo.svg" alt="Ilore logo" style="height:32px; width: 122px; vertical-align:middle;">
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="Services.html">Services</a>
+        <a href="Contact.html">Contact</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="mobile-menu-toggle" id="mobileMenuToggle"></button>
+      </div>
+    </div>
+  </header>
+  <!-- END HEADER SECTION -->
+
+  <!-- ============================================ -->
+  <!-- SOUND CONTROL SECTION - Toggle and status    -->
+  <!-- ============================================ -->
+  <!-- Sound Control -->
+  <div class="sound-control">
+    <span>🔊 Sound:</span>
+    <div class="sound-toggle" onclick="toggleSound()" tabindex="0" role="button" aria-label="Toggle sound on or off"></div>
+    <span id="sound-status">Off</span>
+  </div>
+  <!-- END SOUND CONTROL SECTION -->
+
+  <!-- ============================================ -->
+  <!-- AVATAR CONTAINER / MAIN CONTENT              -->
+  <!-- ============================================ -->
+  <!-- Main Container -->
+  <div class="avatar-container">
+    <!-- Progress Section -->
+    <div class="progress-section">
+      <div class="progress-text">Step 2 of 3: Tell Us About You</div>
+      <div class="progress-track">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- Question 1: Feelings -->
+    <div class="question-container" id="question-1" style="display: block;">
+      <div class="question-header-container">
+        <div class="question-header">
+          <div class="question-counter">Question 1 of 4</div>
+          <h1 class="question-title">How are you feeling today?</h1>
+          <p class="question-subtitle">Pick the feeling that matches how you feel right now</p>
+        </div>
+        <button class="skip-button" onclick="skipQuestion()">Skip Question</button>
+      </div>
+
+      <div class="selected-tags" id="selected-feelings"></div>
+
+      <div class="options-container">
+        <button class="option-button" onclick="selectOption('feeling', 'happy', '😊', 'Happy')" data-value="happy">
+          <span class="option-emoji">😊</span>
+          <span class="option-text">Happy</span>
+        </button>
+        <button class="option-button" onclick="selectOption('feeling', 'excited', '🤩', 'Excited')" data-value="excited">
+          <span class="option-emoji">🤩</span>
+          <span class="option-text">Excited</span>
+        </button>
+        <button class="option-button" onclick="selectOption('feeling', 'sad', '😢', 'Sad')" data-value="sad">
+          <span class="option-emoji">😢</span>
+          <span class="option-text">Sad</span>
+        </button>
+        <button class="option-button" onclick="selectOption('feeling', 'angry', '😠', 'Angry')" data-value="angry">
+          <span class="option-emoji">😠</span>
+          <span class="option-text">Angry</span>
+        </button>
+        <button class="option-button" onclick="selectOption('feeling', 'adventurous', '🗺️', 'Adventurous')" data-value="adventurous">
+          <span class="option-emoji">🗺️</span>
+          <span class="option-text">Adventurous</span>
+        </button>
+      </div>
+
+      <!-- Question 1 -->
+      <div class="action-buttons">
+        <a href="index.html" class="btn btn-outline-primary">← Go Back</a>
+        <button class="btn btn-primary" id="continue-btn-1" disabled onclick="nextQuestion()">Continue →</button>
+      </div>
+    </div>
+
+    <!-- Question 2: Magical Shirt -->
+    <div class="question-container" id="question-2" style="display: none;">
+      <div class="question-header-container">
+        <div class="question-header">
+          <div class="question-counter">Question 2 of 4</div>
+          <h1 class="question-title">Pick a color for your magical shirt</h1>
+          <p class="question-subtitle">Choose a color that makes you feel special and magical</p>
+        </div>
+        <button class="skip-button" onclick="skipQuestion()">Skip Question</button>
+      </div>
+
+      <div class="selected-tags" id="selected-colors"></div>
+
+      <div class="options-container">
+        <button class="option-button" onclick="selectOption('color', 'red', '❤️', 'Sparkling Red')" data-value="red">
+          <span class="option-emoji">❤️</span>
+          <span class="option-text">Sparkling Red</span>
+        </button>
+        <button class="option-button" onclick="selectOption('color', 'green', '💚', 'Glowing Green')" data-value="green">
+          <span class="option-emoji">💚</span>
+          <span class="option-text">Glowing Green</span>
+        </button>
+        <button class="option-button" onclick="selectOption('color', 'blue', '💙', 'Bright Blue')" data-value="blue">
+          <span class="option-emoji">💙</span>
+          <span class="option-text">Bright Blue</span>
+        </button>
+        <button class="option-button" onclick="selectOption('color', 'black', '🖤', 'Shiny Black')" data-value="black">
+          <span class="option-emoji">🖤</span>
+          <span class="option-text">Shiny Black</span>
+        </button>
+        <button class="option-button" onclick="selectOption('color', 'pink', '💗', 'Sparkling Pink')" data-value="pink">
+          <span class="option-emoji">💗</span>
+          <span class="option-text">Sparkling Pink</span>
+        </button>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="action-buttons">
+        <button class="btn btn-outline-primary" onclick="showPreviousQuestion(1)">← Go Back</button>
+        <button class="btn btn-primary" id="continue-btn-2" disabled onclick="nextQuestion()">Continue →</button>
+      </div>
+    </div>
+
+    <!-- Question 3: Magical Place -->
+    <div class="question-container" id="question-3" style="display: none;">
+      <div class="question-header-container">
+        <div class="question-header">
+          <div class="question-counter">Question 3 of 4</div>
+          <h1 class="question-title">Choose a magical place for today’s adventure?</h1>
+        </div>
+        <button class="skip-button" onclick="skipQuestion()">Skip Question</button>
+      </div>
+
+      <div class="selected-tags" id="selected-place"></div>
+
+      <div class="options-container">
+        <button class="option-button" onclick="selectOption('place', 'forest', '🌲', 'A sunset forest')" data-value="forest">
+          <span class="option-emoji">🌲</span>
+          <span class="option-text">A sunset forest</span>
+        </button>
+        <button class="option-button" onclick="selectOption('place', 'river', '🌊', 'A sparkling river')" data-value="river">
+          <span class="option-emoji">🌊</span>
+          <span class="option-text">A sparkling river</span>
+        </button>
+        <button class="option-button" onclick="selectOption('place', 'cave', '🕳️', 'A mysterious cave')" data-value="cave">
+          <span class="option-emoji">🕳️</span>
+          <span class="option-text">A mysterious cave</span>
+        </button>
+        <button class="option-button" onclick="selectOption('place', 'castle', '🏰', 'A castle in the clouds')" data-value="castle">
+          <span class="option-emoji">🏰</span>
+          <span class="option-text">A castle in the clouds</span>
+        </button>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="action-buttons">
+        <button class="btn btn-outline-primary" onclick="showPreviousQuestion(2)">← Go Back</button>
+        <button class="btn btn-primary" id="continue-btn-3" disabled onclick="nextQuestion()">Continue →</button>
+      </div>
+    </div>
+
+    <!-- Question 4: Adventure Companion (renumbered) -->
+    <div class="question-container" id="question-4" style="display: none;">
+      <div class="question-header-container">
+        <div class="question-header">
+          <div class="question-counter">Question 4 of 4</div>
+          <h1 class="question-title">Select your best friend for the adventure:</h1>
+          <p class="question-subtitle">Pick an animal friend to join you on your magical journey</p>
+        </div>
+        <button class="skip-button" onclick="skipQuestion()">Skip Question</button>
+      </div>
+
+      <div class="selected-tags" id="selected-companions"></div>
+
+      <div class="options-container">
+        <button class="option-button" onclick="selectOption('companion', 'dog', '🐕', 'Loyal Dog')" data-value="dog">
+          <span class="option-emoji">🐕</span>
+          <span class="option-text">Loyal Dog</span>
+        </button>
+        <button class="option-button" onclick="selectOption('companion', 'horse', '🐎', 'Swift Horse')" data-value="horse">
+          <span class="option-emoji">🐎</span>
+          <span class="option-text">Swift Horse</span>
+        </button>
+        <button class="option-button" onclick="selectOption('companion', 'owl', '🦉', 'Wise Owl')" data-value="owl">
+          <span class="option-emoji">🦉</span>
+          <span class="option-text">Wise Owl</span>
+        </button>
+        <button class="option-button" onclick="selectOption('companion', 'dolphin', '🐬', 'Playful Dolphin')" data-value="dolphin">
+          <span class="option-emoji">🐬</span>
+          <span class="option-text">Playful Dolphin</span>
+        </button>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="action-buttons">
+        <button class="btn btn-outline-primary" onclick="showPreviousQuestion(3)">← Go Back</button>
+        <button class="btn btn-primary" id="continue-btn-4" disabled onclick="generateAvatar()">Continue →</button>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="question-container" id="loading-screen" style="display: none;">
+      <div class="loading-container">
+        <div class="loading-text">Creating your magical avatar...</div>
+        <div class="loading-dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="reassurance-text">
+          Please don't close or refresh this page.<br>
+          Your unique avatar is being crafted just for you!
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END AVATAR CONTAINER / MAIN CONTENT -->
+
+  <!-- ============================================ -->
+  <!-- FOOTER SECTION                               -->
+  <!-- ============================================ -->
+  <footer class="footer">
+    <div class="footer-container">
+        <!-- Desktop: Logo with social icons in footer-brand -->
+        <div class="footer-brand">
+            <img src="img/Logo-light.svg" alt="Ilore" class="footer-logo">
+            <div class="social-icons">
+              <div class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.024-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.163-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+                </svg>
+              </div>
+              <div class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </div>
+              <div class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </div>
+            </div>
+        </div>
+        
+        <!-- Desktop: Company and Support sections -->
+        <div class="footer-section">
+          <h3>Company</h3>
+          <ul class="footer-links">
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Testimonials</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Support</h3>
+          <ul class="footer-links">
+            <li><a href="#">Help center</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Legal</a></li>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+        
+        <!-- All screens: Newsletter -->
+        <div class="footer-section newsletter-section">
+          <h3>Stay up to date</h3>
+          <form class="newsletter">
+            <input type="email" class="newsletter-input" placeholder="Enter your email">
+            <button type="submit" class="newsletter-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+        
+        <!-- Mobile/Tablet: Separate social icons -->
+        <div class="social-icons">
+          <div class="social-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+              <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.024-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.163-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+            </svg>
+          </div>
+          <div class="social-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            </svg>
+          </div>
+          <div class="social-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </div>
+        </div>
+        
+        <!-- Mobile/Tablet: Combined sections container -->
+        <div class="footer-sections-container">
+            <div class="footer-section">
+              <h3>Company</h3>
+              <ul class="footer-links">
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Testimonials</a></li>
+              </ul>
+            </div>
+            
+            <div class="footer-section">
+              <h3>Support</h3>
+              <ul class="footer-links">
+                <li><a href="#">Help center</a></li>
+                <li><a href="#">Terms of service</a></li>
+                <li><a href="#">Legal</a></li>
+                <li><a href="#">Privacy policy</a></li>
+                <li><a href="#">Status</a></li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p class="footer-copyright">
+        @2025 Ilore Inc. All rights reserved. 
+        <a href="/privacy">Privacy Policy</a> | 
+        <a href="/terms">Terms of Services</a>
+      </p> 
+    </div>
+  </footer>
+  <!-- END FOOTER SECTION -->
+
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS SECTION                             -->
+  <!-- ============================================ -->
+  <script>
+    let currentQuestion = 1;
+    let answers = {
+      feeling: null,
+      color: null,
+      place: null,
+      companion: null
+    };
+    let soundEnabled = true; // Activate sound by default
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const toggle = document.querySelector('.sound-toggle');
+      const status = document.getElementById('sound-status');
+      
+      if (soundEnabled) {
+        toggle.classList.add('on');
+        status.textContent = 'On';
+      } else {
+        toggle.classList.remove('on');
+        status.textContent = 'Off';
+      }
+    }
+
+    function selectOption(category, value, emoji, label) {
+      // Get the current question number from the parent container
+      const questionContainer = event.target.closest('.question-container');
+      const questionId = questionContainer.id; // e.g., "question-2"
+      const questionNum = questionId.split('-')[1]; // "2"
+      currentQuestion = parseInt(questionNum);
+
+      // Clear previous selection in this category
+      document.querySelectorAll(`#question-${currentQuestion} .option-button`).forEach(btn => {
+        btn.classList.remove('selected');
+      });
+
+      // Select new option
+      event.target.closest('.option-button').classList.add('selected');
+      answers[category] = { value, emoji, label };
+
+      // Update selected tags
+      updateSelectedTags(category, emoji, label);
+
+      // Enable continue button
+      updateContinueButton();
+
+      // Announce to screen reader
+      announceToScreenReader(`Selected ${label}`);
+
+      // Play sound if enabled
+      if (soundEnabled) {
+        console.log('Trying to play sound...');
+        const audio = document.getElementById('option-sound');
+        if (audio) {
+          audio.currentTime = 0;
+          audio.play().catch(e => console.log('Audio play error:', e));
+        }
+      }
+    }
+
+    function updateSelectedTags(category, emoji, label) {
+      const containers = {
+        feeling: 'selected-feelings',
+        color: 'selected-colors', 
+        companion: 'selected-companions',
+        place: 'selected-place'
+      };
+      
+      Object.keys(containers).forEach(cat => {
+        const container = document.getElementById(containers[cat]);
+        if (container) {
+          container.innerHTML = '';
+          if (answers[cat]) {
+            container.innerHTML = `<div class="selected-tag">${answers[cat].emoji} ${answers[cat].label}</div>`;
+          }
+        }
+      });
+    }
+
+    function updateContinueButton() {
+      const btn = document.getElementById(`continue-btn-${currentQuestion}`);
+      const hasAnswer = answers[Object.keys(answers)[currentQuestion - 1]];
+      btn.disabled = !hasAnswer;
+    }
+
+    function nextQuestion() {
+      document.getElementById(`question-${currentQuestion}`).style.display = 'none';
+      currentQuestion++;
+      
+      if (currentQuestion <= 4) {
+        document.getElementById(`question-${currentQuestion}`).style.display = 'block';
+        // Update progress
+        const progressFill = document.querySelector('.progress-fill');
+        progressFill.style.width = `${66 + (currentQuestion - 2) * 17}%`;
+      }
+    }
+
+    function previousQuestion() {
+      document.getElementById(`question-${currentQuestion}`).style.display = 'none';
+      currentQuestion--;
+      document.getElementById(`question-${currentQuestion}`).style.display = 'block';
+      
+      // Update progress
+      const progressFill = document.querySelector('.progress-fill');
+      progressFill.style.width = `${66 + (currentQuestion - 2) * 17}%`;
+    }
+
+    function skipQuestion() {
+      // Clear current answer
+      const categories = Object.keys(answers);
+      answers[categories[currentQuestion - 1]] = null;
+      
+      // Update display
+      updateSelectedTags(categories[currentQuestion - 1], '', '');
+      
+      if (currentQuestion < 4) {
+        nextQuestion();
+      } else {
+        generateAvatar();
+      }
+    }
+
+    function generateAvatar() {
+      // Hide current question
+      document.getElementById(`question-${currentQuestion}`).style.display = 'none';
+      
+      // Show loading screen
+      document.getElementById('loading-screen').style.display = 'block';
+      
+      // Update progress to 100%
+      const progressFill = document.querySelector('.progress-fill');
+      progressFill.style.width = '100%';
+      
+      // Save answers
+      localStorage.setItem('avatarAnswers', JSON.stringify(answers));
+      
+      // Simulate generation time (3-5 seconds)
+      setTimeout(() => {
+        window.location.href = 'avatar-step3.html'; // Changed from 'avatar-result.html'
+      }, 4000);
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+
+    function announceToScreenReader(message) {
+      const announcement = document.createElement('div');
+      announcement.setAttribute('role', 'status');
+      announcement.setAttribute('aria-live', 'polite');
+      announcement.style.position = 'absolute';
+      announcement.style.left = '-10000px';
+      announcement.textContent = message;
+      document.body.appendChild(announcement);
+      setTimeout(() => announcement.remove(), 1000);
+    }
+
+    function showPreviousQuestion(prev) {
+      document.getElementById(`question-${currentQuestion}`).style.display = 'none';
+      currentQuestion = prev;
+      document.getElementById(`question-${currentQuestion}`).style.display = 'block';
+      updateContinueButton();
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set initial state
+      updateContinueButton();
+
+      // Activate sound toggle UI on load
+      if (soundEnabled) {
+        document.querySelector('.sound-toggle').classList.add('on');
+        document.getElementById('sound-status').textContent = 'On';
+      }
+
+      // Prime the audio for user interaction (fixes Safari/Chrome autoplay issues)
+      document.body.addEventListener('click', function primeAudio() {
+        const audio = document.getElementById('option-sound');
+        if (audio) {
+          audio.muted = false;
+          audio.play().catch(() => {}); // Try to play (will fail silently if not allowed)
+          audio.pause();
+          audio.currentTime = 0;
+        }
+        document.body.removeEventListener('click', primeAudio);
+      }, { once: true });
+
+      // Mobile menu functionality
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const navMenu = document.getElementById('navMenu');
+
+      if (mobileMenuToggle && navMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+          navMenu.classList.toggle('active');
+          mobileMenuToggle.classList.toggle('active');
+          document.body.classList.toggle('menu-open');
+        });
+      }
+    });
+  </script>
+
+  <audio id="option-sound" src="img/sound.wav" preload="auto"></audio>
+</body>
+</html>
