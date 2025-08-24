@@ -23,11 +23,56 @@
           </nav>
           
           <div class="nav-actions">
+              <!-- ===== Magical Friend (Nav) ===== -->
+              <div class="mf-nav" id="mfNav">
+                <button class="mf-trigger" id="mfOpenBtn" aria-haspopup="dialog" aria-controls="mfModal" aria-expanded="false">
+                  <img
+                    class="mf-avatar"
+                    src="img/generatedavatar.svg"
+                    alt="Magical Friend avatar"
+                  />
+                  <div class="mf-meta">
+                    <span class="mf-name">Magical Friend</span>
+                    <span class="mf-status">Ready to help!</span>
+                  </div>
+                </button>
+              </div>
               <button class="mobile-menu-toggle" id="mobileMenuToggle"></button>
+
           </div>
       </div>
   </header>
   <!-- END HEADER SECTION -->
+
+  <!-- ===== Magical Friend (Modal) ===== -->
+  <div class="mf-modal" id="mfModal" role="dialog" aria-modal="true" aria-labelledby="mfTitle" aria-hidden="true">
+    <div class="mf-backdrop" id="mfBackdrop"></div>
+    <div class="mf-sheet" role="document" tabindex="-1">
+      <button class="mf-close" id="mfCloseBtn" aria-label="Close">×</button>
+
+      <div class="mf-header">
+        <img
+          class="mf-avatar-lg"
+          src="img/generatedavatar.svg"
+          alt="Magical Friend avatar large"
+        />
+        <div class="mf-head-meta">
+          <h3 id="mfTitle">Magical Friend</h3>
+          <p class="mf-status-row"><span class="mf-dot"></span> Ready to help!</p>
+        </div>
+      </div>
+
+      <div class="mf-body">
+        <p class="mf-intro">Hi! I’m your Magical Friend. Together we share feelings and build messages with cards or voice.</p>
+
+        <div class="mf-actions">
+          <button class="mf-btn mf-btn-blue" id="mfEditAvatarBtn">Edit Avatar</button>
+        <button class="mf-btn mf-btn-green" id="mfStartHelpBtn">Start Helping</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ============================================ -->
   <!-- MAIN CONTENT SECTION                        -->
@@ -42,16 +87,12 @@
               onmouseover="this.style.background='rgba(0,0,0,0.2)'; this.style.color='#333';"
               onmouseout="this.style.background='rgba(0,0,0,0.1)'; this.style.color='#666';">&times;</button>
       
-      <div class="avatar-circle">
-        <img src="img/avatar.svg" alt="Avatar Placeholder">
+      <div class="avatar-circle" style="width: 240px; height: 240px;">
+        <img src="img/generatedavatar.svg" alt="Avatar Placeholder" style="width: 100%; height: 100%; object-fit: cover;">
       </div>
-      <h3 class="avatar-prompt-title" style="text-align: center;">Make This Space Yours</h3>
-      <p class="muted avatar-prompt-desc" style="text-align: center;">Make your voice helper look like you! Create your avatar now, or skip and come back later.</p>
-      <div style="text-align: center;">
-        <a href="avatar-step1.html" class="btn btn-primary avatar-prompt-btn" id="openAvatarCreator">
-          Create My Avatar
-        </a>
-      </div>
+      <h3 class="avatar-prompt-title" style="text-align: center;">Hi! I’m Your Magical Friend</h3>
+      <p class="muted avatar-prompt-desc" style="text-align: center;">I’m here to help you share your thoughts. Pick a card or use your voice to get started.</p>
+    
     </section>
 
     <!-- ============================================ -->
@@ -681,6 +722,64 @@ const renderAISuggestions = (cards) => {
         avatarPromptSection.style.display = 'none';
       });
     }
+
+    // -------------------------
+    // Magical Friend Modal
+    // -------------------------
+    (function(){
+      const openBtn = document.getElementById('mfOpenBtn');
+      const modal   = document.getElementById('mfModal');
+      const closeBtn= document.getElementById('mfCloseBtn');
+      const backdrop= document.getElementById('mfBackdrop');
+
+      function openModal(){
+        modal.setAttribute('aria-hidden','false');
+        openBtn.setAttribute('aria-expanded','true');
+        // move focus inside
+        setTimeout(() => closeBtn.focus(), 50);
+        lockScroll(true);
+      }
+      function closeModal(){
+        modal.setAttribute('aria-hidden','true');
+        openBtn.setAttribute('aria-expanded','false');
+        openBtn.focus();
+        lockScroll(false);
+      }
+      function lockScroll(locked){
+        document.documentElement.style.overflow = locked ? 'hidden' : '';
+      }
+
+      if (openBtn && modal && closeBtn && backdrop) {
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        backdrop.addEventListener('click', closeModal);
+
+        // ESC to close
+        document.addEventListener('keydown', (e)=>{
+          if(e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false'){
+            closeModal();
+          }
+        });
+      }
+
+      // Modal action buttons
+      const startBtn = document.getElementById('mfStartHelpBtn');
+      if(startBtn){
+        startBtn.addEventListener('click', ()=>{
+          // Close modal and focus on voice helper
+          closeModal();
+          setActiveTab('voice');
+          setTimeout(() => micBtn.focus(), 100);
+        });
+      }
+      const editBtn = document.getElementById('mfEditAvatarBtn');
+      if(editBtn){
+        editBtn.addEventListener('click', ()=>{
+          // Navigate to avatar editor
+          window.location.href = 'avatar-step1.html';
+        });
+      }
+    })();
 
     // -------------------------
     // Init
