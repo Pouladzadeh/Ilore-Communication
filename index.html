@@ -7,43 +7,58 @@
   <link rel="stylesheet" href="styless.css">
 </head>
 <body>
-  <header>
-      <!-- ============================================ -->
-    <!-- HEADER SECTION - Navigation and Branding    -->
-    <!-- ============================================ -->
-    <header class="header" id="header">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="img/logo.svg" alt="Ilore logo" style="height:32px; width: 122px; vertical-align:middle;">
-            </a>
- 
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html">Home</a>
-                <a href="Services.html">Services</a>
-                <a href="Contact.html">Contact</a>
-            </nav>
-            
-            <div class="nav-actions">
-                <button class="mobile-menu-toggle" id="mobileMenuToggle"></button>
-            </div>
-        </div>
-    </header>
-    <!-- END HEADER SECTION -->
-   
+  <!-- ============================================ -->
+  <!-- HEADER SECTION - Navigation and Branding    -->
+  <!-- ============================================ -->
+  <header class="header" id="header">
+      <div class="nav-container">
+          <a href="index.html" class="logo">
+              <img src="img/Logo.svg" alt="Ilore logo" style="height:32px; width: 122px; vertical-align:middle;">
+          </a>
 
+          <nav class="nav-menu" id="navMenu">
+              <a href="index.html">Home</a>
+              <a href="Services.html">Services</a>
+              <a href="Contact.html">Contact</a>
+          </nav>
+          
+          <div class="nav-actions">
+              <button class="mobile-menu-toggle" id="mobileMenuToggle"></button>
+          </div>
+      </div>
+  </header>
+  <!-- END HEADER SECTION -->
+
+  <!-- ============================================ -->
+  <!-- MAIN CONTENT SECTION                        -->
+  <!-- ============================================ -->
   <main class="container">
-    <!-- Tabs -->
-    <div class="tabs" role="tablist" aria-label="Modes">
-      <button class="tab active" data-tab="voice" role="tab" aria-selected="true">
-        <img src="img/Voice.svg" alt="AI Voice Helper">AI Voice Helper
-      </button>
-      <button class="tab" data-tab="cards" role="tab" aria-selected="false">
-        <img src="img/picturecards.svg" alt="Picture Cards">Picture Cards
-      </button>
-    </div>
+    <!-- ============================================ -->
+    <!-- AVATAR PROMPT SECTION                      -->
+    <!-- ============================================ -->
+    <section id="avatarPromptSection" class="panel avatar-prompt-section" style="position: relative;">
+      <button class="avatar-close-btn" id="avatarCloseBtn" aria-label="Close avatar prompt" 
+              style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.1); border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 18px; color: #666; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; z-index: 10;"
+              onmouseover="this.style.background='rgba(0,0,0,0.2)'; this.style.color='#333';"
+              onmouseout="this.style.background='rgba(0,0,0,0.1)'; this.style.color='#666';">&times;</button>
+      
+      <div class="avatar-circle">
+        <img src="img/avatar.svg" alt="Avatar Placeholder">
+      </div>
+      <h3 class="avatar-prompt-title" style="text-align: center;">Make the Voice Helper Your Own</h3>
+      <p class="muted avatar-prompt-desc" style="text-align: center;">Create your avatar when you're ready</p>
+      <div style="text-align: center;">
+        <a href="avatar-step1.html" class="btn btn-primary avatar-prompt-btn" id="openAvatarCreator">
+          Create My Avatar
+        </a>
+      </div>
+    </section>
 
-    <!-- Message Builder -->
-    <section class="panel" aria-labelledby="msg-title">
+    <!-- ============================================ -->
+    <!-- MAIN APP CONTAINER                          -->
+    <!-- ============================================ -->
+    <section class="panel">
+      <!-- MESSAGE BUILDER SECTION -->
       <div class="panel-title">
         <h3 id="msg-title" style="margin:0;font-size:18px;font-weight:700">My Message:</h3>
         <div class="row">
@@ -56,46 +71,57 @@
         <p class="muted center" id="emptyHint">Choose cards from either page to build your message</p>
         <div class="chips" id="chips"></div>
       </div>
-    </section>
 
-    <!-- Voice Helper -->
-    <section id="tab-voice" class="panel">
-      <div class="center">
-        <h2 style="margin:.2rem 0 6px;font-size:24px">AI Voice Helper</h2>
-        <p class="muted" style="margin-top:0">Say anything, and I'll show you helpful words!</p>
+      <!-- TABS SECTION -->
+      <div class="tabs" role="tablist" aria-label="Modes">
+        <button class="tab active" data-tab="voice" role="tab" aria-selected="true">
+          <img src="img/Voice.svg" alt="AI Voice Helper">AI Voice Helper
+        </button>
+        <button class="tab" data-tab="cards" role="tab" aria-selected="false">
+          <img src="img/picturecards.svg" alt="Picture Cards">Picture Cards
+        </button>
+      </div>
 
-        <div class="mic-wrap">
-          <button id="micBtn" class="mic" aria-pressed="false" aria-label="Start listening">
-            <img src="img/microphone.svg" alt="Microphone" style="height:70px; width: 70px; filter: brightness(0) invert(1);"/>
-          </button>
+      <!-- VOICE HELPER SECTION -->
+      <div id="tab-voice" class="tab-content">
+        <div class="center">
+          <h2 style="margin:2rem 0 6px;font-size:24px">AI Voice Helper</h2>
+          <p class="muted" style="margin-top:0">Say anything, and I'll show you helpful words!</p>
+
+          <div class="mic-wrap">
+            <button id="micBtn" class="mic" aria-pressed="false" aria-label="Start listening">
+              <img src="img/microphone.svg" alt="Microphone" style="height:70px; width: 70px; filter: brightness(0) invert(1);"/>
+            </button>
+          </div>
+          <p id="listenState" style="font-size:20px;font-weight:600;text-align:center;margin:8px 0 4px">Press and say any letter A,B,C...</p>
+          <p class="muted center" style="margin:0 0 18px">Choose a word</p>
         </div>
-        <p id="listenState" style="font-size:20px;font-weight:600;text-align:center;margin:8px 0 4px">Press and say any letter A,B,C...</p>
-        <p class="muted center" style="margin:0 0 18px">Choose a word</p>
+
+        <!-- AI Block moved outside center div for full width -->
+        <div id="aiBlock" class="hidden" style="margin-top:16px">
+          <h3 style="font-size:18px;margin:0 0 10px;padding:0 20px">AI Suggestions:</h3>
+          <div id="aiGrid" class="ai-suggestions-grid"></div>
+        </div>
       </div>
 
-      <!-- AI Block moved outside center div for full width -->
-      <div id="aiBlock" class="hidden" style="margin-top:16px">
-        <h3 style="font-size:18px;margin:0 0 10px;padding:0 20px">AI Suggestions:</h3>
-        <div id="aiGrid" class="ai-suggestions-grid"></div>
+      <!-- PICTURE CARDS SECTION -->
+      <div id="tab-cards" class="tab-content hidden" aria-labelledby="cards-title">
+        <div class="center" style="margin-bottom:24px">
+          <h2 id="cards-title" style="margin:2rem 0 6px;font-size:24px">Picture Cards</h2>
+          <p class="muted" style="margin:0">Tap picture cards to tell you what you need!</p>
+        </div>
+
+        <!-- Categories -->
+        <div id="categoryBar" class="categories"></div>
+
+        <!-- Grid -->
+        <div id="cardGrid" class="grid"></div>
       </div>
     </section>
+</main>
+<!-- END MAIN CONTENT SECTION -->
 
-    <!-- Picture Cards -->
-    <section id="tab-cards" class="panel hidden" aria-labelledby="cards-title">
-      <div class="center" style="margin-bottom:14px">
-        <h2 id="cards-title" style="margin:.2rem 0 6px;font-size:24px">Picture Cards</h2>
-        <p class="muted" style="margin:0">Tap picture cards to tell you what you need!</p>
-      </div>
-
-      <!-- Categories -->
-      <div id="categoryBar" class="categories"></div>
-
-      <!-- Grid -->
-      <div id="cardGrid" class="grid"></div>
-    </section>
-  </main>
-
-  <!-- ============================================ -->
+<!-- ============================================ -->
 <!-- FOOTER SECTION                               -->
 <!-- ============================================ -->
 <footer class="footer">
@@ -106,7 +132,7 @@
           <div class="social-icons">
               <div class="social-icon">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
-                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.024-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.163-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
                 </div>
                 <div class="social-icon">
@@ -163,7 +189,7 @@
       <div class="social-icons">
           <div class="social-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
-                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.024-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.163-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
               </svg>
             </div>
             <div class="social-icon">
@@ -215,8 +241,11 @@
   </div>
 </footer>
 <!-- END FOOTER SECTION -->
-<!-- END FOOTER SECTION -->
-  <script>
+
+<!-- ============================================ -->
+<!-- JAVASCRIPT SECTION                          -->
+<!-- ============================================ -->
+<script>
      
         // Mobile menu toggle functionality
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
@@ -409,8 +438,9 @@
       selectedCards.clear();
       document.querySelectorAll('.pict-card.selected').forEach(el => el.classList.remove('selected'));
       updateMessageUI();
-      // Clear AI block too (optional)
-      // aiBlock.classList.add('hidden'); aiGrid.innerHTML=''
+      // Clear AI block too
+      aiBlock.classList.add('hidden');
+      aiGrid.innerHTML = '';
     };
 
     const toggleSelectCard = (card, tileEl) => {
@@ -466,24 +496,6 @@
       });
     };
 
-    const renderAISuggestions = (cards) => {
-      aiGrid.innerHTML = '';
-      cards.forEach(card => {
-        const tile = document.createElement('button');
-        tile.className = 'pict-card ai';
-        tile.setAttribute('data-card-id', card.id);
-        if (selectedCards.has(card.id)) tile.classList.add('selected');
-        tile.innerHTML = `
-          <div class="badge-ai">AI</div>
-          <div class="pict-emoji">${card.icon}</div>
-          <div class="pict-text">${card.text}</div>
-        `;
-        tile.addEventListener('click', () => toggleSelectCard(card, tile));
-        aiGrid.appendChild(tile);
-      });
-      aiBlock.classList.remove('hidden');
-    };
-
     // -------------------------
     // Tabs
     // -------------------------
@@ -502,29 +514,156 @@
     // -------------------------
     // Voice (simulated)
     // -------------------------
-    const generateAISuggestions = () => ([
-      { id:'ai-hungry', text:'I am hungry', icon:'🍎', isAI:true },
-      { id:'ai-help',   text:'Help me',     icon:'🆘', isAI:true },
-      { id:'ai-water',  text:'I need water',icon:'💧', isAI:true },
-    ]);
+   // const generateAISuggestions = () => ([
+   //   { id:'ai-hungry', text:'I am hungry', icon:'🍎', isAI:true },
+    //  { id:'ai-help',   text:'Help me',     icon:'🆘', isAI:true },
+    //  { id:'ai-water',  text:'I need water',icon:'💧', isAI:true },
+   // ]);
 
-    const handleVoiceInput = async () => {
-      micBtn.classList.add('listening');
-      micBtn.setAttribute('aria-pressed','true');
-      listenState.textContent = 'Listening...';
-      micBtn.disabled = true;
+    //const handleVoiceInput = async () => {
+      //micBtn.classList.add('listening');
+     // micBtn.setAttribute('aria-pressed','true');
+     // listenState.textContent = 'Listening...';
+      //micBtn.disabled = true;
 
       // Simulated 2s capture
-      await new Promise(r => setTimeout(r, 2000));
+      //await new Promise(r => setTimeout(r, 2000));
 
-      const suggestions = generateAISuggestions();
-      renderAISuggestions(suggestions);
+      //const suggestions = generateAISuggestions();
+      //renderAISuggestions(suggestions);
 
-      micBtn.classList.remove('listening');
-      micBtn.setAttribute('aria-pressed','false');
-      listenState.textContent = 'Press and say any letter A,B,C...';
-      micBtn.disabled = false;
-    };
+      //micBtn.classList.remove('listening');
+      //micBtn.setAttribute('aria-pressed','false');
+      //listenState.textContent = 'Press and say any letter A,B,C...';
+      //micBtn.disabled = false;
+   // };
+
+     // -------------------------
+    // Voice (simulated)
+    // -------------------------
+   // (unchanged) Pool of suggestions for variety
+const suggestionPool = [
+  { text: 'I am hungry', icon: '🍎' },
+  { text: 'Help me', icon: '🆘' },
+  { text: 'I need water', icon: '💧' },
+  { text: 'I am happy', icon: '😊' },
+  { text: 'Let\'s play', icon: '🎮' },
+  { text: 'I am tired', icon: '😴' },
+  { text: 'Bathroom please', icon: '🚽' },
+  { text: 'I am cold', icon: '🥶' },
+  { text: 'I am hot', icon: '🥵' },
+  { text: 'Where is mom?', icon: '👩' },
+  { text: 'It hurts', icon: '🤕' },
+  { text: 'I love you', icon: '❤️' },
+  { text: 'I want more', icon: '➕' },
+  { text: 'Please stop', icon: '🛑' },
+  { text: 'Let\'s go', icon: '🚶' },
+  { text: 'Yes', icon: '✅' },
+  { text: 'No', icon: '❌' },
+  { text: 'Thank you', icon: '🙏' },
+  { text: 'Read a book', icon: '📖' },
+  { text: 'Snack time', icon: '🍪' }
+];
+
+// Helper: is a phrase already in user selections?
+const isTextAlreadySelected = (text) => {
+  // selectedCards is a Map you already use
+  // Compare by text so it persists across mic refreshes
+  for (const c of selectedCards.values()) {
+    if (c.text === text) return true;
+  }
+  return false;
+};
+
+const generateAISuggestions = () => {
+  const context = Array.from(selectedCards.values()).map(c => c.text);
+  const lastSelected = context[context.length - 1] || '';
+
+  // Keep variety: avoid last selected & avoid already chosen texts
+  let candidates = suggestionPool.filter(item =>
+    item.text !== lastSelected && !context.includes(item.text)
+  );
+
+  if (candidates.length < 3) {
+    candidates = [...suggestionPool];
+  }
+
+  // Shuffle
+  for (let i = candidates.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
+  }
+
+  const timestamp = Date.now();
+  return candidates.slice(0, 3).map((item, idx) => ({
+    id: `ai-${idx}-${timestamp}`,
+    text: item.text,
+    icon: item.icon,
+    isAI: true
+  }));
+};
+
+const handleVoiceInput = async () => {
+  // Keep mic tappable repeatedly
+  micBtn.classList.add('listening');
+  micBtn.setAttribute('aria-pressed','true');
+  listenState.textContent = 'Listening...';
+
+  await new Promise(r => setTimeout(r, 1000));
+
+  // NEW mic tap -> swap in a fresh set of 3 (grid stays visible between taps)
+  const suggestions = generateAISuggestions();
+  renderAISuggestions(suggestions);
+
+  micBtn.classList.remove('listening');
+  micBtn.setAttribute('aria-pressed','false');
+  listenState.textContent = 'Tap mic for more suggestions';
+};
+
+const renderAISuggestions = (cards) => {
+  aiGrid.innerHTML = '';
+  cards.forEach(card => {
+    const tile = document.createElement('button');
+    tile.className = 'pict-card ai';
+    tile.setAttribute('data-card-id', card.id);
+    tile.setAttribute('type', 'button');
+    tile.setAttribute('aria-label', `Choose: ${card.text}`);
+
+    // If this text is already selected, show it as chosen & disable
+    if (isTextAlreadySelected(card.text)) {
+      tile.classList.add('selected', 'chosen'); // 'chosen' is optional style hook
+      tile.disabled = true;
+      tile.setAttribute('aria-pressed', 'true');
+    } else {
+      tile.setAttribute('aria-pressed', 'false');
+    }
+
+    tile.innerHTML = `
+      <div class="badge-ai">AI</div>
+      <div class="pict-emoji">${card.icon}</div>
+      <div class="pict-text">${card.text}</div>
+    `;
+
+    tile.addEventListener('click', () => {
+      // Add to user selections (your existing function)
+      toggleSelectCard(card, tile);
+
+      // Keep suggestions visible; just mark this one as chosen
+      tile.classList.add('selected', 'chosen');
+      tile.disabled = true;
+      tile.setAttribute('aria-pressed', 'true');
+
+      listenState.textContent = 'Tap mic for new suggestions';
+      // NOTE: no hiding or clearing here anymore ✅
+    });
+
+    aiGrid.appendChild(tile);
+  });
+
+  // Ensure the block is visible
+  aiBlock.classList.remove('hidden');
+};
+
 
     // -------------------------
     // Wire up controls
@@ -533,6 +672,15 @@
     sendBtn.addEventListener('click', sendMessage);
     clearBtn.addEventListener('click', clearMessage);
     micBtn.addEventListener('click', handleVoiceInput);
+    
+    // Avatar prompt close functionality
+    const avatarCloseBtn = document.getElementById('avatarCloseBtn');
+    const avatarPromptSection = document.getElementById('avatarPromptSection');
+    if (avatarCloseBtn && avatarPromptSection) {
+      avatarCloseBtn.addEventListener('click', () => {
+        avatarPromptSection.style.display = 'none';
+      });
+    }
 
     // -------------------------
     // Init
@@ -543,6 +691,9 @@
     updateMessageUI();
   </script>
 
+  <!-- ============================================ -->
+  <!-- HEADER HEIGHT OFFSET SCRIPT                 -->
+  <!-- ============================================ -->
   <script>
 // ensure CSS variable matches the measured header height
 function updateHeaderOffset() {
