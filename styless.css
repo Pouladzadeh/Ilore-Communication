@@ -387,6 +387,7 @@ header {
   width: 24px;
   height: 24px;
   object-fit: contain;
+  flex-shrink: 0; /* Prevent icon from shrinking */
 }
 
 .tab:hover {
@@ -410,6 +411,59 @@ header {
   padding: 0 20px; /* restore padding for content */
 }
 
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .tab {
+    padding: 16px 12px;
+    font-size: 14px;
+    gap: 8px;
+    min-height: 56px;
+  }
+  
+  .tab img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tab {
+    padding: 12px 8px;
+    font-size: 12px;
+    gap: 6px;
+    min-height: 48px;
+  }
+  
+  .tab img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Hide labels on very small screens (below 320px) */
+@media (max-width: 319px) {
+  .tabs {
+    width: calc(100% + 42px); /* Keep the extension but ensure it fits */
+    margin: 0 -21px; /* Keep negative margins */
+    max-width: 100vw; /* Prevent overflow beyond viewport */
+    box-sizing: border-box;
+  }
+  
+  .tab {
+    padding: 10px 2px; /* Reduce horizontal padding further */
+    gap: 0;
+    min-height: 44px;
+    min-width: 0; /* Allow tabs to shrink if needed */
+    font-size: 0; /* Hide text content */
+    text-indent: -9999px; /* Move text off screen */
+  }
+  
+  .tab img {
+    width: 16px;
+    height: 16px;
+    text-indent: 0; /* Reset text-indent for images */
+  }
+}
 /* ========================================================================
    PANELS AND CARDS
    ======================================================================== */
@@ -497,64 +551,96 @@ header {
   }
 }
 
-/* Tablet specific adjustments */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .panel-title {
-    gap: 16px;
-  }
-  
-  .panel-title h3 {
-    font-size: 20px !important;
-  }
-  
-  .panel-title .btn {
-    padding: 10px 16px;
-    font-size: 15px;
+/* ========================================================================
+   RESPONSIVE BUTTONS
+   ======================================================================== */
+
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+  .btn {
+    padding: 7px 10px;
+    font-size: 13px;
   }
 }
 
-/* Message area responsiveness */
+/* Tablets */
 @media (max-width: 768px) {
-  .message-area {
-    min-height: 80px;
-    padding: 12px;
+  .panel-title .row {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .btn {
+    flex: 1 1 0;
+    min-width: 80px;
+    padding: 10px 12px;
     font-size: 14px;
-  }
-  
-  /* Chips in message area */
-  .chips {
-    gap: 6px;
-  }
-  
-  .chip {
-    padding: 8px 12px;
-    font-size: 14px;
-  }
-  
-  .chip span {
-    font-size: 14px !important;
   }
 }
 
-/* Small phone adjustments */
+/* Small tablets and large phones */
+@media (max-width: 600px) {
+  .panel-title .row {
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 12px 8px;
+    font-size: 13px;
+    min-width: 70px;
+  }
+
+  .btn span {
+    display: none; /* Hide text, keep icons */
+  }
+
+  .btn img,
+  .btn svg {
+    height: 18px;
+    width: 18px;
+  }
+}
+
+/* Small phones */
 @media (max-width: 480px) {
-  /* Stack buttons vertically on very small screens */
   .panel-title .row {
     flex-direction: column;
+    gap: 8px;
     width: 100%;
   }
   
-  .panel-title .btn {
+  .btn {
     width: 100%;
-    padding: 14px 20px;
+    padding: 14px 16px;
+    font-size: 14px;
+    min-width: 0;
   }
-  
-  /* Adjust padding for smaller screens */
-  .panel {
-    padding: 16px 12px;
+
+  .btn span {
+    display: inline; /* Show text again on very small screens */
+  }
+
+  .btn img,
+  .btn svg {
+    height: 18px;
+    width: 18px;
   }
 }
 
+/* Very small screens */
+@media (max-width: 360px) {
+  .btn img,
+  .btn svg {
+    display: none; /* Hide icons on very small screens */
+  }
+  
+  .btn {
+    padding: 16px;
+  }
+}
+/* ========================================================================
+   BUTTONS
+   ======================================================================== */
 /* ========================================================================
    BUTTONS
    ======================================================================== */
@@ -568,40 +654,49 @@ header {
   font-weight: 600;
   color: #fff;
   cursor: pointer;
-  font-size: 16px; /* Larger button text */
+  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
 .btn:disabled {
-  opacity: .5;
+  opacity: 0.5;
   cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 /* Button color variants */
 .btn-green {
   background: var(--green);
 }
-.btn-green:hover {
+
+.btn-green:hover:not(:disabled) {
   background: var(--green-600);
 }
 
 .btn-blue {
   background: var(--blue);
 }
-.btn-blue:hover {
+
+.btn-blue:hover:not(:disabled) {
   background: var(--blue-600);
 }
 
 .btn-red {
   background: var(--red);
 }
-.btn-red:hover {
+
+.btn-red:hover:not(:disabled) {
   background: var(--red-600);
 }
 
 /* Outlined Primary Button */
 .btn-outline-primary {
   background-color: transparent;
-  color: #1C5A98; /* Use your primary color */
+  color: #1C5A98;
   border: 2px solid #1C5A98;
   padding: 12px 24px;
   font-size: 16px;
@@ -616,7 +711,7 @@ header {
   font-family: inherit;
 }
 
-.btn-outline-primary:hover {
+.btn-outline-primary:hover:not(:disabled) {
   background-color: #1C5A98;
   color: white;
   transform: translateY(-2px);
@@ -638,16 +733,106 @@ header {
   cursor: not-allowed;
   border-color: #ccc;
   color: #999;
-}
-
-.btn-outline-primary:disabled:hover {
   background-color: transparent;
-  transform: none;
-  box-shadow: none;
 }
 
 /* ========================================================================
-   MESSAGE AREA AND CHIPS
+   RESPONSIVE BUTTONS
+   ======================================================================== */
+
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+  .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .panel-title .row {
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .btn {
+    flex: 1 1 0;
+    min-width: 80px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
+
+/* Small tablets and large phones */
+@media (max-width: 600px) {
+  .panel-title .row {
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 12px 8px;
+    font-size: 13px;
+    min-width: 70px;
+  }
+
+  .btn span {
+    display: none; /* Hide text, keep icons */
+  }
+
+  .btn img,
+  .btn svg {
+    height: 18px;
+    width: 18px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .panel-title {
+    width: 100%;
+  }
+  
+  .panel-title .row {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+  
+  .btn {
+    width: 100% !important;
+    max-width: none !important; /* Remove any max-width constraints */
+    padding: 14px 16px;
+    font-size: 14px;
+    min-width: 0;
+    box-sizing: border-box; /* Ensure padding is included in width */
+  }
+}
+
+/* Very small screens */
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 14px;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  
+  .btn img,
+  .btn svg {
+    display: none; /* Hide icons on very small screens */
+  }
+  
+  .btn span {
+    display: inline; /* Ensure text is visible */
+  }
+}
+
+/* ========================================================================
+   MESSAGE AREA
    ======================================================================== */
 .message-area {
   min-height: 100px;
@@ -659,34 +844,7 @@ header {
   margin-bottom: 20px;  /* added padding between message section and tabs */
 }
 
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
 
-.chip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 10px 14px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
-  font-size: 16px; /* Larger chip text */
-}
-
-.chip .remove {
-  border: none;
-  background: transparent;
-  color: #9ca3af;
-  cursor: pointer;
-}
-
-.chip .remove:hover {
-  color: var(--red);
-}
 
 /* ========================================================================
    MICROPHONE BUTTON
@@ -1071,6 +1229,9 @@ body {
 /* ========================================================================
    MESSAGE AREA IMPROVEMENTS
    ======================================================================== */
+/* ========================================================================
+   MESSAGE AREA AND CHIPS
+   ======================================================================== */
 .message-area {
   min-height: 100px;
   border: 2px dashed var(--border);
@@ -1081,14 +1242,35 @@ body {
   margin-bottom: 20px;  /* added padding between message section and tabs */
 }
 
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
   padding: 10px 14px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
   font-size: 16px; /* Larger chip text */
 }
 
-.chip span {
-  font-size: 16px !important;
+.chip .remove {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
 }
+
+.chip .remove:hover {
+  color: var(--red);
+}
+
 
 /* ========================================================================
    VOICE HELPER SECTION - Better alignment
@@ -2758,7 +2940,6 @@ border-color: #1C5A98;
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-/*  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);*/
 }
 
 .btn-primary:disabled {
@@ -2924,60 +3105,67 @@ border-color: #1C5A98;
       border-radius: 4px;
       transition: width 0.5s ease;
     }
+/* Question Container */
+.question-container {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
 
-    /* Question Container */
-    .question-container {
-      background: white;
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
-    }
+.question-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  gap: 20px; /* Add gap between elements */
+}
 
-    .question-header-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 20px;
-      position: relative; /* Add this */
-    }
+.question-header {
+  text-align: center;
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 0; /* Allows flex item to shrink below content size */
+}
 
-    .question-header {
-      text-align: center;
-      margin-bottom: 0;
-      flex: 1;
-      position: relative; /* Add this */
-      padding: 0 60px; /* Add space for the skip button */
-    }
+.skip-button {
+  background: #ffffff;
+  color: #1C5A98;
+  border: 2px solid #1C5A98;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap; /* Prevent text wrapping */
+  flex-shrink: 0; /* Prevent button from shrinking */
+  height: fit-content; /* Only take needed height */
+}
 
-    .skip-button {
-      background: #ffffff;
-      color: #1C5A98;
-      border: 2px solid #1C5A98;
-      padding: 8px 16px;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: absolute; /* Change to absolute */
-      right: 0; /* Position on the right */
-      top: 8px; /* Align with question counter */
-    }
+.skip-button:hover {
+  background: #F4F8FA;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(28, 90, 152, 0.15);
+}
 
-    .skip-button:hover {
-      background: #F4F8FA;
-      transform: translateY(-1px);
-    }
-
-    /* Ensure the question counter stays centered */
-    .question-counter {
-      display: inline-block;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 1;
-    }
-
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .question-header-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .question-header {
+    text-align: center;
+  }
+  
+  .skip-button {
+    align-self: flex-end;
+  }
+}
     .question-title {
       font-size: 28px;
       color: #1f2937;
@@ -3036,23 +3224,45 @@ border-color: #1C5A98;
     }
 
     .option-button {
-      background: #ffffff;
-      border: 2px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 28px 32px;
-      font-size: 22px;
-      color: #1f2937;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-      font-weight: 600;
-      position: relative;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 24px;
-      justify-content: center;
-    }
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 28px 32px;
+  font-size: 22px;
+  color: #1f2937;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-weight: 600;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Small screens - Stack content vertically and reduce spacing */
+@media (max-width: 768px) {
+  .option-button {
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 16px;
+    font-size: 18px;
+  }
+}
+
+/* Extra small screens - Further optimize spacing */
+@media (max-width: 480px) {
+  .option-button {
+    padding: 16px 12px;
+    font-size: 16px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+}
 
     .option-button:hover {
       transform: translateY(-2px);
@@ -3221,10 +3431,6 @@ border-color: #1C5A98;
         font-size: 18px;
       }
     }
-
-
-
-
 /* ============================================ */
 /* AVATAR STEP 3 - SUCCESS PAGE STYLES         */
 /* ============================================ */
@@ -3446,7 +3652,6 @@ border-color: #1C5A98;
 .toast.show {
   opacity: 1;
 }
-
 /* Avatar Modal */
 .modal {
   position: fixed;
@@ -3563,6 +3768,260 @@ border-color: #1C5A98;
     width: 100%;
     max-width: 280px;
   }
+}
+
+
+
+
+/* ========================================================================
+   MAGICAL FRIEND NAVIGATION & MODAL STYLES
+   ======================================================================== */
+
+/* ===== Magical Friend: Nav item (simple) ===== */
+.mf-nav { 
+    display: inline-block; 
+}
+
+.mf-trigger {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 8px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mf-trigger:hover { 
+    background: rgba(28, 90, 152, 0.06); 
+}
+
+.mf-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--blue);
+    box-shadow: 0 2px 8px rgba(28, 90, 152, 0.15);
+    margin-right: 12px;
+}
+
+.mf-meta { 
+    display: inline-block; 
+    vertical-align: middle; 
+}
+
+.mf-name { 
+    display: block; 
+    font-weight: 700; 
+    font-size: 14px; 
+    color: var(--text); 
+    line-height: 1.1; 
+}
+
+.mf-status { 
+    display: block; 
+    font-weight: 600; 
+    font-size: 12px; 
+    color: var(--green); 
+}
+
+/* Compact on small screens */
+@media (max-width: 768px) {
+    .mf-name, .mf-status { 
+        display: none; 
+    }
+    .mf-avatar { 
+        width: 36px; 
+        height: 36px; 
+        margin-right: 0; 
+    }
+}
+
+/* ===== Magical Friend: Modal (simple) ===== */
+.mf-modal[aria-hidden="true"] { 
+    display: none; 
+}
+
+.mf-modal[aria-hidden="false"] { 
+    display: block; 
+}
+
+.mf-backdrop {
+    position: fixed;
+    top: 0; 
+    right: 0; 
+    bottom: 0; 
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+
+.mf-sheet {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    max-width: 92vw;
+    max-height: 80vh;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    padding: 20px;
+    overflow: auto;
+    z-index: 1001;
+}
+
+.mf-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.06);
+    color: #333;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mf-close:hover { 
+    background: rgba(0, 0, 0, 0.12); 
+}
+
+/* Header row */
+.mf-header { 
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 16px;
+}
+
+.mf-header > * { 
+    margin-right: 14px; 
+}
+
+.mf-header > *:last-child { 
+    margin-right: 0; 
+}
+
+.mf-avatar-lg {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--blue);
+    box-shadow: 0 4px 16px rgba(28, 90, 152, 0.25);
+}
+
+.mf-head-meta h3 { 
+    margin: 0; 
+    font-size: 20px; 
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* Status row */
+.mf-status-row {
+    margin: 4px 0 0 0;
+    display: inline-flex;
+    align-items: center;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.mf-status-row .mf-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--green);
+    display: inline-block;
+    margin-right: 8px;
+    box-shadow: 0 0 0 3px rgba(36, 174, 95, 0.15);
+}
+
+/* Body */
+.mf-body { 
+    margin-top: 12px; 
+}
+
+.mf-intro { 
+    margin: 0 0 16px 0; 
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Actions row */
+.mf-actions { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px;
+}
+
+/* Button ordering - Edit Avatar on right */
+.mf-btn-green { 
+    order: 1; /* Start Helping comes first (left) */
+}
+
+.mf-btn-blue { 
+    order: 2; /* Edit Avatar comes second (right) */
+}
+
+/* Buttons */
+.mf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    min-width: 120px;
+}
+
+.mf-btn-blue { 
+    background: var(--blue); 
+}
+
+.mf-btn-blue:hover { 
+    background: var(--blue-600); 
+    transform: translateY(-1px);
+}
+
+.mf-btn-green { 
+    background: var(--green); 
+}
+
+.mf-btn-green:hover { 
+    background: var(--green-600); 
+    transform: translateY(-1px);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .mf-sheet {
+        width: 90vw;
+        max-width: 400px;
+        max-height: 70vh;
+    }
+    
+    .mf-actions {
+        flex-direction: column;
+    }
+    
+    .mf-btn {
+        width: 100%;
+    }
 }
 
 
