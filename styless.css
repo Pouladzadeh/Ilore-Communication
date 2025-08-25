@@ -1569,7 +1569,7 @@ body {
 .pict-card:hover {
   transform: scale(1.03);
   box-shadow: var(--shadow);
-  border-color: var(--border-300);
+border-color: #1C5A98;
 }
 
 .pict-card.selected {
