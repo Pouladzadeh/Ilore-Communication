@@ -1566,6 +1566,18 @@ body {
     aspect-ratio: 1.1;
     box-sizing: border-box;
 }
+.pict-card:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow);
+  border-color: var(--border-300);
+}
+
+.pict-card.selected {
+  border-color: #1C5A98;
+  background: #f3f4f6;
+  box-shadow: 0 6px 18px rgba(28, 90, 152, .18);
+}
+
 
 /* Responsive Card Sizing */
 @media (min-width: 1200px) {
@@ -2080,6 +2092,15 @@ body {
   border-color: #1C5A98;
     box-shadow: rgba(28, 90, 152, 0.18) 0px 5.99502px 17.9851px 0px;
 }
+
+#aiGrid .pict-card.selected {
+  border-color: #1C5A98;
+  background: #f3f4f6;
+  box-shadow: 0 6px 18px rgba(28, 90, 152, .18);
+  /* Override disabled styles */
+}
+
+
 
 #aiGrid .pict-card .pict-emoji {
   font-size: 72px;
