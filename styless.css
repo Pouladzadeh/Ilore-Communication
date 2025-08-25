@@ -704,7 +704,7 @@ header {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: inline-flex;
+  /*display: inline-flex;*/
   align-items: center;
   gap: 8px;
   text-decoration: none;
@@ -4152,3 +4152,650 @@ border-color: #1C5A98;
 
 
 
+/* ========================================================================
+   SAVED AVATARS PAGE STYLES
+   ======================================================================== */
+
+/* Page Header Styles */
+.avatars-page-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 12px;
+}
+
+.page-subtitle {
+  font-size: 18px;
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Create Avatar Button */
+#addAvatarBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.btn-icon {
+  font-size: 20px;
+  font-weight: 700;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* Avatars Grid Container */
+.avatars-grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* Current Avatar Section */
+.current-avatar-section {
+  background: #f9fafb;
+  border-radius: 20px;
+  padding: 32px;
+  border: 2px solid var(--border);
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title::before {
+  width: 5px;
+  height: 24px;
+  background: var(--blue);
+  border-radius: 3px;
+}
+
+/* Avatar Card Styles */
+.avatar-card {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.avatar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: var(--border-300);
+}
+
+.avatar-card.active {
+  border-color: #1C5A98;
+  background: white;
+}
+
+/* Avatar Image Container */
+.avatar-image-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #EAF2FA 0%, #D4E4F5 100%);
+  padding: 4px;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: white;
+}
+
+/* Active Badge */
+.active-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--green);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(52, 168, 83, 0.3);
+}
+
+/* Avatar Info */
+.avatar-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.avatar-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+
+.avatar-description {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Avatar Traits */
+.avatar-traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.trait-tag {
+  background: #EAF2FA;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(28, 90, 152, 0.2);
+}
+
+/* Avatar Actions */
+.avatar-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-small {
+  font-size: 14px;
+  padding: 10px 20px;
+}
+
+/* Delete Button */
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.06);
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: rgba(0, 0, 0, 0.12);
+
+}
+
+/* Saved Avatars Grid */
+.saved-avatars-section {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  border: 1px solid var(--border);
+}
+
+.avatars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Empty State */
+.empty-avatar-card {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 40px;
+  background: #F9FAFB;
+  border: 2px dashed var(--border-300);
+  border-radius: 20px;
+}
+
+.empty-content {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  opacity: 0.3;
+}
+
+.empty-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 12px;
+}
+
+.empty-description {
+  font-size: 16px;
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+
+/* Tips Section */
+.tips-section {
+  background: linear-gradient(135deg, #F0F7FF 0%, #E8F2FD 100%);
+  border-radius: 20px;
+  padding: 32px;
+  border: 1px solid rgba(28, 90, 152, 0.1);
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.tip-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.tip-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 90, 152, 0.1);
+  border-color: var(--blue);
+}
+
+.tip-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.tip-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 12px;
+}
+
+.tip-description {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  z-index: 2001;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.modal[aria-hidden="false"] .modal-content {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.06);
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.modal-body {
+  text-align: center;
+}
+
+.warning-icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+}
+
+.modal-text {
+  font-size: 16px;
+  color: var(--muted);
+  margin: 0 0 24px;
+  line-height: 1.6;
+}
+
+.delete-avatar-preview {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: #F9FAFB;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.preview-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.preview-info h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 4px;
+}
+
+.preview-info p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn-outline-primary {
+  background: white;
+  color: var(--blue);
+  border: 2px solid var(--blue);
+}
+
+.btn-outline-primary:hover {
+  background: var(--blue);
+  color: white;
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--text);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  z-index: 3000;
+  opacity: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .avatars-page-header {
+    padding: 0 16px;
+  }
+  
+  .page-title {
+    font-size: 28px;
+  }
+  
+  .page-subtitle {
+    font-size: 16px;
+  }
+  
+  .current-avatar-section,
+  .saved-avatars-section {
+    padding: 24px 16px;
+  }
+  
+  .section-title {
+    font-size: 20px;
+  }
+  
+  .avatars-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .avatar-card {
+    padding: 20px;
+  }
+  
+  .avatar-image-container {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-content {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 24px;
+  }
+  
+  .page-subtitle {
+    font-size: 14px;
+  }
+  
+  #addAvatarBtn {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+  
+  .avatar-name {
+    font-size: 18px;
+  }
+  
+  .avatar-description {
+    font-size: 13px;
+  }
+  
+  .trait-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .modal-actions .btn {
+    width: 100%;
+  }
+}
+
+/* Animation for card deletion */
+@keyframes fadeOutScale {
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+/* Avatar Actions - Responsive Improvements */
+.avatar-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Desktop: Normal horizontal layout */
+@media (min-width: 769px) {
+  .avatar-actions {
+    flex-direction: row;
+  }
+  
+  .avatar-actions .btn {
+    min-width: 140px;
+  }
+}
+
+/* Tablet: Slightly smaller buttons */
+@media (max-width: 768px) and (min-width: 481px) {
+  .avatar-actions {
+    gap: 10px;
+  }
+  
+  .avatar-actions .btn {
+    font-size: 14px;
+    padding: 10px 18px;
+    min-width: 120px;
+  }
+}
+/* Small tablets and large phones */
+/* Small tablets and large phones */
+@media (max-width: 600px) {
+  .avatar-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+  
+  .avatar-actions .btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 16px;
+    min-width: unset;
+  }
+  
+  .avatar-actions .btn span {
+    display: inline !important; /* Force display of button text */
+    font-size: 14px;
+  }
+}
+
+/* Mobile: Stack buttons vertically */
+@media (max-width: 480px) {
+  .avatar-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+  
+  .avatar-actions .btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 16px;
+    min-width: unset;
+  }
+  
+  .avatar-actions .btn span {
+    display: inline !important; /* Force display of button text */
+    font-size: 14px;
+  }
+}
+/* Very small screens: Optimize button size */
+@media (max-width: 360px) {
+  .avatar-actions .btn {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+  
+  .avatar-actions .btn span {
+    font-size: 13px;
+  }
+}

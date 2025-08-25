@@ -67,8 +67,8 @@
         <p class="mf-intro">Hi! I’m your Magical Friend. Together we share feelings and build messages with cards or voice.</p>
 
         <div class="mf-actions">
-          <button class="mf-btn mf-btn-blue" id="mfEditAvatarBtn">Edit Avatar</button>
-        <button class="mf-btn mf-btn-green" id="mfStartHelpBtn">Start Helping</button>
+          <button class="btn-outline-primary" id="mfEditAvatarBtn">Edit Avatar</button>
+        <button class="btn btn-primary" id="mfStartHelpBtn">My Avatars</button>
 
         </div>
       </div>
@@ -767,10 +767,8 @@ const renderAISuggestions = (cards) => {
       const startBtn = document.getElementById('mfStartHelpBtn');
       if(startBtn){
         startBtn.addEventListener('click', ()=>{
-          // Close modal and focus on voice helper
-          closeModal();
-          setActiveTab('voice');
-          setTimeout(() => micBtn.focus(), 100);
+          // Navigate to My Avatars page
+          window.location.href = 'saved-avatar.html';
         });
       }
       const editBtn = document.getElementById('mfEditAvatarBtn');
