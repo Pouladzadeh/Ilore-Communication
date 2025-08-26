@@ -4799,3 +4799,31 @@ border-color: #1C5A98;
     font-size: 13px;
   }
 }
+/* Small tablets and large phones */
+@media (max-width: 600px) {
+  .panel-title .row {
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 12px 8px;
+    font-size: 13px;
+    min-width: 70px;
+  }
+
+  /* Only hide button text in the panel title area */
+  .panel-title .btn span {
+    display: none;
+  }
+
+  /* Keep button text visible in header actions */
+  .header-actions .btn span {
+    display: inline !important;
+  }
+
+  .btn img,
+  .btn svg {
+    height: 18px;
+    width: 18px;
+  }
+}
