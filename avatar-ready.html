@@ -86,7 +86,7 @@
       <button class="avatar-close-btn" id="avatarCloseBtn" aria-label="Close avatar prompt" 
               style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.1); border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 18px; color: #666; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; z-index: 10;"
               onmouseover="this.style.background='rgba(0,0,0,0.2)'; this.style.color='#333';"
-              onmouseout="this.style.background='rgba(0,0,0,0.1)'; this.style.color='#666';">&times;</button>
+              onmouseout="this.style.background='rgba(0,0,0,0.1)'; this.style.color='#666';">−</button>
       
       <div class="avatar-circle" style="width: 240px; height: 240px;">
         <img src="img/generatedavatar.svg" alt="Avatar Placeholder" style="width: 100%; height: 100%; object-fit: cover;">
@@ -557,9 +557,9 @@
     // Voice (simulated)
     // -------------------------
    // const generateAISuggestions = () => ([
-   //   { id:'ai-hungry', text:'I am hungry', icon:'🍎', isAI:true },
-    //  { id:'ai-help',   text:'Help me',     icon:'🆘', isAI:true },
-    //  { id:'ai-water',  text:'I need water',icon:'💧', isAI:true },
+   //   { id:'ai-hungry', text:'I am hungry', icon:'🍎' },
+    //  { id:'ai-help',   text:'Help me',     icon:'🆘' },
+    //  { id:'ai-water',  text:'I need water',icon:'💧' },
    // ]);
 
     //const handleVoiceInput = async () => {
@@ -718,11 +718,71 @@ const renderAISuggestions = (cards) => {
     // Avatar prompt close functionality
     const avatarCloseBtn = document.getElementById('avatarCloseBtn');
     const avatarPromptSection = document.getElementById('avatarPromptSection');
-    if (avatarCloseBtn && avatarPromptSection) {
-      avatarCloseBtn.addEventListener('click', () => {
-        avatarPromptSection.style.display = 'none';
-      });
+
+    // Add sticky bubble HTML after the avatar prompt section
+    const stickyBubbleHTML = `
+    <div id="stickyBubble" class="sticky-bubble" onclick="showAvatarPrompt()">
+      <img src="img/generatedavatar.svg" alt="Show avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+    </div>
+    `;
+
+    // Insert sticky bubble into the DOM
+    document.querySelector('main').insertAdjacentHTML('beforeend', stickyBubbleHTML);
+
+    // Avatar visibility state
+    let isAvatarPromptVisible = true;
+
+    // Hide avatar prompt function
+    function hideAvatarPrompt() {
+      const bubble = document.getElementById('stickyBubble');
+      
+      avatarPromptSection.classList.add('hidden');
+      
+      // Show sticky bubble after animation completes
+      setTimeout(() => {
+        bubble.classList.add('show');
+        bubble.classList.add('bounce');
+      }, 300);
+      
+      isAvatarPromptVisible = false;
     }
+
+    // Show avatar prompt function
+    function showAvatarPrompt() {
+      const bubble = document.getElementById('stickyBubble');
+      
+      // Hide bubble
+      bubble.classList.remove('show', 'bounce');
+      
+      // Show avatar prompt
+      avatarPromptSection.classList.remove('hidden');
+      avatarPromptSection.style.display = 'block';
+      
+      // Scroll to avatar prompt with smooth animation
+      setTimeout(() => {
+        avatarPromptSection.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }, 100);
+      
+      isAvatarPromptVisible = true;
+    }
+
+    // Update the close button event listener
+    if (avatarCloseBtn && avatarPromptSection) {
+      avatarCloseBtn.addEventListener('click', hideAvatarPrompt);
+    }
+
+    // Add scroll-based interactions for the bubble
+    window.addEventListener('scroll', () => {
+      const bubble = document.getElementById('stickyBubble');
+      if (!isAvatarPromptVisible && window.scrollY > 200) {
+        bubble.style.transform = 'scale(1.05)';
+      } else if (!isAvatarPromptVisible) {
+        bubble.style.transform = 'scale(1)';
+      }
+    });
 
     // -------------------------
     // Magical Friend Modal
