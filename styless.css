@@ -4060,8 +4060,8 @@ border-color: #1C5A98;
 
 .mf-close {
     position: absolute;
-    top: -10px;
-    right: -10px;
+     top: 10px !important;
+    right: 10px !important;
     width: 40px;
     height: 40px;
     background: white;
@@ -4902,7 +4902,7 @@ border-color: #1C5A98;
   position: relative;
 }
 
-/* Sticky Bubble Styles - Container-aligned positioning */
+/* Sticky Bubble Styles - Consistent container-aligned positioning */
 .sticky-bubble {
   position: fixed;
   width: 80px;
@@ -4922,40 +4922,34 @@ border-color: #1C5A98;
   justify-content: center;
   border: 1px solid rgba(0, 0, 0, 0.08);
   
-  /* Base positioning - will be overridden by container calculations */
-  bottom: 100px;
-  right: 60px;
+  /* Default mobile-first positioning */
+  bottom: 80px;
+  right: 30px;
 }
 
-/* Container-aligned positioning calculations */
-/* For screens wider than container + padding */
-@media (min-width: 1320px) {
+/* Show the bubble when active */
+.sticky-bubble.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(0);
+}
+
+/* Hover effects */
+.sticky-bubble:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Small mobile devices */
+@media (min-width: 480px) {
   .sticky-bubble {
-    /* Position relative to container: (viewport - container) / 2 + right-margin */
-    right: calc((100vw - 1200px) / 2 + 80px); /* 80px margin from container edge */
-    bottom: 100px;
+    right: 40px;
+    bottom: 90px;
   }
 }
 
-/* Large desktop screens */
-@media (min-width: 1440px) {
-  .sticky-bubble {
-    right: calc((100vw - 1200px) / 2 + 80px);
-    bottom: 100px;
-  }
-}
-
-/* Medium to large screens - container takes full width with padding */
-@media (min-width: 1024px) and (max-width: 1319px) {
-  .sticky-bubble {
-    /* Add margin to prevent overlap with container */
-    right: 60px;
-    bottom: 100px;
-  }
-}
-
-/* Tablet adjustments */
-@media (min-width: 768px) and (max-width: 1023px) {
+/* Large mobile / small tablet */
+@media (min-width: 768px) {
   .sticky-bubble {
     width: 76px;
     height: 76px;
@@ -4964,109 +4958,113 @@ border-color: #1C5A98;
   }
 }
 
-/* Mobile optimizations */
-@media (max-width: 767px) {
+/* Tablet to desktop */
+@media (min-width: 1024px) {
   .sticky-bubble {
-    width: 72px;
-    height: 72px;
-    right: 40px;
-    bottom: 80px;
+    width: 80px;
+    height: 80px;
+    right: 60px;
+    bottom: 100px;
   }
 }
 
-/* Small mobile devices */
-@media (max-width: 480px) {
+/* Large screens - position relative to container */
+@media (min-width: 1320px) {
   .sticky-bubble {
-    width: 68px;
-    height: 68px;
-    right: 30px;
-    bottom: 70px;
+    /* Calculate position: (viewport width - container width) / 2 + desired margin */
+    /* Assuming your container is 1200px wide with max-width */
+    right: calc((100vw - 1200px) / 2 + 60px);
+    bottom: 100px;
   }
 }
 
-/* Very small screens */
-@media (max-width: 360px) {
+/* Extra large screens */
+@media (min-width: 1600px) {
   .sticky-bubble {
-    width: 64px;
-    height: 64px;
-    right: 25px;
-    bottom: 60px;
+    /* Keep consistent distance from container edge */
+    right: calc((100vw - 1200px) / 2 + 80px);
+    bottom: 120px;
   }
 }
 
-/* Show bubble */
+
+/* Sticky Bubble Styles - Simplified with JavaScript positioning */
+.sticky-bubble {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.8) translateY(20px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  
+  /* Default positioning - will be overridden by JavaScript */
+  bottom: 80px;
+  right: 60px;
+}
+
+/* Show the bubble when active */
 .sticky-bubble.show {
   opacity: 1;
   visibility: visible;
   transform: scale(1) translateY(0);
 }
 
-/* Hover states */
+/* Hover effects */
 .sticky-bubble:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 0.98);
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-.sticky-bubble:active {
-  transform: scale(0.95);
-}
-
-/* Focus states for accessibility */
-.sticky-bubble:focus {
-  outline: 2px solid #4285f4;
-  outline-offset: 2px;
-}
-
-/* Bounce animation */
-.sticky-bubble.bounce {
-  animation: bounce 0.6s ease-out;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  40% {
-    transform: translateY(-12px) scale(1.02);
-  }
-  60% {
-    transform: translateY(-6px) scale(1.01);
-  }
-}
-
-/* Alternative approach using CSS custom properties */
-/* If you want to dynamically set container width */
-:root {
-  --container-max-width: 1200px;
-  --bubble-margin: 80px;
-}
-
-.sticky-bubble.container-aligned {
-  right: calc((100vw - var(--container-max-width)) / 2 + var(--bubble-margin));
-}
-
-/* Fallback for when container width calculation isn't available */
-@media (max-width: calc(1200px + 160px)) {
-  .sticky-bubble.container-aligned {
-    right: var(--bubble-margin);
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
+/* Basic mobile adjustments only */
+@media (max-width: 768px) {
   .sticky-bubble {
-    border: 2px solid;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 70px;
+    height: 70px;
+    right: 20px;
+    bottom: 60px;
   }
 }
 
-/* Reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-  .sticky-bubble {
-    transition: opacity 0.2s ease;
-  }
+/* JavaScript will handle all desktop/Mac positioning */
+
+/* Alternative approach: If you want it always aligned with container edge */
+.sticky-bubble-container-aligned {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.8) translateY(20px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   
+  /* Position using CSS custom properties that can be set via JavaScript */
+  bottom: var(--bubble-bottom, 100px);
+  right: var(--bubble-right, 60px);
+}
+
+
+
   .sticky-bubble.bounce {
     animation: none;
   }
@@ -5074,7 +5072,7 @@ border-color: #1C5A98;
   .sticky-bubble:hover {
     transform: scale(1.02);
   }
-}
+
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
