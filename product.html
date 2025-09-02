@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ILore – Communication App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styless.css">
+
+</head>
+<body>
+  <!-- ============================================ -->
+  <!-- HEADER SECTION - Navigation and Branding    -->
+  <!-- ============================================ -->
+  <header class="header" id="header">
+      <div class="nav-container">
+          <a href="index.html" class="logo">
+              <img src="img/logo.svg" alt="Ilore logo" style="height:32px; width: 122px; vertical-align:middle;">
+          </a>
+
+          <nav class="nav-menu" id="navMenu">
+              <a href="index.html">Home</a>
+              <a href="product.html">Product</a>
+              <a href="Contact.html">Contact</a>
+          </nav>
+          
+          <div class="nav-actions">
+              <button class="mobile-menu-toggle" id="mobileMenuToggle"></button>
+          </div>
+      </div>
+  </header>
+  <!-- END HEADER SECTION -->
+
+  <!-- ============================================ -->
+  <!-- MAIN CONTENT SECTION                        -->
+  <!-- ============================================ -->
+  <main class="container">
+    <!-- ============================================ -->
+    <!-- AVATAR PROMPT SECTION                      -->
+    <!-- ============================================ -->
+    <section id="avatarPromptSection" class="panel avatar-prompt-section" style="position: relative;">
+      <button class="avatar-close-btn" id="avatarCloseBtn" aria-label="Close avatar prompt" 
+              style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.1); border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 18px; color: #666; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; z-index: 10;"
+              onmouseover="this.style.background='rgba(0,0,0,0.2)'; this.style.color='#333';"
+              onmouseout="this.style.background='rgba(0,0,0,0.1)'; this.style.color='#666';">&times;</button>
+      
+      <div class="avatar-circle">
+        <img src="img/avatar.svg" alt="Avatar Placeholder">
+      </div>
+      <h3 class="avatar-prompt-title" style="text-align: center;">Make This Space Yours</h3>
+      <p class="muted avatar-prompt-desc" style="text-align: center;">Make your voice helper look like you! Create your avatar now, or skip and come back later.</p>
+      <div style="text-align: center;">
+        <a href="avatar-step1.html" class="btn btn-primary avatar-prompt-btn" id="openAvatarCreator">
+          Create My Avatar
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- MAIN APP CONTAINER                          -->
+    <!-- ============================================ -->
+    <section class="panel">
+      <!-- MESSAGE BUILDER SECTION -->
+      <div class="panel-title">
+        <h3 id="msg-title" style="margin:0;font-size:18px;font-weight:700">My Message:</h3>
+        <div class="row">
+          <button id="sayBtn" class="btn btn-green" disabled aria-label="Say it"><img src="img/sound.svg" alt="Say It" style="height:20px; width: 20px; vertical-align:middle;"> <span>Say It</span></button>
+       <!--   <button id="sendBtn" class="btn btn-blue" disabled aria-label="Send"><img src="img/send.svg" alt="Send" style="height:20px; width: 20px; vertical-align:middle;"> <span>Send</span></button>-->
+          <button id="clearBtn" class="btn btn-red" aria-label="Clear"><img src="img/remove.svg" alt="Clear" style="height:20px; width: 20px; vertical-align:middle;"> <span>Clear</span></button>
+        </div>
+      </div>
+      <div id="messageArea" class="message-area">
+        <p class="muted center" id="emptyHint">Choose cards from either page to build your message</p>
+        <div class="chips" id="chips"></div>
+      </div>
+
+      <!-- TABS SECTION -->
+      <div class="tabs" role="tablist" aria-label="Modes">
+        <button class="tab active" data-tab="voice" role="tab" aria-selected="true">
+          <img src="img/Voice.svg" alt="AI Voice Helper">AI Voice Helper
+        </button>
+        <button class="tab" data-tab="cards" role="tab" aria-selected="false">
+          <img src="img/picturecards.svg" alt="Picture Cards">Picture Cards
+        </button>
+      </div>
+
+      <!-- VOICE HELPER SECTION -->
+      <div id="tab-voice" class="tab-content">
+        <div class="center">
+          <h2 style="margin:2rem 0 6px;font-size:24px">AI Voice Helper</h2>
+          <p class="muted" style="margin-top:0">Say anything, and I'll show you helpful words!</p>
+
+          <div class="mic-wrap">
+            <button id="micBtn" class="mic" aria-pressed="false" aria-label="Start listening">
+              <img src="img/microphone.svg" alt="Microphone" style="height:70px; width: 70px; filter: brightness(0) invert(1);"/>
+            </button>
+          </div>
+          <p id="listenState" style="font-size:20px;font-weight:600;text-align:center;margin:8px 0 4px">Press and say any letter A,B,C...</p>
+          <p class="muted center" style="margin:0 0 18px">Choose a word</p>
+        </div>
+
+        <!-- AI Block moved outside center div for full width -->
+        <div id="aiBlock" class="hidden">
+          <h3 style="font-size:18px;margin:0 0 10px;padding:0 20px">AI Suggestions:</h3>
+          <div id="aiGrid" class="ai-suggestions-grid"></div>
+        </div>
+      </div>
+
+      <!-- PICTURE CARDS SECTION -->
+      <div id="tab-cards" class="tab-content hidden" aria-labelledby="cards-title">
+        <div class="center" style="margin-bottom:24px">
+          <h2 id="cards-title" style="margin:2rem 0 6px;font-size:24px">Picture Cards</h2>
+          <p class="muted" style="margin:0">Tap picture cards to tell you what you need!</p>
+        </div>
+
+        <!-- Categories -->
+        <div id="categoryBar" class="categories"></div>
+
+        <!-- Grid -->
+        <div id="cardGrid" class="grid"></div>
+      </div>
+    </section>
+</main>
+<!-- END MAIN CONTENT SECTION -->
+
+<!-- ============================================ -->
+<!-- FOOTER SECTION                               -->
+<!-- ============================================ -->
+<footer class="footer">
+  <div class="footer-container">
+      <!-- Logo and Social Icons (Desktop) -->
+      <div class="footer-brand">
+          <img src="img/Logo-light.svg" alt="Ilore" class="footer-logo">
+          <div class="social-icons">
+              <div class="social-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </div>
+                <div class="social-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                  </svg>
+                </div>
+                <div class="social-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </div>
+          </div>
+      </div>
+      
+      <!-- Company Links (Desktop) -->
+      <div class="footer-section">
+          <h3>Company</h3>
+          <ul class="footer-links">
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Testimonials</a></li>
+          </ul>
+      </div>
+      
+      <!-- Support Links (Desktop) -->
+      <div class="footer-section">
+          <h3>Support</h3>
+          <ul class="footer-links">
+              <li><a href="#">Help center</a></li>
+              <li><a href="#">Terms of service</a></li>
+              <li><a href="#">Legal</a></li>
+              <li><a href="#">Privacy policy</a></li>
+              <li><a href="#">Status</a></li>
+          </ul>
+      </div>
+      
+      <!-- Newsletter (Desktop & Mobile) -->
+      <div class="footer-section newsletter-section">
+          <h3>Stay up to date</h3>
+          <form class="newsletter">
+              <input type="email" class="newsletter-input" placeholder="Enter your email">
+              <button type="submit" class="newsletter-btn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                  </svg>
+              </button>
+          </form>
+      </div>
+      
+      <!-- Social Icons (Mobile/Tablet Only) -->
+      <div class="social-icons">
+          <div class="social-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </div>
+            <div class="social-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </div>
+            <div class="social-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </div>
+      </div>
+      
+      <!-- Company and Support sections container for mobile/tablet -->
+      <div class="footer-sections-container">
+          <!-- Company Links -->
+          <div class="footer-section">
+              <h3>Company</h3>
+              <ul class="footer-links">
+                  <li><a href="#">About us</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">Contact us</a></li>
+                  <li><a href="#">Pricing</a></li>
+                  <li><a href="#">Testimonials</a></li>
+              </ul>
+          </div>
+          
+          <!-- Support Links -->
+          <div class="footer-section">
+              <h3>Support</h3>
+              <ul class="footer-links">
+                  <li><a href="#">Help center</a></li>
+                  <li><a href="#">Terms of service</a></li>
+                  <li><a href="#">Legal</a></li>
+                  <li><a href="#">Privacy policy</a></li>
+                  <li><a href="#">Status</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+  
+  <div class="footer-bottom">
+      <p class="footer-copyright">
+      @2025 Ilore Inc. All rights reserved. 
+      <a href="/privacy">Privacy Policy</a> | 
+      <a href="/terms">Terms of Services</a>
+  </p> 
+  </div>
+</footer>
+<!-- END FOOTER SECTION -->
+
+<!-- ============================================ -->
+<!-- JAVASCRIPT SECTION                          -->
+<!-- ============================================ -->
+<script>
+     
+        // Mobile menu toggle functionality
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+
+        // Header background change on scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Set active menu based on current page
+        function setActiveMenuByPage() {
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const linkHref = link.getAttribute('href');
+                
+                // Check if current page matches the link
+                if (linkHref === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Call on page load
+        document.addEventListener('DOMContentLoaded', setActiveMenuByPage);
+ 
+
+    // -------------------------
+    // Data (matches your React)
+    // -------------------------
+    const categories = {
+      basic:      { name: 'Basic Needs', icon:'🏠', theme: 'basic' },
+      emotions:   { name: 'Emotions',    icon:'😊', theme: 'emotions' },
+      activities: { name: 'Activities',  icon:'⚽', theme: 'activities' },
+      people:     { name: 'People',      icon:'👨‍👩‍👧', theme: 'people' },
+    };
+
+    const pictureCards = {
+      basic: [
+        { id: 'hungry',   text: 'I am hungry',  icon: '🍎', category: 'basic' },
+        { id: 'thirsty',  text: 'I am thirsty', icon: '🥤', category: 'basic' },
+        { id: 'bathroom', text: 'Bathroom',     icon: '🚽', category: 'basic' },
+        { id: 'sleep',    text: 'I am tired',   icon: '😴', category: 'basic' },
+        { id: 'help',     text: 'Help me',      icon: '🆘', category: 'basic' },
+        { id: 'more',     text: 'More',         icon: '➕', category: 'basic' },
+      ],
+      emotions: [
+        { id: 'happy',   text: 'I am happy',   icon: '😊', category: 'emotions' },
+        { id: 'sad',     text: 'I am sad',     icon: '😢', category: 'emotions' },
+        { id: 'angry',   text: 'I am angry',   icon: '😠', category: 'emotions' },
+        { id: 'scared',  text: 'I am scared',  icon: '😨', category: 'emotions' },
+        { id: 'excited', text: 'I am excited', icon: '🤩', category: 'emotions' },
+        { id: 'calm',    text: 'I am calm',    icon: '😌', category: 'emotions' },
+      ],
+      activities: [
+        { id: 'play',   text: 'I want to play', icon: '🎮', category: 'activities' },
+        { id: 'read',   text: 'I want to read', icon: '📖', category: 'activities' },
+        { id: 'music',  text: 'I want music',   icon: '🎵', category: 'activities' },
+        { id: 'outside',text: 'Go outside',     icon: '🌳', category: 'activities' },
+        { id: 'watch',  text: 'Watch TV',       icon: '📺', category: 'activities' },
+        { id: 'draw',   text: 'I want to draw', icon: '🎨', category: 'activities' },
+      ],
+      people: [
+        { id: 'mom',     text: 'Mom',    icon: '👩',       category: 'people' },
+        { id: 'dad',     text: 'Dad',    icon: '👨',       category: 'people' },
+        { id: 'teacher', text: 'Teacher',icon: '👩‍🏫',     category: 'people' },
+        { id: 'friend',  text: 'Friend', icon: '👫',       category: 'people' },
+        { id: 'doctor',  text: 'Doctor', icon: '👨‍⚕️',     category: 'people' },
+        { id: 'family',  text: 'Family', icon: '👨‍👩‍👧‍👦', category: 'people' },
+      ]
+    };
+
+    // -------------------------
+    // State
+    // -------------------------
+    let activeTab = 'voice';
+    let selectedCategory = 'basic';
+    const selectedCards = new Map(); // id -> card
+
+    // -------------------------
+    // Elements
+    // -------------------------
+    const tabs = document.querySelectorAll('.tab');
+    const tabVoice = document.getElementById('tab-voice');
+    const tabCards = document.getElementById('tab-cards');
+
+    const sayBtn = document.getElementById('sayBtn');
+   // const sendBtn = document.getElementById('sendBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const chipsWrap = document.getElementById('chips');
+    const emptyHint = document.getElementById('emptyHint');
+
+    const micBtn = document.getElementById('micBtn');
+    const listenState = document.getElementById('listenState');
+    const aiBlock = document.getElementById('aiBlock');
+    const aiGrid = document.getElementById('aiGrid');
+
+    const categoryBar = document.getElementById('categoryBar');
+    const cardGrid = document.getElementById('cardGrid');
+
+    // -------------------------
+    // Utilities
+    // -------------------------
+    // Speak a single card immediately
+    const speakCard = (text) => {
+      if (!('speechSynthesis' in window)) return;
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang   = 'en-US';
+      u.rate   = 1;
+      u.pitch  = 1;
+      speechSynthesis.cancel();   // stop anything already talking
+      speechSynthesis.speak(u);
+    };
+
+    const updateMessageUI = () => {
+      chipsWrap.innerHTML = '';
+      const cards = Array.from(selectedCards.values());
+      if (cards.length === 0) {
+        emptyHint.classList.remove('hidden');
+        sayBtn.disabled = true;
+       // sendBtn.disabled = true;
+        return;
+      }
+      emptyHint.classList.add('hidden');
+      sayBtn.disabled = false;
+      // sendBtn.disabled = false;
+
+      cards.forEach((card, idx) => {
+        const chip = document.createElement('div');
+        chip.className = 'chip';
+        chip.innerHTML = `
+          <span style="font-size:18px">${card.icon}</span>
+          <span style="font-size:14px;font-weight:600">${card.text}</span>
+          <button class="remove" aria-label="Remove card">&times;</button>
+          ${idx < cards.length - 1 ? '<span class="muted">→</span>' : ''}
+        `;
+        chip.querySelector('.remove').addEventListener('click', () => {
+          selectedCards.delete(card.id);
+          // also unselect the tile if visible
+          const tile = document.querySelector(`[data-card-id="${card.id}"]`);
+          if (tile) tile.classList.remove('selected');
+          updateMessageUI();
+        });
+        chipsWrap.appendChild(chip);
+      });
+    };
+
+    const buildSentence = () =>
+      Array.from(selectedCards.values()).map(c => c.text).join('. ');
+
+    const speakMessage = () => {
+      const sentence = buildSentence();
+      if (!sentence) return;
+      try {
+        // Use Web Speech API if available
+        if ('speechSynthesis' in window) {
+          const u = new SpeechSynthesisUtterance(sentence);
+          u.rate = 0.95;
+          u.pitch = 1.0;
+          speechSynthesis.cancel();
+          speechSynthesis.speak(u);
+        } else {
+          console.log('TTS not supported, simulated:', sentence);
+        }
+      } catch(e) { console.warn(e) }
+    };
+
+    const sendMessage = () => {
+      const sentence = buildSentence();
+      if (!sentence) return;
+      const timestamp = new Date().toLocaleTimeString();
+      alert(`✅ Message sent to Mom at ${timestamp}:\n"${sentence}"`);
+      setTimeout(clearMessage, 800);
+    };
+
+    const clearMessage = () => {
+      selectedCards.clear();
+      document.querySelectorAll('.pict-card.selected').forEach(el => el.classList.remove('selected'));
+      updateMessageUI();
+      // Reset all prediction state
+      currentSuggestionSet = null;
+      cycleCount = 0;
+      micTapCount = 0;
+      aiBlock.classList.add('hidden');
+      aiGrid.innerHTML = '';
+      listenState.textContent = 'Press and say any letter A,B,C...';
+      listenState.className = '';
+    };
+
+    const toggleSelectCard = (card, tileEl) => {
+      if (selectedCards.has(card.id)) {
+        selectedCards.delete(card.id);
+        tileEl.classList.remove('selected');
+      } else {
+        selectedCards.set(card.id, card);
+        tileEl.classList.add('selected');
+        // Read this card aloud as soon as it’s chosen
+        speakCard(card.text);
+      }
+      updateMessageUI();
+    };
+
+    // -------------------------
+    // Renderers
+    // -------------------------
+    const renderCategories = () => {
+      categoryBar.innerHTML = '';
+      Object.entries(categories).forEach(([key, cat]) => {
+        const btn = document.createElement('button');
+        btn.className = 'pill';
+        btn.innerHTML = `<span>${cat.icon}</span><span>${cat.name}</span>`;
+        if (key === selectedCategory) btn.classList.add(`active-${cat.theme}`);
+        btn.addEventListener('click', () => {
+          selectedCategory = key;  // Update selected category
+          renderCategories();      // Re-render categories to update active state
+          renderCardGrid();        // Re-render grid with new category
+        });
+        categoryBar.appendChild(btn);
+      });
+    };
+
+    const renderCardGrid = () => {
+      cardGrid.innerHTML = '';
+      pictureCards[selectedCategory].forEach(card => {
+        const tile = document.createElement('button');
+        tile.className = 'pict-card';
+        tile.setAttribute('data-card-id', card.id);
+        tile.innerHTML = `
+          <span class="pict-emoji">${card.icon}</span>
+          <span class="pict-text">${card.text}</span>
+        `;
+        
+        // Check if already selected
+        if (selectedCards.has(card.id)) {
+          tile.classList.add('selected');
+        }
+        
+        tile.addEventListener('click', () => toggleSelectCard(card, tile));
+        cardGrid.appendChild(tile);
+      });
+    };
+
+    // -------------------------
+    // Tabs
+    // -------------------------
+    const setActiveTab = (tab) => {
+      activeTab = tab;
+      tabs.forEach(t => {
+        const on = t.getAttribute('data-tab') === tab;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', String(on));
+      });
+      tabVoice.classList.toggle('hidden', tab !== 'voice');
+      tabCards.classList.toggle('hidden', tab !== 'cards');
+    };
+    tabs.forEach(t => t.addEventListener('click', () => setActiveTab(t.dataset.tab)));
+
+
+    // -------------------------
+    // Voice (simulated) - ENHANCED VERSION
+    // -------------------------
+  // Enhanced word-by-word prediction rules with more relatable options
+const wordPredictions = {
+  // First words that start sentences
+  starters: ['I', 'Let\'s', 'Can', 'Where', 'Help', 'Thank you'],
+  
+  // What comes after each word/phrase - expanded with natural conversation flow
+  nextWords: {
+    // === FLOW 1: Basic Need Expression (I → I need → I need help → I need help please) ===
+    'I': ['am', 'want', 'need', 'like', 'don\'t', 'can\'t'],
+    
+    // After "I need" - core needs
+    'I need': ['help', 'food', 'water', 'bathroom', 'rest', 'mama'],
+    
+    // Flow progression: I need help → specifics
+    'I need help': ['please', 'right now', 'with this', 'can\'t do it'],
+    'I need help please': ['🎯 COMPLETE', 'right now', 'thank you'], // Flow completion marker
+    'I need help right now': ['please', '🎯 COMPLETE', 'very urgent'],
+    'I need help with this': ['please', 'too hard', '🎯 COMPLETE'],
+    'I need help can\'t do it': ['please help me', 'too hard', '🎯 COMPLETE'],
+    
+    // Other "I need" flows
+    'I need food': ['please', 'right now', 'very hungry'],
+    'I need food please': ['🎯 COMPLETE', 'right now', 'thank you'],
+    'I need water': ['please', 'right now', 'thirsty'],
+    'I need water please': ['🎯 COMPLETE', 'very thirsty', 'thank you'],
+    'I need bathroom': ['right now', 'please', 'urgent'],
+    'I need bathroom right now': ['🎯 COMPLETE', 'please help', 'hurry'],
+    
+    // === FLOW 2: Social Interaction (Can → Can you → Can you play with → Can you play with me please) ===
+    'Can': ['I', 'you', 'we', 'mama', 'daddy'],
+    
+    // After "Can you" - requests
+    'Can you': ['help', 'play', 'come', 'read', 'give'],
+    
+    // Flow progression: Can you play → expansion
+    'Can you play': ['with me', 'games', 'outside', 'this game'],
+    'Can you play with': ['me', 'me please', 'us', 'toys'],
+    'Can you play with me': ['please', 'right now', 'games'],
+    'Can you play with me please': ['🎯 COMPLETE', 'right now', 'thank you'], // Flow completion
+    
+    // Alternative Can you flows
+    'Can you help': ['me', 'me please', 'with this', 'right now'],
+    'Can you help me': ['please', 'right now', 'with this'],
+    'Can you help me please': ['🎯 COMPLETE', 'right now', 'thank you'],
+    
+    'Can you come': ['here', 'play', 'help me'],
+    'Can you come here': ['please', 'right now', '🎯 COMPLETE'],
+    
+    // Can I flows
+    'Can I': ['have', 'go', 'play', 'help', 'eat'],
+    'Can I have': ['food', 'water', 'snack', 'toy'],
+    'Can I have food': ['please', 'right now', 'hungry'],
+    'Can I have food please': ['🎯 COMPLETE', 'thank you', 'right now'],
+    'Can I go': ['outside', 'bathroom', 'play'],
+    'Can I go outside': ['please', 'play there', 'right now'],
+    'Can I go outside please': ['🎯 COMPLETE', 'right now', 'thank you'],
+    
+    // === EMOTIONAL EXPRESSION FLOWS ===
+    // After "I am" - feelings and states
+    'I am': ['hungry', 'tired', 'happy', 'sad', 'cold', 'hot', 'done', 'ready', 'scared'],
+    
+    // Happy flow
+    'I am happy': ['today', 'right now', 'very much', 'thank you'],
+    'I am happy today': ['thank you', 'love this', '🎯 COMPLETE'],
+    'I am happy right now': ['thank you', 'love you', '🎯 COMPLETE'],
+    'I am happy very much': ['thank you', 'love this', '🎯 COMPLETE'],
+    
+    // Sad flow - needs comfort
+    'I am sad': ['right now', 'help me', 'want hug', 'miss mama'],
+    'I am sad right now': ['need help', 'want hug', '🎯 COMPLETE'],
+    'I am sad want hug': ['please', 'right now', '🎯 COMPLETE'],
+    'I am sad help me': ['please', 'feel better', '🎯 COMPLETE'],
+    
+    // Hungry flow
+    'I am hungry': ['please', 'right now', 'for food', 'very much'],
+    'I am hungry please': ['feed me', 'what\'s food', '🎯 COMPLETE'],
+    'I am hungry right now': ['please help', 'very much', '🎯 COMPLETE'],
+    'I am hungry for food': ['please', 'what\'s available', '🎯 COMPLETE'],
+    
+    // Tired flow
+    'I am tired': ['right now', 'very much', 'need rest', 'want sleep'],
+    'I am tired right now': ['need rest', 'want sleep', '🎯 COMPLETE'],
+    'I am tired need rest': ['please', 'right now', '🎯 COMPLETE'],
+    
+    // === ACTIVITY INITIATION FLOWS ===
+    'Let\'s': ['play', 'go', 'eat', 'read', 'clean up', 'have fun'],
+    
+    // Play flows
+    'Let\'s play': ['together', 'outside', 'games', 'right now'],
+    'Let\'s play together': ['right now', 'games', '🎯 COMPLETE'],
+    'Let\'s play outside': ['right now', 'games', '🎯 COMPLETE'],
+    'Let\'s play games': ['what game', 'right now', '🎯 COMPLETE'],
+    
+    // Go flows
+    'Let\'s go': ['outside', 'home', 'play', 'to park'],
+    'Let\'s go outside': ['play there', 'right now', '🎯 COMPLETE'],
+    'Let\'s go play': ['outside', 'together', '🎯 COMPLETE'],
+    'Let\'s go to park': ['right now', 'play there', '🎯 COMPLETE'],
+    
+    // Eat flows
+    'Let\'s eat': ['together', 'right now', 'food'],
+    'Let\'s eat together': ['right now', 'family time', '🎯 COMPLETE'],
+    'Let\'s eat right now': ['together', 'what\'s food', '🎯 COMPLETE'],
+    
+    // === WANT/DESIRE FLOWS ===
+    'I want': ['food', 'water', 'help', 'mama', 'daddy', 'to play', 'toys'],
+    
+    // Want to play flows
+    'I want to play': ['right now', 'outside', 'games', 'with you'],
+    'I want to play right now': ['please', 'outside', '🎯 COMPLETE'],
+    'I want to play with you': ['please', 'right now', 'games'],
+    'I want to play with you please': ['🎯 COMPLETE', 'right now', 'thank you'],
+    
+    // Want food flows
+    'I want food': ['please', 'right now', 'hungry'],
+    'I want food please': ['right now', 'thank you', '🎯 COMPLETE'],
+    'I want food right now': ['please', 'very hungry', '🎯 COMPLETE'],
+    
+    // === GRATITUDE FLOWS ===
+    'Thank you': ['very much', 'for help', 'so nice', 'mama', 'daddy'],
+    'Thank you very much': ['for everything', 'so nice', '🎯 COMPLETE'],
+    'Thank you for help': ['very much', 'so nice', '🎯 COMPLETE'],
+    'Thank you so nice': ['love you', 'very much', '🎯 COMPLETE'],
+    
+    // === QUESTION FLOWS ===
+    'Where': ['is', 'are', 'do', 'can'],
+    'Where is': ['mama', 'daddy', 'my toy', 'food'],
+    'Where is mama': ['right now', 'I miss her', '🎯 COMPLETE'],
+    'Where is daddy': ['right now', 'I miss him', '🎯 COMPLETE'],
+    'Where is my toy': ['can\'t find', 'help find', '🎯 COMPLETE'],
+    
+    'What': ['is', 'are', 'can', 'time'],
+    'What is': ['this', 'for lunch', 'happening'],
+    'What is this': ['thing', 'for', '🎯 COMPLETE'],
+    'What is for lunch': ['today', 'I\'m hungry', '🎯 COMPLETE'],
+    
+    'Why': ['is', 'can\'t', 'do'],
+    'Why is': ['this happening', 'broken', 'mama sad'],
+    'Why can\'t I': ['play', 'have it', 'go there'],
+    'Why can\'t I play': ['outside', 'right now', '🎯 COMPLETE'],
+    
+    'When': ['can', 'is', 'do'],
+    'When can': ['we play', 'I eat', 'mama come'],
+    'When can we play': ['outside', 'together', '🎯 COMPLETE'],
+    'When is mama coming': ['home', 'back', '🎯 COMPLETE'],
+    
+    // === EXPANSION OPTIONS (when user wants more) ===
+    'More options': ['different words', 'other ways', 'expand this'],
+    
+    // === COMMON KID RESPONSES ===
+    'please': ['right now', 'help me', 'thank you'],
+    'right now': ['please', 'very much', 'help me'],
+    'help me': ['please', 'right now', 'can\'t do it'],
+    'thank you': ['very much', 'so nice', 'love you'],
+    'love you': ['very much', 'so much', 'mama'],
+    'very much': ['thank you', 'love you', 'please'],
+    'so much': ['love you', 'thank you', 'miss you']
+  }
+};
+
+// Enhanced icon mapping with flow completion indicators
+const iconMap = {
+  // Flow completion marker
+  '🎯 COMPLETE': '✨',
+  
+  // Core starters
+  'I': '👤', 'Let\'s': '👥', 'Can': '❓', 'Where': '📍', 'Help': '🆘', 'Thank you': '🙏',
+  
+  // After "I"
+  'am': '🙋', 'want': '💭', 'need': '⭐', 'like': '👍', 'don\'t': '🚫', 'can\'t': '😰',
+  
+  // Feelings and states
+  'hungry': '🍎', 'tired': '😴', 'happy': '😊', 'sad': '😢', 'cold': '🥶', 'hot': '🥵',
+  'done': '✅', 'ready': '🎯', 'scared': '😨', 'excited': '🤗', 'angry': '😠',
+  
+  // Natural follow-ups to feelings
+  'feed me': '🍽️', 'what\'s food': '🍽️', 'can\'t find': '🔍', 'help find': '🔍',
+  'want to sleep': '🛏️', 'need rest': '😴', 'so sleepy': '😴', 'rest please': '🛌',
+  'love this': '❤️', 'having fun': '🎉', 'this is fun': '🎉', 'you\'re nice': '😊',
+  'need help': '🆘', 'want mama': '👩', 'hug please': '🤗', 'make better': '😌',
+  'feel better': '😌', 'what\'s wrong': '❓', 'miss mama': '💭', 'miss you': '💭',
+  
+  // Activities and actions
+  'play': '🎮', 'go': '🚶', 'eat': '🍽️', 'read': '📚', 'clean up': '🧹',
+  'outside': '🌳', 'games': '🎯', 'together': '🤝', 'right now': '⚡',
+  'what game': '🎲', 'board games': '🎲', 'video games': '🎮', 'fun time': '🎉',
+  'fresh air': '💨', 'play there': '🏃', 'have fun': '🎈', 'this game': '🎲',
+  
+  // Food and eating
+  'food': '🍽️', 'water': '💧', 'snack': '🍪', 'lunch': '🍽️', 'dinner': '🍽️',
+  'what\'s available': '❓', 'very hungry': '🍎', 'thirsty': '🥤', 'for food': '🍽️',
+  'family time': '👨‍👩‍👧‍👦', 'for lunch': '🍽️', 'what kind': '❓',
+  
+  // Help and assistance
+  'help': '🆘', 'please': '🙏', 'show me': '👆', 'can\'t do it': '😰', 'too hard': '😓',
+  'with this': '👆', 'need you': '🤗', 'very urgent': '🚨', 'please help me': '🆘',
+  
+  // People and relationships
+  'mama': '👩', 'daddy': '👨', 'you': '👆', 'we': '👥', 'me': '👤', 'with you': '🤝',
+  'I miss her': '💭', 'I miss him': '💭', 'need her': '👩', 'need him': '👨',
+  'with me': '🤝', 'me please': '🙏', 'with me please': '🤝', 'us': '👥', 'toys': '🧸',
+  
+  // Places and locations
+  'bathroom': '🚽', 'home': '🏠', 'to park': '🏞️', 'my toy': '🧸', 'with friends': '👫',
+  'here': '👆', 'come here': '👆',
+  
+  // Time and intensity
+  'very much': '❤️', 'so much': '💖', 'today': '📅', 'now': '⏰', 'next': '➡️',
+  'urgent': '🚨', 'hurry': '💨', 'very urgent': '🚨🚨',
+  
+  // Responses and politeness
+  'thank you': '🙏', 'you\'re good': '👍', 'really helped': '🤝', 'for everything': '🌟',
+  'so nice': '😊', 'love you': '❤️', 'for help': '🆘',
+  
+  // Questions kids ask
+  'What': '❓', 'Why': '❓', 'When': '❓', 'How': '❓',
+  'is': '❓', 'are': '❓', 'can': '❓', 'do': '❓', 'time': '⏰',
+  'this': '👆', 'for': '❓', 'happening': '❓', 'broken': '🔧', 'mama sad': '😢',
+  'this happening': '❓', 'is broken': '🔧', 'is happening': '❓',
+  'we play': '🎮', 'I eat': '🍽️', 'mama come': '👩', 'mama coming': '👩',
+  'coming home': '🏠', 'back': '🔙',
+  
+  // Expansion options
+  'More options': '➕', 'different words': '🔄', 'other ways': '🔀', 'expand this': '📈',
+  
+  // Common responses
+  'yes': '✅', 'no': '❌', 'maybe': '🤔', 'okay': '👍', 'sorry': '😔'
+};
+
+// Global state for flow management
+let currentSuggestionSet = null;
+let cycleCount = 0;
+let micTapCount = 0;
+let currentFlow = null;
+let flowCompleted = false;
+const MAX_CYCLES = 3;
+
+// Flow completion detection
+const isFlowComplete = (text) => {
+  return text === 'COMPLETE';
+};
+
+// Helper: is a phrase already in user selections?
+const isTextAlreadySelected = (text) => {
+  // Skip completion markers
+  if (isFlowComplete(text)) return false;
+  
+  for (const c of selectedCards.values()) {
+    if (c.text === text) return true;
+  }
+  return false;
+};
+
+// Smart suggestion generator with flow awareness
+const getNextWords = (context) => {
+  if (context.length === 0) {
+    return {
+      suggestions: wordPredictions.starters,
+      reasoning: 'Starting conversation',
+      confidence: 'high',
+      flowStage: 'initiation'
+    };
+  }
+  
+  const currentMessage = context.join(' ');
+  console.log('Current message:', currentMessage);
+  
+  // Check for exact matches first (longest to shortest for better matching)
+  const sortedKeys = Object.keys(wordPredictions.nextWords).sort((a, b) => b.length - a.length);
+  
+  for (const key of sortedKeys) {
+    if (currentMessage.endsWith(key)) {
+      const suggestions = wordPredictions.nextWords[key];
+      
+      // Check if any suggestion completes the flow
+      const hasCompletion = suggestions.some(isFlowComplete);
+      
+      console.log(`✨ Match found: "${key}" → [${suggestions.join(', ')}]`);
+      
+      return {
+        suggestions: suggestions,
+        reasoning: hasCompletion ? `Completing: "${key}"` : `Continuing: "${key}"`,
+        confidence: 'high',
+        flowStage: hasCompletion ? 'completion' : 'progression',
+        canComplete: hasCompletion
+      };
+    }
+  }
+  
+  // Smart fallbacks based on what kids commonly say
+  const lastWord = context[context.length - 1] || '';
+  const commonKidResponses = ['please', 'thank you', 'right now', 'help me', 'very much', 'love you'];
+  
+  console.log('No specific match - suggesting natural kid responses');
+  return {
+    suggestions: commonKidResponses,
+    reasoning: 'Continuing: ',
+    confidence: 'medium',
+    flowStage: 'fallback'
+  };
+};
+
+// Create suggestion with icon and flow awareness
+const createSuggestion = (text, flowData) => {
+  const isComplete = isFlowComplete(text);
+  
+  return {
+    text: isComplete ? 'Complete!' : text,
+    originalText: text,
+    icon: iconMap[text] || '',
+    isComplete: isComplete,
+    flowStage: flowData.flowStage,
+    canComplete: flowData.canComplete
+  };
+};
+
+// Generate suggestion set with flow completion logic
+const generateSuggestionSet = (context) => {
+  const nextWordsData = getNextWords(context);
+  
+  // Filter out already selected text and process completions
+  let availableSuggestions = nextWordsData.suggestions.filter(text => {
+    if (isFlowComplete(text)) return true; // Always show completion
+    return !isTextAlreadySelected(text);
+  });
+  
+  // If no available suggestions, provide alternatives
+  if (availableSuggestions.length === 0) {
+    availableSuggestions = ['please', 'thank you', 'help me'];
+    nextWordsData.reasoning = 'Alternative options';
+    nextWordsData.confidence = 'medium';
+  }
+  
+  // Take up to 3 suggestions
+  const suggestions = availableSuggestions.slice(0, 3);
+  
+  return {
+    suggestions: suggestions.map(text => createSuggestion(text, nextWordsData)),
+    reasoning: nextWordsData.reasoning,
+    confidence: nextWordsData.confidence,
+    context: context.join(' '),
+    flowStage: nextWordsData.flowStage,
+    canComplete: nextWordsData.canComplete || false
+  };
+};
+
+// Enhanced flow completion handler
+const handleFlowCompletion = () => {
+  console.log('FLOW COMPLETED! Waiting for mic tap to start new flow...');
+  
+  // Clear current state
+  currentSuggestionSet = null;
+  cycleCount = 0;
+  flowCompleted = true;
+  
+  // Hide AI suggestions and wait for mic tap
+  aiBlock.classList.add('hidden');
+  
+  // Update UI state to prompt for mic tap
+  listenState.textContent = 'Great job! Tap mic to start new conversation';
+  listenState.className = 'high-confidence';
+  
+  // Add visual emphasis to mic button
+  micBtn.classList.add('completion-ready');
+  micBtn.style.animation = 'completion-pulse 2s ease-in-out infinite';
+  
+  console.log('Waiting for user to tap mic for fresh start...');
+};
+
+// Main suggestion generator with flow completion logic
+const generatePredictiveAISuggestions = (forceMicRefresh = false) => {
+  const context = Array.from(selectedCards.values()).map(c => c.text);
+  const currentContext = context.join(' ');
+  
+  // If flow was completed and this is a mic refresh, start fresh with empty context
+  if (flowCompleted && forceMicRefresh) {
+    console.log('Generating fresh starters after flow completion');
+    currentSuggestionSet = generateSuggestionSet([]); // Empty context = starters
+    cycleCount = 1;
+    micTapCount++;
+  }
+  // Force new set if context changed, mic tapped, or no current set
+  else if (forceMicRefresh || 
+      !currentSuggestionSet || 
+      currentSuggestionSet.context !== currentContext) {
+    
+    currentSuggestionSet = generateSuggestionSet(context);
+    cycleCount = 1;
+    
+    if (forceMicRefresh) {
+      micTapCount++;
+      console.log(`FRESH SET from mic tap #${micTapCount}: [${currentSuggestionSet.suggestions.map(s => s.text).join(', ')}]`);
+    } else {
+      console.log(`NEW CONTEXT: [${currentSuggestionSet.suggestions.map(s => s.text).join(', ')}] (cycle 1/${MAX_CYCLES})`);
+    }
+  } else {
+    // Same context, increment cycle count
+    cycleCount++;
+    console.log(`REPEATING: [${currentSuggestionSet.suggestions.map(s => s.text).join(', ')}] (cycle ${cycleCount}/${MAX_CYCLES})`);
+  }
+  
+  const timestamp = Date.now();
+  return currentSuggestionSet.suggestions.map((item, idx) => ({
+    id: `ai-${idx}-${timestamp}`,
+    text: item.text,
+    originalText: item.originalText,
+    icon: item.icon,
+    isAI: true,
+    isPredictive: true,
+    confidence: currentSuggestionSet.confidence,
+    reasoning: currentSuggestionSet.reasoning,
+    cycleCount: cycleCount,
+    maxCycles: MAX_CYCLES,
+    micTapCount: micTapCount,
+    isRepeating: cycleCount > 1,
+    isComplete: item.isComplete,
+    flowStage: currentSuggestionSet.flowStage,
+    canComplete: currentSuggestionSet.canComplete
+  }));
+};
+
+// Enhanced voice input handler with voice simulation
+const handleVoiceInput = async () => {
+  micBtn.classList.add('listening');
+  micBtn.setAttribute('aria-pressed', 'true');
+  
+  // Remove completion styling if present
+  micBtn.classList.remove('completion-ready');
+  micBtn.style.animation = '';
+  
+  // Simulate listening for voice input
+  listenState.textContent = 'Listening... Say something!';
+  listenState.className = 'listening';
+  
+  console.log(' Mic activated - simulating voice detection...');
+  
+  // Simulate voice processing delay
+  await new Promise(r => setTimeout(r, 1500));
+  
+  // Simulate voice detected
+  listenState.textContent = 'Voice detected! Processing...';
+  console.log('Voice input detected - generating new suggestions');
+  
+  await new Promise(r => setTimeout(r, 800));
+  
+  // Always start with fresh initial words when mic is tapped
+  // This simulates hearing a new voice input that could be anything
+  console.log('Generating fresh initial suggestions (simulating new voice input)');
+  
+  // Clear any existing context to start completely fresh
+  if (flowCompleted) {
+    console.log('Starting completely new conversation after flow completion');
+    flowCompleted = false;
+  } else {
+    console.log('Starting new conversation (new voice input detected)');
+  }
+  
+  // Generate fresh starter suggestions (always start with initial words)
+  const suggestions = generateFreshStarterSuggestions();
+  renderAISuggestions(suggestions);
+
+  micBtn.classList.remove('listening');
+  micBtn.setAttribute('aria-pressed', 'false');
+  
+  // Show success message with fresh start indication
+  listenState.textContent = 'Fresh voice input ready! Choose your starting word';
+  listenState.className = 'high-confidence';
+  
+  console.log('New voice session started - fresh conversation ready!');
+};
+
+// Generate fresh starter suggestions (simulating new voice input)
+const generateFreshStarterSuggestions = () => {
+  // Reset all state for fresh start
+  currentSuggestionSet = null;
+  cycleCount = 0;
+  micTapCount++;
+  
+  // Generate fresh starter set
+  const freshSet = generateSuggestionSet([]); // Empty context = starters
+  
+  console.log(`FRESH VOICE INPUT #${micTapCount}: [${freshSet.suggestions.map(s => s.text).join(', ')}]`);
+  
+  const timestamp = Date.now();
+  return freshSet.suggestions.map((item, idx) => ({
+   id: `voice-fresh-${idx}-${timestamp}`,
+   text: item.text,
+    originalText: item.originalText,
+    icon: item.icon,
+    isAI: true,
+    isPredictive: true,
+    confidence: 'high', // Always high confidence for fresh starters
+    reasoning: `Voice input detected`,
+   // reasoning: `Voice input detected (Session #${micTapCount})`,
+   // cycleCount: 1,
+    maxCycles: MAX_CYCLES,
+    micTapCount: micTapCount,
+    isRepeating: false,
+    isComplete: item.isComplete,
+    flowStage: 'initiation',
+    canComplete: false,
+    isFreshVoiceInput: true
+  }));
+};
+
+// Enhanced rendering with voice input feedback
+const renderAISuggestions = (cards) => {
+  aiGrid.innerHTML = '';
+  
+  // Show context hint with voice input information
+  if (cards.length > 0) {
+    const hint = document.createElement('p');
+    hint.className = 'prediction-context-hint';
+    
+   // const cycleInfo = `(${cards[0].cycleCount}/${cards[0].maxCycles})`;
+   const cycleInfo = ''; // Remove cycle display
+    const repeatIndicator = cards[0].isRepeating ? ' ' : '';
+    
+    // Special styling for fresh voice input
+    if (cards[0].isFreshVoiceInput) {
+      const flowIcon = '🎤 ';
+      hint.textContent = `${flowIcon}${cards[0].reasoning} ${cycleInfo}`;
+      hint.style.cssText = `
+        text-align: center; 
+        color: #fff; 
+        font-size: 14px; 
+        font-weight: 600; 
+        margin: 0 0 12px 0; 
+        padding: 8px 16px; 
+        background: #1C5A98; 
+        border-radius: 20px; 
+        animation: voice-input-glow 2s ease-in-out;
+      `;
+    } else {
+      const flowIcon = cards[0].flowStage === 'completion' ? '' : 
+                       cards[0].flowStage === 'initiation' ? '' : '';
+      
+      hint.textContent = `${flowIcon}${repeatIndicator}${cards[0].reasoning} ${cycleInfo}`;
+      hint.style.cssText = `
+        text-align: center; 
+        color: ${cards[0].flowStage === 'completion' ? '#dc2626' : '#059669'}; 
+        font-size: 14px; 
+        font-weight: 600; 
+        margin: 0 0 12px 0; 
+        padding: 8px 16px; 
+        background: ${cards[0].flowStage === 'completion' ? 'rgba(220, 38, 38, 0.1)' : 'rgba(16, 185, 129, 0.1)'}; 
+        border-radius: 20px; 
+        border: 1px solid ${cards[0].flowStage === 'completion' ? 'rgba(220, 38, 38, 0.2)' : 'rgba(16, 185, 129, 0.2)'};
+      `;
+    }
+    
+    aiGrid.appendChild(hint);
+  }
+  
+  cards.forEach((card, index) => {
+    const tile = document.createElement('button');
+    tile.className = 'pict-card ai predictive';
+    tile.setAttribute('data-card-id', card.id);
+    tile.setAttribute('type', 'button');
+    tile.setAttribute('aria-label', `Choose: ${card.text}`);
+    
+    // Special styling for fresh voice input cards
+    if (card.isFreshVoiceInput) {
+      tile.classList.add('fresh-voice-input');
+    }
+    
+    // Special styling for completion cards
+    if (card.isComplete) {
+      tile.classList.add('completion-ready');
+    }
+    
+    if (card.confidence === 'high') {
+      tile.classList.add('high-confidence');
+    }
+
+    // Check if this text is already selected (skip completion markers)
+    if (!card.isComplete && isTextAlreadySelected(card.text)) {
+      tile.classList.add('selected', 'chosen');
+      tile.disabled = true;
+      tile.setAttribute('aria-pressed', 'true');
+    } else {
+      tile.setAttribute('aria-pressed', 'false');
+    }
+
+    // Badge shows different states
+    let badgeContent = 'AI';
+    if (card.isComplete) {
+      badgeContent = 'AI';
+    } else if (card.isFreshVoiceInput) {
+      badgeContent = 'AI';
+    } else if (card.isRepeating) {
+      badgeContent = `${card.cycleCount}`;
+    }
+
+    tile.innerHTML = `
+      <div class="badge-ai predictive ${card.isComplete ? 'completion' : ''} ${card.isFreshVoiceInput ? 'voice-input' : ''}">${badgeContent}</div>
+      <div class="pict-emoji">${card.icon}</div>
+      <div class="pict-text">${card.text}</div>
+    `;
+
+    tile.addEventListener('click', () => {
+      if (card.isComplete) {
+        // Handle flow completion
+        handleFlowCompletion();
+        return;
+      }
+      
+      // Add to user selections
+      toggleSelectCard(card, tile);
+
+      // Mark as chosen
+      tile.classList.add('selected', 'chosen');
+      tile.disabled = true;
+      tile.setAttribute('aria-pressed', 'true');
+
+      // Generate new predictions based on updated context
+      setTimeout(() => {
+        const newSuggestions = generatePredictiveAISuggestions(false);
+        renderAISuggestions(newSuggestions);
+        
+        const newCard = newSuggestions[0];
+       // const cycleInfo = `(${newCard.cycleCount}/${newCard.maxCycles})`;
+        const cycleInfo = ''; // Remove cycle display
+        const repeatIndicator = newCard.isRepeating ? '' : '';
+        const stageIcon = newCard.flowStage === 'completion' ? ' ' : 
+                         newCard.flowStage === 'initiation' ? '' : '';
+        
+        listenState.textContent = `${stageIcon}${repeatIndicator}Building your message ${cycleInfo}`;
+        listenState.className = newCard.confidence === 'high' ? 'high-confidence' : '';
+      }, 300);
+    });
+
+    aiGrid.appendChild(tile);
+  });
+
+  // Add CSS for voice input styling
+  if (!document.getElementById('voice-input-styles')) {
+    const style = document.createElement('style');
+    style.id = 'voice-input-styles';
+    style.textContent = `
+      .fresh-voice-input {
+       
+         border: 2px solid var(--border); !important;
+        background: #fff; !important;
+        transform: scale(1.02);
+        animation: fresh-voice-pulse 3s ease-in-out;
+      }
+      
+      .badge-ai.voice-input {
+         border: 2px solid var(--border); !important;
+        background: #fff; !important;
+        animation: voice-badge-glow 2s ease-in-out;
+      }
+      
+      .listening {
+        color: #1F2937 !important;
+        animation: listening-pulse 1s ease-in-out infinite;
+      }
+   
+      
+      @keyframes fresh-voice-pulse {
+        0% { transform: scale(1.02); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1.02); }
+      }
+      
+      @keyframes voice-badge-glow {
+        0%, 100% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.5); }
+      }
+      
+      @keyframes listening-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Ensure the block is visible
+  aiBlock.classList.remove('hidden');
+};
+
+// Enhanced clear functionality with flow reset
+const originalClearMessage = clearMessage;
+const enhancedClearMessage = () => {
+  originalClearMessage();
+  
+  // Reset all flow state
+  currentSuggestionSet = null;
+  cycleCount = 0;
+  micTapCount = 0;
+  currentFlow = null;
+  flowCompleted = false;
+  
+  // Hide AI suggestions
+  aiBlock.classList.add('hidden');
+  
+  // Reset UI state
+  listenState.textContent = 'Press mic to start conversation flow';
+  listenState.className = '';
+  
+  console.log('Complete reset - ready for new conversation flow');
+};
+
+// Enhanced message speaking with flow awareness
+const enhancedSpeakMessage = () => {
+  const context = Array.from(selectedCards.values()).map(c => c.text);
+  const message = context.join(' ');
+  
+  if (message.trim()) {
+    // Check if this completes a common flow
+    const completesFlow = checkIfCompletesFlow(message);
+    
+    if (completesFlow) {
+      console.log(`Speaking completed flow: "${message}"`);
+      // Add completion celebration
+      setTimeout(() => {
+        listenState.textContent = 'Perfect! That was a complete thought!';
+        listenState.className = 'high-confidence';
+      }, 1000);
+    }
+    
+    // Call the original speak functionality
+    speakMessage(); // Changed from originalSpeakMessage() to speakMessage()
+  }
+};
+
+// Flow completion checker
+const checkIfCompletesFlow = (message) => {
+  const completionPatterns = [
+    /^I need help please$/i,
+    /^I need help right now$/i,
+    /^Can you play with me please$/i,
+    /^Can you help me please$/i,
+    /^I am happy today$/i,
+    /^Thank you very much$/i,
+    /^Let's play together$/i,
+    /^I want food please$/i
+  ];
+  
+  return completionPatterns.some(pattern => pattern.test(message));
+};
+
+// Enhanced initialization with flow system
+const initializeFlowSystem = () => {
+  // Wire up enhanced controls
+  sayBtn.addEventListener('click', enhancedSpeakMessage);
+//  sendBtn.addEventListener('click', sendMessage);
+  clearBtn.addEventListener('click', enhancedClearMessage);
+  micBtn.addEventListener('click', handleVoiceInput);
+
+  // Avatar prompt close functionality
+  const avatarCloseBtn = document.getElementById('avatarCloseBtn');
+  const avatarPromptSection = document.getElementById('avatarPromptSection');
+  if (avatarCloseBtn && avatarPromptSection) {
+    avatarCloseBtn.addEventListener('click', () => {
+      avatarPromptSection.style.display = 'none';
+    });
+  }
+
+  // Initialize UI
+  renderCategories();
+  renderCardGrid();
+  setActiveTab('voice');
+  updateMessageUI();
+  
+  // Set initial state
+  listenState.textContent = 'Press mic to start conversation flow';
+  listenState.className = '';
+  
+  console.log('Complete conversation flow system initialized!');
+  console.log('Available flows:');
+  console.log('   Flow 1: I → I need → I need help → I need help please');
+  console.log('   Flow 2: Can → Can you → Can you play with me → Can you play with me please');
+  console.log('   ✨ Many more natural conversation flows ready!');
+};
+
+// Flow demonstration helper (for testing/demo purposes)
+const demonstrateFlow = (flowNumber) => {
+  console.log(`Demonstrating Flow ${flowNumber}:`);
+  
+  if (flowNumber === 1) {
+    console.log('Flow 1: Basic Need Expression');
+    console.log('Step 1: User selects "I" → AI suggests ["am", "want", "need", "like", "don\'t"]');
+    console.log('Step 2: User selects "need" → AI suggests ["help", "food", "water", "bathroom", "rest"]');
+    console.log('Step 3: User selects "help" → AI suggests ["please", "right now", "with this"]');
+    console.log('Step 4: User selects "please" → AI shows completion "✨ Complete!" + flow reset');
+    console.log('Result: "I need help please" - complete natural expression!');
+  } else if (flowNumber === 2) {
+    console.log('Flow 2: Social Interaction');
+    console.log('Step 1: User selects "Can" → AI suggests ["I", "you", "we", "mama", "daddy"]');
+    console.log('Step 2: User selects "you" → AI suggests ["help", "play", "come", "read"]');
+    console.log('Step 3: User selects "play" → AI suggests ["with me", "games", "outside"]');
+    console.log('Step 4: User selects "with me" → AI suggests ["please", "right now", "games"]');
+    console.log('Step 5: User selects "please" → AI shows completion "✨ Complete!" + flow reset');
+    console.log('Result: "Can you play with me please" - perfect social request!');
+  }
+};
+
+// Export flow system for integration
+const conversationFlowSystem = {
+  generatePredictiveAISuggestions,
+  handleVoiceInput,
+  renderAISuggestions,
+  enhancedClearMessage,
+  enhancedSpeakMessage,
+  initializeFlowSystem,
+  demonstrateFlow,
+  
+  // Flow state accessors
+  getCurrentFlow: () => currentFlow,
+  getFlowStage: () => currentSuggestionSet?.flowStage || 'none',
+  isFlowCompleted: () => flowCompleted,
+  
+  // Configuration
+  wordPredictions,
+  iconMap
+};
+
+// Auto-initialize when script loads
+if (typeof document !== 'undefined') {
+  // Wait for DOM to be ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeFlowSystem);
+  } else {
+    initializeFlowSystem();
+  }
+}
+
+// Make available globally if needed
+if (typeof window !== 'undefined') {
+  window.conversationFlowSystem = conversationFlowSystem;
+}
+  </script>
+
+  <!-- ============================================ -->
+  <!-- HEADER HEIGHT OFFSET SCRIPT                 -->
+  <!-- ============================================ -->
+  <script>
+// ensure CSS variable matches the measured header height
+function updateHeaderOffset() {
+  const headerEl = document.getElementById('header');
+  const h = headerEl ? headerEl.offsetHeight : 0;
+  document.documentElement.style.setProperty('--header-h', `${h}px`);
+}
+
+// set on load and when window size changes (keeps it correct on mobile/rotate)
+window.addEventListener('DOMContentLoaded', () => {
+  updateHeaderOffset();
+  // if other DOMContentLoaded listeners exist they will also run
+});
+window.addEventListener('resize', updateHeaderOffset);
+</script>
+</body>
+</html>

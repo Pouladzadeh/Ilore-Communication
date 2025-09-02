@@ -4,13 +4,25 @@
   <meta charset="utf-8" />
   <title>ILore – Communication App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styless.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="website.css" rel="stylesheet">
+
 </head>
 <body>
+  <!-- Enhanced Animated Background -->
+  <div class="bg-animation">
+    <div class="floating-shape">💬</div>
+    <div class="floating-shape">📚</div>
+    <div class="floating-shape">🤝</div>
+    <div class="floating-shape">🧩</div>
+    <div class="floating-shape">⭐</div>
+  </div>
+
   <!-- ============================================ -->
   <!-- HEADER SECTION - Navigation and Branding    -->
   <!-- ============================================ -->
-  <header class="header" id="header">
+ <header class="header" id="header">
       <div class="nav-container">
           <a href="index.html" class="logo">
               <img src="img/logo.svg" alt="Ilore logo" style="height:32px; width: 122px; vertical-align:middle;">
@@ -18,7 +30,7 @@
 
           <nav class="nav-menu" id="navMenu">
               <a href="index.html">Home</a>
-              <a href="Services.html">Services</a>
+              <a href="product.html">Product</a>
               <a href="Contact.html">Contact</a>
           </nav>
           
@@ -29,99 +41,208 @@
   </header>
   <!-- END HEADER SECTION -->
 
-  <!-- ============================================ -->
-  <!-- MAIN CONTENT SECTION                        -->
-  <!-- ============================================ -->
-  <main class="container">
-    <!-- ============================================ -->
-    <!-- AVATAR PROMPT SECTION                      -->
-    <!-- ============================================ -->
-    <section id="avatarPromptSection" class="panel avatar-prompt-section" style="position: relative;">
-      <button class="avatar-close-btn" id="avatarCloseBtn" aria-label="Close avatar prompt" 
-              style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.1); border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 18px; color: #666; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; z-index: 10;"
-              onmouseover="this.style.background='rgba(0,0,0,0.2)'; this.style.color='#333';"
-              onmouseout="this.style.background='rgba(0,0,0,0.1)'; this.style.color='#666';">&times;</button>
-      
-      <div class="avatar-circle">
-        <img src="img/avatar.svg" alt="Avatar Placeholder">
-      </div>
-      <h3 class="avatar-prompt-title" style="text-align: center;">Make This Space Yours</h3>
-      <p class="muted avatar-prompt-desc" style="text-align: center;">Make your voice helper look like you! Create your avatar now, or skip and come back later.</p>
-      <div style="text-align: center;">
-        <a href="avatar-step1.html" class="btn btn-primary avatar-prompt-btn" id="openAvatarCreator">
-          Create My Avatar
-        </a>
-      </div>
-    </section>
+  <!-- Enhanced Hero Section -->
+  <section class="hero">
+    <div class="hero-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
 
-    <!-- ============================================ -->
-    <!-- MAIN APP CONTAINER                          -->
-    <!-- ============================================ -->
-    <section class="panel">
-      <!-- MESSAGE BUILDER SECTION -->
-      <div class="panel-title">
-        <h3 id="msg-title" style="margin:0;font-size:18px;font-weight:700">My Message:</h3>
-        <div class="row">
-          <button id="sayBtn" class="btn btn-green" disabled aria-label="Say it"><img src="img/sound.svg" alt="Say It" style="height:20px; width: 20px; vertical-align:middle;"> <span>Say It</span></button>
-          <button id="sendBtn" class="btn btn-blue" disabled aria-label="Send"><img src="img/send.svg" alt="Send" style="height:20px; width: 20px; vertical-align:middle;"> <span>Send</span></button>
-          <button id="clearBtn" class="btn btn-red" aria-label="Clear"><img src="img/remove.svg" alt="Clear" style="height:20px; width: 20px; vertical-align:middle;"> <span>Clear</span></button>
+    <div class="container two-column">
+      <div class="hero-content animate-fade-in">
+        <span class="badge" aria-label="Autism-friendly design">
+          🧩 Autism‑Friendly Design
+        </span>
+        <h1 class="headline">
+          Helping Every Child 
+          <span class="golden">Communicate</span> 
+          Confidently
+        </h1>
+        <p class="lede">
+          Our advanced AI recognizes your child's unique sounds, gestures, and communication patterns, then suggests the perfect words they're trying to express. Purpose-built for children on the autism spectrum who are developing their voice.
+        </p>
+        <div class="cta">
+          <!-- Replaced button with direct link version -->
+          <a class="btn primary" href="product.html" aria-label="Get Started" onclick="window.location.href='product.html'; return false;">
+            Get Started
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14m-7-7 7 7-7 7"></path>
+            </svg>
+          </a>
+          <button class="btn secondary" id="watchDemo" aria-label="Watch demo video">
+            Watch Demo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5,3 19,12 5,21"></polygon>
+            </svg>
+          </button>
         </div>
       </div>
-      <div id="messageArea" class="message-area">
-        <p class="muted center" id="emptyHint">Choose cards from either page to build your message</p>
-        <div class="chips" id="chips"></div>
+
+        <!-- Right: Phone scene -->
+    <div class="il-hero__scene" aria-hidden="true">
+      <!-- gradient glow -->
+      <div class="scene__glow"></div>
+
+      <!-- phone body (SVG so it's crisp) -->
+      <svg class="scene__phone" viewBox="0 0 280 560">
+    <defs>
+      <linearGradient id="phg" x1="0" x2="1">
+        <stop offset="0" stop-color="#3b82f6" />
+        <stop offset="1" stop-color="#6ee7b7" />
+      </linearGradient>
+      <clipPath id="screenClip">
+        <rect x="24" y="76" width="232" height="448" rx="22"/>
+      </clipPath>
+    </defs>
+    <!-- shell -->
+    <rect x="10" y="10" width="260" height="540" rx="36" fill="#ffffff" stroke="#d1d5db" stroke-width="2"/>
+    <!-- screen -->
+    <rect x="24" y="76" width="232" height="448" rx="22" fill="url(#phg)" opacity=".18"/>
+    
+    <!-- App screen image -->
+    <image x="4" y="56" width="272" height="508" href="img/design.svg" clip-path="url(#screenClip)" preserveAspectRatio="xMidYMid slice" opacity="0.95"/>
+    <rect x="24" y="76" width="232" height="448" rx="22" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    
+    <!-- notch/cam -->
+    <rect x="110" y="36" width="60" height="10" rx="5" fill="#e5e7eb"/>
+    <circle cx="150" cy="54" r="3" fill="#9ca3af"/>
+  </svg>
+
+      <!-- chat bubbles (accessible text is in title attrs) -->
+      <div class="bubble b1" title="I'm hungry"><img class="av" src="img/happyboy.svg" alt="" aria-hidden="true">🍎 I'm hungry</div>
+      <div class="bubble b2" title="I'm happy"><img class="av" src="img/kindboy.svg" alt="" aria-hidden="true">😊 I'm happy</div>
+      <div class="bubble b3" title="Water please"><img class="av" src="img/smartgirl.svg" alt="" aria-hidden="true">💧 Water please</div>
+      <div class="bubble b4" title="Bathroom please"><img class="av" src="img/friendlygirl.svg" alt="" aria-hidden="true">🚽 Bathroom please</div>
+      <div class="bubble b5" title="Please help"><img class="av" src="img/creativegirl.svg" alt="" aria-hidden="true">🆘 Please help</div>
+    </div>
+  </div>
+  </section>
+
+
+
+  <main id="main">
+    <!-- Enhanced Features Section -->
+    <section id="features" class="container single-column">
+      <div class="section-header">
+        <span class="tag">Why families choose ILore</span>
+        <h2>Professional, playful—and built for <span class="text-gradient">accessibility</span></h2>
+        <p>Every pixel and interaction is designed for clarity and comfort. Simple layouts, high contrast, and friendly cues help kids focus on communication—not the interface.</p>
       </div>
 
-      <!-- TABS SECTION -->
-      <div class="tabs" role="tablist" aria-label="Modes">
-        <button class="tab active" data-tab="voice" role="tab" aria-selected="true">
-          <img src="img/Voice.svg" alt="AI Voice Helper">AI Voice Helper
-        </button>
-        <button class="tab" data-tab="cards" role="tab" aria-selected="false">
-          <img src="img/picturecards.svg" alt="Picture Cards">Picture Cards
-        </button>
-      </div>
-
-      <!-- VOICE HELPER SECTION -->
-      <div id="tab-voice" class="tab-content">
-        <div class="center">
-          <h2 style="margin:2rem 0 6px;font-size:24px">AI Voice Helper</h2>
-          <p class="muted" style="margin-top:0">Say anything, and I'll show you helpful words!</p>
-
-          <div class="mic-wrap">
-            <button id="micBtn" class="mic" aria-pressed="false" aria-label="Start listening">
-              <img src="img/microphone.svg" alt="Microphone" style="height:70px; width: 70px; filter: brightness(0) invert(1);"/>
-            </button>
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="ico">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
           </div>
-          <p id="listenState" style="font-size:20px;font-weight:600;text-align:center;margin:8px 0 4px">Press and say any letter A,B,C...</p>
-          <p class="muted center" style="margin:0 0 18px">Choose a word</p>
-        </div>
+          <h3>Understands real kid speech</h3>
+          <p>Advanced speech recognition designed specifically for children's unique vocal patterns, including echolalia, stimming sounds, and emerging speech attempts. Our AI grows with your child.</p>
+        </article>
 
-        <!-- AI Block moved outside center div for full width -->
-        <div id="aiBlock" class="hidden">
-          <h3 style="font-size:18px;margin:0 0 10px;padding:0 20px">AI Suggestions:</h3>
-          <div id="aiGrid" class="ai-suggestions-grid"></div>
-        </div>
-      </div>
+        <article class="feature">
+          <div class="ico">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
+          <h3>Adapts to different needs</h3>
+          <p>Fully customizable interface with symbols, text, or both. Adjust timing, visual complexity, and sensory elements to match your child's comfort zone and learning style.</p>
+        </article>
 
-      <!-- PICTURE CARDS SECTION -->
-      <div id="tab-cards" class="tab-content hidden" aria-labelledby="cards-title">
-        <div class="center" style="margin-bottom:24px">
-          <h2 id="cards-title" style="margin:2rem 0 6px;font-size:24px">Picture Cards</h2>
-          <p class="muted" style="margin:0">Tap picture cards to tell you what you need!</p>
-        </div>
-
-        <!-- Categories -->
-        <div id="categoryBar" class="categories"></div>
-
-        <!-- Grid -->
-        <div id="cardGrid" class="grid"></div>
+        <article class="feature">
+          <div class="ico">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <circle cx="12" cy="16" r="1"></circle>
+              <path d="m7 11 0-5a5 5 0 0 1 10 0v5"></path>
+            </svg>
+          </div>
+          <h3>Privacy by design</h3>
+          <p>On‑device processing options, encrypted data, and complete parental control. Your family's communication data stays private and secure, always.</p>
+        </article>
       </div>
     </section>
-</main>
-<!-- END MAIN CONTENT SECTION -->
 
-<!-- ============================================ -->
+
+
+<!-- Alternative 2: Animated Flow -->
+<section class="section demo-section">
+    <div class="container">
+      
+        <div class="section-header">
+            <span class="tag">How it works</span>
+            <h2>Three gentle steps to <span class="text-gradient">unlock communication</span></h2>
+            <p class="subtitle">Built for nonverbal autistic kids. Choose AI help or picture cards. Optionally create a Magical Friend avatar to support feelings and motivation.</p>
+        </div>
+        
+        <div class="flow-container">
+            <div class="flow-step">
+                <div class="flow-circle"><img src="img/pic1.svg" alt="Choose cards or mic" width="150px" height="150px" /></div>
+                <h3>Pick Your Way</h3>
+                <p>Choose AI help or manual picture cards. Create your Magical Friend avatar.</p>
+                <div class="flow-arrow">→</div>
+            </div>
+            
+            <div class="flow-step">
+                <div class="flow-circle"><img src="img/robot.svg" alt="Choose cards or mic" width="150px" height="150px" /></div>
+                <h3>Listen & Support</h3>
+                <p>AI listens and suggests words, or manually tap cards to speak.</p>
+                <div class="flow-arrow">→</div>
+            </div>
+         
+
+            <div class="flow-step">
+                <div class="flow-circle"><img src="img/celebrate.svg" alt="Choose cards or mic" width="150px" height="150px" /></div>
+                <h3>Celebrate & Grow</h3>
+                <p>Track wins, repeat favorites, expand vocabulary naturally.</p>
+            </div>
+        </div>
+    </div>
+</section>
+ 
+
+    <!-- Enhanced CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="card animate-fade-in">
+          <h2>Ready to unlock your child's communication potential?</h2>
+          <p>Join thousands of families who've discovered the joy of clearer communication. Start your journey today.</p>
+          <div class="cta">
+             <!-- Replaced button with direct link version -->
+             <a class="btn primary" href="product.html" aria-label="Get Started" onclick="window.location.href='product.html'; return false;">
+            Get Started
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14m-7-7 7 7-7 7"></path>
+            </svg>
+          </a>
+          <button class="btn secondary" id="watchDemo" aria-label="Watch demo video">
+            Watch Demo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5,3 19,12 5,21"></polygon>
+            </svg>
+          </button>
+          </div>
+         <!-- <p style="font-size: 0.9rem; margin-top: 1.5rem; opacity: 0.8;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: middle;">
+              <path d="M5 12l5 5L20 7"></path>
+            </svg>
+            No credit card required • Cancel anytime • Full feature access
+          </p>-->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================ -->
 <!-- FOOTER SECTION                               -->
 <!-- ============================================ -->
 <footer class="footer">
@@ -242,11 +363,28 @@
 </footer>
 <!-- END FOOTER SECTION -->
 
-<!-- ============================================ -->
-<!-- JAVASCRIPT SECTION                          -->
-<!-- ============================================ -->
-<script>
-     
+  <!-- Enhanced Modal -->
+  <div class="modal" id="demoModal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-title">ILore Demo Video</h3>
+        <button id="closeModal" aria-label="Close modal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <video id="demoVideo" controls poster="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQ1MCIgdmlld0JveD0iMCAwIDgwMCA0NTAiIGZpbGw9Im5vbmUiPjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSIjZjFmNWY5Ii8+PGNpcmNsZSBjeD0iNDAwIiBjeT0iMjI1IiByPSI2MCIgZmlsbD0iIzFDNUE5OCIvPjxwb2x5Z29uIHBvaW50cz0iMzgwLDIwMCA0MzAsMjI1IDM4MCwyNTAiIGZpbGw9IndoaXRlIi8+PHRleHQgeD0iNDAwIiB5PSIzMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2Yjcy4DAiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWkiIGZvbnQtc2l6ZT0iMTgiPklMb3JlIERlbW8gVmlkZW88L3RleHQ+PC9zdmc+">
+        <source src="#" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <script>
+
+
         // Mobile menu toggle functionality
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const navMenu = document.getElementById('navMenu');
@@ -284,430 +422,420 @@
 
         // Call on page load
         document.addEventListener('DOMContentLoaded', setActiveMenuByPage);
- 
-    <!-- END JAVASCRIPT -->
-    // -------------------------
-    // Data (matches your React)
-    // -------------------------
-    const categories = {
-      basic:      { name: 'Basic Needs', icon:'🏠', theme: 'basic' },
-      emotions:   { name: 'Emotions',    icon:'😊', theme: 'emotions' },
-      activities: { name: 'Activities',  icon:'⚽', theme: 'activities' },
-      people:     { name: 'People',      icon:'👨‍👩‍👧', theme: 'people' },
-    };
 
-    const pictureCards = {
-      basic: [
-        { id: 'hungry',   text: 'I am hungry',  icon: '🍎', category: 'basic' },
-        { id: 'thirsty',  text: 'I am thirsty', icon: '🥤', category: 'basic' },
-        { id: 'bathroom', text: 'Bathroom',     icon: '🚽', category: 'basic' },
-        { id: 'sleep',    text: 'I am tired',   icon: '😴', category: 'basic' },
-        { id: 'help',     text: 'Help me',      icon: '🆘', category: 'basic' },
-        { id: 'more',     text: 'More',         icon: '➕', category: 'basic' },
-      ],
-      emotions: [
-        { id: 'happy',   text: 'I am happy',   icon: '😊', category: 'emotions' },
-        { id: 'sad',     text: 'I am sad',     icon: '😢', category: 'emotions' },
-        { id: 'angry',   text: 'I am angry',   icon: '😠', category: 'emotions' },
-        { id: 'scared',  text: 'I am scared',  icon: '😨', category: 'emotions' },
-        { id: 'excited', text: 'I am excited', icon: '🤩', category: 'emotions' },
-        { id: 'calm',    text: 'I am calm',    icon: '😌', category: 'emotions' },
-      ],
-      activities: [
-        { id: 'play',   text: 'I want to play', icon: '🎮', category: 'activities' },
-        { id: 'read',   text: 'I want to read', icon: '📖', category: 'activities' },
-        { id: 'music',  text: 'I want music',   icon: '🎵', category: 'activities' },
-        { id: 'outside',text: 'Go outside',     icon: '🌳', category: 'activities' },
-        { id: 'watch',  text: 'Watch TV',       icon: '📺', category: 'activities' },
-        { id: 'draw',   text: 'I want to draw', icon: '🎨', category: 'activities' },
-      ],
-      people: [
-        { id: 'mom',     text: 'Mom',    icon: '👩',       category: 'people' },
-        { id: 'dad',     text: 'Dad',    icon: '👨',       category: 'people' },
-        { id: 'teacher', text: 'Teacher',icon: '👩‍🏫',     category: 'people' },
-        { id: 'friend',  text: 'Friend', icon: '👫',       category: 'people' },
-        { id: 'doctor',  text: 'Doctor', icon: '👨‍⚕️',     category: 'people' },
-        { id: 'family',  text: 'Family', icon: '👨‍👩‍👧‍👦', category: 'people' },
-      ]
-    };
 
-    // -------------------------
-    // State
-    // -------------------------
-    let activeTab = 'voice';
-    let selectedCategory = 'basic';
-    const selectedCards = new Map(); // id -> card
+    // Enhanced JavaScript with better performance and accessibility
+    (function() {
+      'use strict';
+      
+      // Utility functions
+      const throttle = (func, limit) => {
+        let inThrottle;
+        return function() {
+          const args = arguments;
+          const context = this;
+          if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+          }
+        }
+      };
 
-    // -------------------------
-    // Elements
-    // -------------------------
-    const tabs = document.querySelectorAll('.tab');
-    const tabVoice = document.getElementById('tab-voice');
-    const tabCards = document.getElementById('tab-cards');
+      const debounce = (func, wait) => {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      };
 
-    const sayBtn = document.getElementById('sayBtn');
-    const sendBtn = document.getElementById('sendBtn');
-    const clearBtn = document.getElementById('clearBtn');
-    const chipsWrap = document.getElementById('chips');
-    const emptyHint = document.getElementById('emptyHint');
+      // Enhanced navbar functionality
+      const header = document.getElementById('header');
+      let lastScrollY = window.scrollY;
 
-    const micBtn = document.getElementById('micBtn');
-    const listenState = document.getElementById('listenState');
-    const aiBlock = document.getElementById('aiBlock');
-    const aiGrid = document.getElementById('aiGrid');
-
-    const categoryBar = document.getElementById('categoryBar');
-    const cardGrid = document.getElementById('cardGrid');
-
-    // -------------------------
-    // Utilities
-    // -------------------------
-    // Speak a single card immediately
-    const speakCard = (text) => {
-      if (!('speechSynthesis' in window)) return;
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang   = 'en-US';
-      u.rate   = 1;
-      u.pitch  = 1;
-      speechSynthesis.cancel();   // stop anything already talking
-      speechSynthesis.speak(u);
-    };
-
-    const updateMessageUI = () => {
-      chipsWrap.innerHTML = '';
-      const cards = Array.from(selectedCards.values());
-      if (cards.length === 0) {
-        emptyHint.classList.remove('hidden');
-        sayBtn.disabled = true;
-        sendBtn.disabled = true;
-        return;
-      }
-      emptyHint.classList.add('hidden');
-      sayBtn.disabled = false;
-      sendBtn.disabled = false;
-
-      cards.forEach((card, idx) => {
-        const chip = document.createElement('div');
-        chip.className = 'chip';
-        chip.innerHTML = `
-          <span style="font-size:18px">${card.icon}</span>
-          <span style="font-size:14px;font-weight:600">${card.text}</span>
-          <button class="remove" aria-label="Remove card">&times;</button>
-          ${idx < cards.length - 1 ? '<span class="muted">→</span>' : ''}
-        `;
-        chip.querySelector('.remove').addEventListener('click', () => {
-          selectedCards.delete(card.id);
-          // also unselect the tile if visible
-          const tile = document.querySelector(`[data-card-id="${card.id}"]`);
-          if (tile) tile.classList.remove('selected');
-          updateMessageUI();
-        });
-        chipsWrap.appendChild(chip);
-      });
-    };
-
-    const buildSentence = () =>
-      Array.from(selectedCards.values()).map(c => c.text).join('. ');
-
-    const speakMessage = () => {
-      const sentence = buildSentence();
-      if (!sentence) return;
-      try {
-        // Use Web Speech API if available
-        if ('speechSynthesis' in window) {
-          const u = new SpeechSynthesisUtterance(sentence);
-          u.rate = 0.95;
-          u.pitch = 1.0;
-          speechSynthesis.cancel();
-          speechSynthesis.speak(u);
+      const updateNavbar = throttle(() => {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY > 100) {
+          header.classList.add('scrolled');
         } else {
-          console.log('TTS not supported, simulated:', sentence);
+          header.classList.remove('scrolled');
         }
-      } catch(e) { console.warn(e) }
-    };
+        
+        lastScrollY = currentScrollY;
+      }, 16);
 
-    const sendMessage = () => {
-      const sentence = buildSentence();
-      if (!sentence) return;
-      const timestamp = new Date().toLocaleTimeString();
-      alert(`✅ Message sent to Mom at ${timestamp}:\n"${sentence}"`);
-      setTimeout(clearMessage, 800);
-    };
-
-    const clearMessage = () => {
-      selectedCards.clear();
-      document.querySelectorAll('.pict-card.selected').forEach(el => el.classList.remove('selected'));
-      updateMessageUI();
-      // Clear AI block too
-      aiBlock.classList.add('hidden');
-      aiGrid.innerHTML = '';
-    };
-
-    const toggleSelectCard = (card, tileEl) => {
-      if (selectedCards.has(card.id)) {
-        selectedCards.delete(card.id);
-        tileEl.classList.remove('selected');
-      } else {
-        selectedCards.set(card.id, card);
-        tileEl.classList.add('selected');
-        // Read this card aloud as soon as it’s chosen
-        speakCard(card.text);
-      }
-      updateMessageUI();
-    };
-
-    // -------------------------
-    // Renderers
-    // -------------------------
-    const renderCategories = () => {
-      categoryBar.innerHTML = '';
-      Object.entries(categories).forEach(([key, cat]) => {
-        const btn = document.createElement('button');
-        btn.className = 'pill';
-        btn.innerHTML = `<span>${cat.icon}</span><span>${cat.name}</span>`;
-        if (key === selectedCategory) btn.classList.add(`active-${cat.theme}`);
-        btn.addEventListener('click', () => {
-          selectedCategory = key;  // Update selected category
-          renderCategories();      // Re-render categories to update active state
-          renderCardGrid();        // Re-render grid with new category
+      // Enhanced intersection observer for animations
+      const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
         });
-        categoryBar.appendChild(btn);
+      }, {
+        threshold: 0.1,
+        rootMargin: '50px 0px -50px 0px'
       });
-    };
 
-    const renderCardGrid = () => {
-      cardGrid.innerHTML = '';
-      pictureCards[selectedCategory].forEach(card => {
-        const tile = document.createElement('button');
-        tile.className = 'pict-card';
-        tile.setAttribute('data-card-id', card.id);
-        tile.innerHTML = `
-          <span class="pict-emoji">${card.icon}</span>
-          <span class="pict-text">${card.text}</span>
-        `;
+      // Enhanced modal functionality
+      const modal = document.getElementById('demoModal');
+      const video = document.getElementById('demoVideo');
+      const watchBtns = document.querySelectorAll('#watchDemo, #watchDemo2');
+      const closeBtn = document.getElementById('closeModal');
+
+      const openModal = () => {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+        // Trap focus in modal
+        modal.addEventListener('keydown', trapFocus);
+      };
+
+      const closeModal = () => {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+        video.pause();
+        modal.removeEventListener('keydown', trapFocus);
+      };
+
+      const trapFocus = (e) => {
+        const focusableElements = modal.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.key === 'Tab') {
+          if (e.shiftKey && document.activeElement === firstElement) {
+            lastElement.focus();
+            e.preventDefault();
+          } else if (!e.shiftKey && document.activeElement === lastElement) {
+            firstElement.focus();
+            e.preventDefault();
+          }
+        }
+      };
+
+      // Enhanced parallax effects
+      const heroParticles = document.querySelector('.hero-particles');
+      const bgAnimation = document.querySelector('.bg-animation');
+      
+      const updateParallax = throttle(() => {
+        const scrolled = window.pageYOffset;
         
-        // Check if already selected
-        if (selectedCards.has(card.id)) {
-          tile.classList.add('selected');
+        if (heroParticles && scrolled < window.innerHeight) {
+          const speed = scrolled * 0.2;
+          heroParticles.style.transform = `translateY(${speed}px)`;
         }
         
-        tile.addEventListener('click', () => toggleSelectCard(card, tile));
-        cardGrid.appendChild(tile);
+        if (bgAnimation) {
+          const bgSpeed = scrolled * 0.05;
+          bgAnimation.style.transform = `translateY(${bgSpeed}px)`;
+        }
+      }, 16);
+
+      // Enhanced dial interaction
+      const dial = document.querySelector('.dial');
+      const thumb = document.querySelector('.thumb');
+      let isDragging = false;
+      let startX = 0;
+      let thumbLeft = 45; // Start position
+
+      const updateThumbPosition = (percentage) => {
+        const clampedPercentage = Math.max(0, Math.min(100, percentage));
+        thumb.style.left = `${clampedPercentage}%`;
+        
+        // Update colors based on position
+        const track = dial.querySelector('.track');
+        if (clampedPercentage < 30) {
+          track.style.background = 'linear-gradient(90deg, #e5e7eb 0%, #f59e0b 70%, #24AE5F 100%)';
+        } else if (clampedPercentage < 70) {
+          track.style.background = 'linear-gradient(90deg, #e5e7eb 0%, #f59e0b 50%, #24AE5F 100%)';
+        } else {
+          track.style.background = 'linear-gradient(90deg, #e5e7eb 0%, #f59e0b 30%, #24AE5F 100%)';
+        }
+      };
+
+      // Enhanced smooth scrolling
+      const smoothScrollTo = (target, duration = 800) => {
+        const targetElement = document.querySelector(target);
+        if (!targetElement) return;
+
+        const targetPosition = targetElement.offsetTop - 80; // Account for fixed header
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+
+        const easeInOutCubic = (t) => {
+          return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+        };
+
+        const animation = (currentTime) => {
+          if (startTime === null) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const progress = Math.min(timeElapsed / duration, 1);
+          
+          window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
+          
+          if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+          }
+        };
+
+        requestAnimationFrame(animation);
+      };
+
+      // Event listeners
+      window.addEventListener('scroll', updateNavbar, { passive: true });
+      window.addEventListener('scroll', updateParallax, { passive: true });
+
+      // Modal events
+      watchBtns.forEach(btn => {
+        btn?.addEventListener('click', openModal);
       });
-    };
-
-    // -------------------------
-    // Tabs
-    // -------------------------
-    const setActiveTab = (tab) => {
-      activeTab = tab;
-      tabs.forEach(t => {
-        const on = t.getAttribute('data-tab') === tab;
-        t.classList.toggle('active', on);
-        t.setAttribute('aria-selected', String(on));
+      closeBtn?.addEventListener('click', closeModal);
+      modal?.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
       });
-      tabVoice.classList.toggle('hidden', tab !== 'voice');
-      tabCards.classList.toggle('hidden', tab !== 'cards');
-    };
-    tabs.forEach(t => t.addEventListener('click', () => setActiveTab(t.dataset.tab)));
 
-    // -------------------------
-    // Voice (simulated)
-    // -------------------------
-   // const generateAISuggestions = () => ([
-   //   { id:'ai-hungry', text:'I am hungry', icon:'🍎', isAI:true },
-    //  { id:'ai-help',   text:'Help me',     icon:'🆘', isAI:true },
-    //  { id:'ai-water',  text:'I need water',icon:'💧', isAI:true },
-   // ]);
+      // Keyboard events
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+          closeModal();
+        }
+      });
 
-    //const handleVoiceInput = async () => {
-      //micBtn.classList.add('listening');
-     // micBtn.setAttribute('aria-pressed','true');
-     // listenState.textContent = 'Listening...';
-      //micBtn.disabled = true;
+      // Dial events
+      if (thumb) {
+        const handleStart = (e) => {
+          isDragging = true;
+          startX = (e.type === 'mousedown' ? e.clientX : e.touches[0].clientX);
+          thumb.style.cursor = 'grabbing';
+        };
 
-      // Simulated 2s capture
-      //await new Promise(r => setTimeout(r, 2000));
+        const handleMove = (e) => {
+          if (!isDragging) return;
+          e.preventDefault();
+          
+          const currentX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+          const dialRect = dial.getBoundingClientRect();
+          const trackRect = dial.querySelector('.track').getBoundingClientRect();
+          const relativeX = currentX - trackRect.left;
+          const percentage = (relativeX / trackRect.width) * 100;
+          
+          updateThumbPosition(percentage);
+        };
 
-      //const suggestions = generateAISuggestions();
-      //renderAISuggestions(suggestions);
+        const handleEnd = () => {
+          isDragging = false;
+          thumb.style.cursor = 'grab';
+        };
 
-      //micBtn.classList.remove('listening');
-      //micBtn.setAttribute('aria-pressed','false');
-      //listenState.textContent = 'Press and say any letter A,B,C...';
-      //micBtn.disabled = false;
-   // };
+        // Mouse events
+        thumb.addEventListener('mousedown', handleStart);
+        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('mouseup', handleEnd);
 
-     // -------------------------
-    // Voice (simulated)
-    // -------------------------
-   // (unchanged) Pool of suggestions for variety
-const suggestionPool = [
-  { text: 'I am hungry', icon: '🍎' },
-  { text: 'Help me', icon: '🆘' },
-  { text: 'I need water', icon: '💧' },
-  { text: 'I am happy', icon: '😊' },
-  { text: 'Let\'s play', icon: '🎮' },
-  { text: 'I am tired', icon: '😴' },
-  { text: 'Bathroom please', icon: '🚽' },
-  { text: 'I am cold', icon: '🥶' },
-  { text: 'I am hot', icon: '🥵' },
-  { text: 'Where is mom?', icon: '👩' },
-  { text: 'It hurts', icon: '🤕' },
-  { text: 'I love you', icon: '❤️' },
-  { text: 'I want more', icon: '➕' },
-  { text: 'Please stop', icon: '🛑' },
-  { text: 'Let\'s go', icon: '🚶' },
-  { text: 'Yes', icon: '✅' },
-  { text: 'No', icon: '❌' },
-  { text: 'Thank you', icon: '🙏' },
-  { text: 'Read a book', icon: '📖' },
-  { text: 'Snack time', icon: '🍪' }
-];
+        // Touch events
+        thumb.addEventListener('touchstart', handleStart, { passive: false });
+        document.addEventListener('touchmove', handleMove, { passive: false });
+        document.addEventListener('touchend', handleEnd);
 
-// Helper: is a phrase already in user selections?
-const isTextAlreadySelected = (text) => {
-  // selectedCards is a Map you already use
-  // Compare by text so it persists across mic refreshes
-  for (const c of selectedCards.values()) {
-    if (c.text === text) return true;
-  }
-  return false;
-};
+        // Keyboard accessibility for dial
+        thumb.addEventListener('keydown', (e) => {
+          let newPosition = thumbLeft;
+          if (e.key === 'ArrowLeft') {
+            newPosition = Math.max(0, thumbLeft - 5);
+          } else if (e.key === 'ArrowRight') {
+            newPosition = Math.min(100, thumbLeft + 5);
+          }
+          if (newPosition !== thumbLeft) {
+            thumbLeft = newPosition;
+            updateThumbPosition(thumbLeft);
+          }
+        });
 
-const generateAISuggestions = () => {
-  const context = Array.from(selectedCards.values()).map(c => c.text);
-  const lastSelected = context[context.length - 1] || '';
+        thumb.setAttribute('tabindex', '0');
+        thumb.setAttribute('role', 'slider');
+        thumb.setAttribute('aria-valuemin', '0');
+        thumb.setAttribute('aria-valuemax', '100');
+        thumb.setAttribute('aria-valuenow', thumbLeft);
+      }
 
-  // Keep variety: avoid last selected & avoid already chosen texts
-  let candidates = suggestionPool.filter(item =>
-    item.text !== lastSelected && !context.includes(item.text)
-  );
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = this.getAttribute('href');
+          if (target && target !== '#') {
+            smoothScrollTo(target);
+          }
+        });
+      });
 
-  if (candidates.length < 3) {
-    candidates = [...suggestionPool];
-  }
+      // Initialize animations on page load
+      document.addEventListener('DOMContentLoaded', () => {
+        // Observe all animated elements
+        document.querySelectorAll('.animate-fade-in').forEach(el => {
+          animationObserver.observe(el);
+        });
 
-  // Shuffle
-  for (let i = candidates.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
-  }
+        // Initialize navbar state
+        updateNavbar();
+        
+        // Set initial dial position
+        if (thumb) {
+          updateThumbPosition(thumbLeft);
+        }
 
-  const timestamp = Date.now();
-  return candidates.slice(0, 3).map((item, idx) => ({
-    id: `ai-${idx}-${timestamp}`,
-    text: item.text,
-    icon: item.icon,
-    isAI: true
-  }));
-};
+        // Add loading complete class to body
+        document.body.classList.add('loaded');
+      });
 
-const handleVoiceInput = async () => {
-  // Keep mic tappable repeatedly
-  micBtn.classList.add('listening');
-  micBtn.setAttribute('aria-pressed','true');
-  listenState.textContent = 'Listening...';
-
-  await new Promise(r => setTimeout(r, 1000));
-
-  // NEW mic tap -> swap in a fresh set of 3 (grid stays visible between taps)
-  const suggestions = generateAISuggestions();
-  renderAISuggestions(suggestions);
-
-  micBtn.classList.remove('listening');
-  micBtn.setAttribute('aria-pressed','false');
-  listenState.textContent = 'Tap mic for more suggestions';
-};
-
-const renderAISuggestions = (cards) => {
-  aiGrid.innerHTML = '';
-  cards.forEach(card => {
-    const tile = document.createElement('button');
-    tile.className = 'pict-card ai';
-    tile.setAttribute('data-card-id', card.id);
-    tile.setAttribute('type', 'button');
-    tile.setAttribute('aria-label', `Choose: ${card.text}`);
-
-    // If this text is already selected, show it as chosen & disable
-    if (isTextAlreadySelected(card.text)) {
-      tile.classList.add('selected', 'chosen'); // 'chosen' is optional style hook
-      tile.disabled = true;
-      tile.setAttribute('aria-pressed', 'true');
-    } else {
-      tile.setAttribute('aria-pressed', 'false');
+      // Button loading states - only for buttons without hrefs
+document.querySelectorAll('.btn.primary').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    // Check if this is a navigation link (has href attribute)
+    if (this.hasAttribute('href') && this.getAttribute('href') !== '#') {
+      // This is a navigation link - let it work normally
+      console.log('Navigating to:', this.href);
+      return true; // Allow default navigation
     }
-
-    tile.innerHTML = `
-      <div class="badge-ai">AI</div>
-      <div class="pict-emoji">${card.icon}</div>
-      <div class="pict-text">${card.text}</div>
-    `;
-
-    tile.addEventListener('click', () => {
-      // Add to user selections (your existing function)
-      toggleSelectCard(card, tile);
-
-      // Keep suggestions visible; just mark this one as chosen
-      tile.classList.add('selected', 'chosen');
-      tile.disabled = true;
-      tile.setAttribute('aria-pressed', 'true');
-
-      listenState.textContent = 'Tap mic for new suggestions';
-      // NOTE: no hiding or clearing here anymore ✅
-    });
-
-    aiGrid.appendChild(tile);
-  });
-
-  // Ensure the block is visible
-  aiBlock.classList.remove('hidden');
-};
-
-
-    // -------------------------
-    // Wire up controls
-    // -------------------------
-    sayBtn.addEventListener('click', speakMessage);
-    sendBtn.addEventListener('click', sendMessage);
-    clearBtn.addEventListener('click', clearMessage);
-    micBtn.addEventListener('click', handleVoiceInput);
     
-    // Avatar prompt close functionality
-    const avatarCloseBtn = document.getElementById('avatarCloseBtn');
-    const avatarPromptSection = document.getElementById('avatarPromptSection');
-    if (avatarCloseBtn && avatarPromptSection) {
-      avatarCloseBtn.addEventListener('click', () => {
-        avatarPromptSection.style.display = 'none';
-      });
-    }
-
-    // -------------------------
-    // Init
-    // -------------------------
-    renderCategories();
-    renderCardGrid();
-    setActiveTab('voice');
-    updateMessageUI();
-  </script>
-
-  <!-- ============================================ -->
-  <!-- HEADER HEIGHT OFFSET SCRIPT                 -->
-  <!-- ============================================ -->
-  <script>
-// ensure CSS variable matches the measured header height
-function updateHeaderOffset() {
-  const headerEl = document.getElementById('header');
-  const h = headerEl ? headerEl.offsetHeight : 0;
-  document.documentElement.style.setProperty('--header-h', `${h}px`);
-}
-
-// set on load and when window size changes (keeps it correct on mobile/rotate)
-window.addEventListener('DOMContentLoaded', () => {
-  updateHeaderOffset();
-  // if other DOMContentLoaded listeners exist they will also run
+    // This is a button without valid href - add loading state
+    e.preventDefault();
+    const originalText = this.innerHTML;
+    this.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="3"></circle></svg> Loading...';
+    this.style.opacity = '0.8';
+    this.disabled = true;
+    
+    // Simulate loading
+    setTimeout(() => {
+      this.innerHTML = originalText;
+      this.style.opacity = '1';
+      this.disabled = false;
+    }, 2000);
+  });
 });
-window.addEventListener('resize', updateHeaderOffset);
-</script>
+
+      // Enhanced focus management
+      document.querySelectorAll('.btn, .feature, .step').forEach(element => {
+        element.addEventListener('focus', function() {
+          this.style.outline = '3px solid rgba(28, 90, 152, 0.5)';
+          this.style.outlineOffset = '2px';
+        });
+        
+        element.addEventListener('blur', function() {
+          this.style.outline = '';
+          this.style.outlineOffset = '';
+        });
+      });
+      
+      // Newsletter form handling
+      const newsletterForm = document.querySelector('.newsletter');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const input = this.querySelector('.newsletter-input');
+          const button = this.querySelector('.newsletter-btn');
+          const originalButtonContent = button.innerHTML;
+          
+          button.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="animation: spin 1s linear infinite;"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>';
+          button.disabled = true;
+          
+          setTimeout(() => {
+            button.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M5 12l5 5L20 7"></path></svg>';
+            setTimeout(() => {
+              button.innerHTML = originalButtonContent;
+              button.disabled = false;
+              input.value = '';
+            }, 1500);
+          }, 1000);
+        });
+      }
+
+      // Add CSS for spin animation
+      const style = document.createElement('style');
+      style.textContent = `
+ `;
+      document.head.appendChild(style);
+
+      // Performance optimization: Intersection Observer for heavy animations
+      const heavyAnimationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const element = entry.target;
+          if (entry.isIntersecting) {
+            element.style.animationPlayState = 'running';
+          } else {
+            element.style.animationPlayState = 'paused';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      // Observe particles and floating shapes
+      document.querySelectorAll('.particle, .floating-shape').forEach(el => {
+        heavyAnimationObserver.observe(el);
+      });
+
+      // Error handling for missing elements
+      const safeQuerySelector = (selector, callback) => {
+        const element = document.querySelector(selector);
+        if (element && callback) {
+          callback(element);
+        }
+        return element;
+      };
+
+      // Safe event listener addition
+      const safeAddEventListener = (selector, event, handler) => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element => {
+          if (element) {
+            element.addEventListener(event, handler);
+          }
+        });
+      };
+
+      // Initialize mobile menu (for future implementation)
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+          // Mobile menu implementation would go here
+          console.log('Mobile menu toggle clicked');
+        });
+      }
+
+      // Add resize handler for responsive adjustments
+      let resizeTimer;
+      window.addEventListener('resize', debounce(() => {
+        // Recalculate positions and sizes on resize
+        updateNavbar();
+        if (thumb) {
+          updateThumbPosition(thumbLeft);
+        }
+      }, 250));
+
+      // Preload critical resources
+      const preloadImage = (src) => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = src;
+        document.head.appendChild(link);
+      };
+
+      // Log initialization
+      console.log('ILore website enhanced with improved accessibility, performance, and visual design');
+      
+    })();
+
+
+    
+  </script>
 </body>
 </html>
